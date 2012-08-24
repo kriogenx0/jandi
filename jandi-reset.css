@@ -1,0 +1,225 @@
+/* GENERAL CSS RESET */
+body
+{
+	margin: 0;
+	padding: 0;
+	font: 12px Arial, sans-serif;
+	overflow-y: scroll;
+	/* IE 7 < SCROLL */
+	*overflow: hidden;
+	*overflow-y: hidden;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td
+{
+	margin:0;
+	padding:0;
+}
+table
+{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+input:focus,
+select:focus,
+a:focus
+{
+	outline: 0 none;
+}
+input,
+textarea,
+select
+{
+	font-family:inherit;
+	font-size:inherit;
+	font-weight:inherit;
+}
+input,
+textarea,
+select
+{
+*font-size:100%;
+}
+img,
+a img
+{
+	border: 0 none;
+	outline: 0 none;
+}
+a,
+a:hover
+{
+	text-decoration: none;		
+}
+a *
+{
+*cursor: pointer; 
+}
+a
+{
+	display: inline-block;
+}
+p a
+{
+	display: inline;	
+}
+b,
+i,
+s
+{
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: normal;
+}
+ul,
+ul li
+{
+	/* padding: 5px 0 5px 15px; */
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ol
+{
+	list-style: decimal;
+}
+ol ol
+{
+	list-style: upper-alpha;
+}
+ol ol ol
+{
+	list-style: lower-roman;
+}
+ol ol ol ol
+{
+	list-style: lower-alpha;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+	margin: 0;
+	padding: 5px 0;
+	display: block;
+}
+h1
+{
+	font-size: 32px;
+}
+h2
+{
+	font-size: 24px;	
+}
+h3
+{
+	font-size: 20px;	
+}
+h4
+{
+	font-size: 18px;
+}
+h5
+{
+	font-size: 16px;
+}
+h6
+{
+	font-size: 14px;
+}
+sup
+{
+	vertical-align: super;
+	line-height: inherit;
+}
+
+/* JANDI UI */
+.clear
+{
+	clear: both;
+}
+.ui-hidden,
+.ui-templates
+{
+	display: none;	
+}
+.page-width
+{
+	width: 960px;
+	margin: 0 auto;
+}
+/* TABLE BLOCK */
+.table-block
+{
+	width: 100%;
+}
+.table-block,
+.table-block > tr,
+.table-block > tr > th,
+.table-block > tr > td,
+.table-block > tbody > tr > th,
+.table-block > tbody > tr > td
+{
+	border: 0 none;
+	border-spacing: 0;
+	padding: 0;
+	margin: 0;
+	vertical-align: top;
+}
+/* BASIC FLOATING */
+.half-left,
+.half-right
+{
+	width: 49%;	
+}
+.third-left,
+.third-right
+{
+	width: 33%;	
+}
+.twoThirds-left,
+.twoThirds-right
+{
+	width: 66%;
+}
+.half-left,
+.third-left,
+.twoThirds-left
+{
+	float: left;	
+}
+.half-right,
+.third-right,
+.twoThirds-right
+{
+	float: right;
+	text-align: right;
+}
+

@@ -1,0 +1,408 @@
+/*
+// JANDI BASE UI
+// USED FOR GROUND RULES FOR CSS
+*/
+
+/* BASICS */
+
+.ui-template
+{
+	display: none;	
+}
+.ui-center
+{
+	text-align: center;	
+}
+.ui-rule
+{
+	clear: both;
+	padding-top: 5px;
+	background: #efefef;
+}
+
+/* LAYOUT */
+.layout-padding
+{
+	padding: 10px;
+}
+.layout-thick
+{
+	padding: 20px;
+}
+.layout-thicker
+{
+	padding: 30px;
+}
+.ui-wide,
+.layout-wide
+{
+	padding: 20px 40px;
+}
+.ui-deep,
+.layout-deep
+{
+	padding: 40px;	
+}
+.ui-space,
+.layout-spacing
+{
+	margin-top: 10px;
+	margin-bottom: 10px;	
+}
+.layout-spacing-top
+{
+	margin-top: 10px;	
+}
+.layout-spacing-bottom
+{
+	margin-bottom: 10px;	
+}
+.layout-gap
+{
+	margin-top: 20px;
+	margin-bottom: 20px;	
+}
+.layout-cozy
+{
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.layout-cozy-top
+{
+	margin-top: 40px;
+}
+.layout-floatLeft
+{
+	float: left;	
+}
+.layout-main
+{
+	width: 69%;
+	float: left;
+}
+.layout-side
+{
+	width: 30%;
+	float: right;	
+}
+
+/* BASIC FLOATING */
+.layout-left
+{
+	float: left;
+}
+.layout-right
+{
+	float: right;
+}
+.layout-half-left,
+.layout-half-right
+{
+	width: 49%;	
+}
+.layout-third-left,
+.layout-third-right
+{
+	width: 33%;
+}
+.layout-half-left,
+.layout-third-left
+{
+	float: left;	
+}
+.layout-half-right,
+.layout-third-right
+{
+	float: right;
+	text-align: right;
+}
+.layout-floatLeft
+{
+	float: left;	
+}
+
+/*****************/
+/* TEXT */
+pre
+{
+	text-shadow: none;
+}
+strong
+{
+	font-weight: 600;
+}
+.text-center
+{
+	text-align: center;
+}
+.text-right
+{
+	text-align: right;
+}
+
+.text-blurred,
+.textbox-blurred
+{
+	color: #777;
+	font-style: italic;	
+}
+
+/* MISC */
+.loader,
+.ui-loader
+{
+	background: url(jandi-ui/loaders/loader-ffffff-666666.gif) no-repeat center;	
+}
+.icon
+{
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+/**************/
+/* UI */
+
+
+/* MESSAGES */
+.ui-message-error,
+.ui-message-success
+{
+	padding: 10px;
+	margin: 10px 0;
+	padding-left: 45px;
+	font-size: 14px;
+}
+.ui-message-error
+{
+	color: #ce0000;
+	border: 1px solid #ce0000;
+	background: #fee url(jandi-ui/icons/icon-xmark-18x19.png) no-repeat 15px center;
+}
+.ui-message-success
+{
+	color: #0c0;
+	border: 1px solid #0c0;
+	background: #efe url(jandi-ui/icons/icon-check-21x19.png) no-repeat 15px center;
+}
+
+/************************************/
+/* BUTTONS */
+a.ui-button
+{
+	display: inline-block;
+	min-width: 100px;
+}
+a.ui-button.button-full
+{
+	display: block;
+	width: auto;
+}
+
+/************************************/
+/* LISTS */
+
+ul.normal
+{
+	margin: 10px 0 10px 35px;
+}
+ul.normal li
+{
+	padding-left: 20px;
+}
+
+/* LEFT SPACE */
+dl.leftSpace
+{
+	display: block;
+}
+dl.leftSpace dt
+{
+	float: left;
+	width: 33%;
+	clear: both;
+}
+dl.leftSpace dd
+{
+	/*
+	float: right;
+	width: 66%;*/
+}
+
+/* SPLIT */
+dl.split
+{
+	display: block;
+}
+dl.split dt
+{
+	float: left;
+	clear: both;
+}
+dl.split dd
+{
+	display: block;
+	text-align: right;
+}
+ul.split,
+ul.split li
+{
+	display: block;
+	list-style: none;
+	clear: both;
+}
+ul.split b
+{
+	/* float: left; */
+}
+ul.split i
+{
+	/*float: right;
+	text-align: right; */
+}
+ul.split u
+{
+	clear: both;
+}
+/* DISC */
+ul.list-disc li
+{
+	list-style: disc inside;
+}
+/******************/
+/* DEFINITION LIST */
+
+/* SPLIT WIDTH */
+dl.splitWidth dt,
+dl.splitWidth dd
+{
+	display: inline-block;
+	vertical-align: top;
+}
+dl.splitWidth dt
+{
+	width: 33%;
+}
+dl.splitWidth dd
+{
+	width: 66%;
+}
+
+
+/************************************/
+/* FORMS */
+
+/* STYLED FORM */
+.form input[type='text'],
+.form input[type='password'],
+.form input[type='email'],
+.form select,
+.form textarea
+{
+	border: 0 none;
+	padding: 5px;
+	resize: none;
+	outline: 0 none;
+	margin-bottom: 3px;
+	border: solid 1px #cfcfcf;
+	
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+.form input[type='text']:focus,
+.form input[type='password']:focus,
+.form input[type='email']:focus,
+.form select:focus,
+.form textarea:focus
+{
+	border-color: #bbb;
+}
+.form .form-field
+{
+	margin-bottom: 5px;
+	clear: both;
+}
+.form .form-field:last-child
+{
+	margin-bottom: 0;
+}
+.form .field-text .field-input
+{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.form .field-text .field-input
+{
+	border: 1px solid transparent;	
+}
+.form .field-validation
+{
+	display: none;
+}
+.form .field-text .field-validation
+{
+	clear: both;
+}
+.form .field-checkboxgroup label
+{
+	display: inline-block;
+	margin-right: 10px;	
+}
+.form .field-checkboxgroup.field-full label
+{
+	display: block;
+	margin: 0;
+}
+.form .field-checkboxgroup input,
+.form .field-checkbox input
+{
+	margin-right: 6px;	
+}
+.form .field-checkboxgroup.field-checkboxgroup-half label
+{
+	width: 49%;
+	margin-right: 0;
+}
+.form .form-field.field-checkbox label
+{
+	display: block;
+	margin-bottom: 5px;
+}
+.form .field-cardExpiration .field-input
+{
+	width: 164px;
+	margin-right: 2px;
+}
+.form .field-radio.field-radio-vertical label
+{
+	display: block;
+	padding: 5px;
+}
+
+/************************************/
+/* FULL FORM */
+
+.form-full input[type='text'],
+.form-full input[type='password'],
+.form-full select,
+.form-full textarea
+{
+	width: 95%;
+}
+
+/* DISABLELOADER */
+.ui-disableLoader
+{
+	position: relative;
+}
+.ui-disableLoader .disableLoader-layover
+{
+	background: #000 url(jandi-ui/loaders/loader-000000-ffffff.gif) no-repeat center;
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
