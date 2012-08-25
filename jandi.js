@@ -57,7 +57,7 @@
 	////////////////
 	// FORMAT
 	
-	$.format = function(type, value) {
+	$.format = function(value, type) {
 	    var s = $.format, t = type || '';
 	    if (typeof(val) == 'undefined')
 	    	return value;
@@ -1843,6 +1843,13 @@
 	
 		return a;
 	};
+	
+	// AVOID CONSOLE ERRORS
+	if (!window.console) {
+		window.console = {
+			log: function(){}
+		};
+	}
 
 
 })(jQuery);
