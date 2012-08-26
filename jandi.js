@@ -58,11 +58,11 @@
 	// FORMAT
 	
 	$.format = function(value, type) {
-	    var s = $.format, t = type || '';
-	    if (typeof(val) == 'undefined')
+	    var s = $.format;
+	    if (typeof(value) == 'undefined')
 	    	return value;
-	    else if (typeof( s[t] ) == 'function')
-	    	return s[t](value);
+	    else if (typeof( s[type] ) == 'function')
+	    	return s[type](value);
 	    else if (typeof(type) == 'function')
 	    	return type(value);
 	    else
@@ -105,7 +105,8 @@
 	};
 	
 	$.format.vin = function(v) {
-		return v.replace(/[oq]/ig, 0).replace(/i/ig, 1).replace(/\W/g, "").toUpperCase().substring(0, 17);
+		var a = v.replace(/[oq]/ig, 0).replace(/i/ig, 1).replace(/\W/g, "").toUpperCase().substring(0, 17);
+		return a == 0 ? '' : a;
 	};
 	
 	$.format.creditcard = $.format.cc = function(v) {
