@@ -1,7 +1,7 @@
 /*
 // jandi
-// Version 1.3.2
-// 2012-08-10
+// Version 1.3.3
+// 2012-08-26
 //
 // javascript and i
 // jandi.kriogenx.net
@@ -57,7 +57,7 @@
 	////////////////
 	// FORMAT
 	
-	$.format = function(type, value) {
+	$.format = function(value, type) {
 	    var s = $.format, t = type || '';
 	    if (typeof(val) == 'undefined')
 	    	return value;
@@ -138,7 +138,7 @@
 		value = value + ""; //STRING
 		type = type.toLowerCase();
 		//debug([VALIDATING: ", val, type]);
-		if (t['type'])
+		if (typoef(t['type']) == 'function')
 			return t['type'](value);
 		// REGEX
 		else if (typeof(type) == "object" && typeof(type.test) != "undefined")
