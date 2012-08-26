@@ -68,7 +68,6 @@
 	    else
 	    	return value;
 	};
-	var f = $.format;
 	
 	$.format.number = function(v) {
 	    v = parseFloat((v + '').replace(/[^0-9\.\-]/g, ''));
@@ -134,12 +133,12 @@
 	// ADD SUPPORT FOR MULTIPLE VALUES AND MULTIPLE TYPES
 	
 	$.validate = function(value, type) {
-		var t = this;
+		var t = $.validate;
 		value = value + ""; //STRING
 		type = type.toLowerCase();
 		//debug([VALIDATING: ", val, type]);
-		if (t['type'])
-			return t['type'](value);
+		if (t[type])
+			return t[type](value);
 		// REGEX
 		else if (typeof(type) == "object" && typeof(type.test) != "undefined")
 			return type.test(value);
@@ -1793,7 +1792,7 @@
 		var a = {};
         a.defaults = {
           transition: 'fade', // fade, slide, false
-          opacity: .5
+          opacity: .25
         };
         var o = a.options = $.extend({}, a.defaults, options);
 
