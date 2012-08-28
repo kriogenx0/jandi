@@ -99,8 +99,8 @@
 	$.format.phone = function(v) {
 		v = v.replace(/\D/g, "").substr(0, 10);
 		var s = v.substr(0,3);
-		if (v.length > 2) s += "-" + val.substr(3,3);
-		if (v.length > 5) s += "-" + val.substr(6);
+		if (v.length > 2) s += "-" + v.substr(3,3);
+		if (v.length > 5) s += "-" + v.substr(6);
 		return s.replace(/[\s-]*$/, "");
 	};
 	
@@ -121,7 +121,7 @@
 	};
 	
 	$.format.amex = function(v) {
-		var s = val.replace(/\D/g, "");
+		var s = v.replace(/\D/g, "");
 		s = s.substring(0, 15);
 		var rgx = /^(\d{4})(\d{0,6})(\d{0,5})/;
 		s = s.replace(rgx, '$1' + ' ' + '$2' + " " + '$3');
@@ -151,6 +151,7 @@
 	};
 	
 	$.validate.email = function(v) {
+		//		/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z][a-z.]{0,4}[a-z]?$/i.test(v);
 	}
 	$.validate.phone = function(v) {
@@ -164,7 +165,7 @@
 		// CAPITAL LETTER & NUMBER
 		return (
 			/[A-Z]/.test(v) &&
-		//	/[!"#$%&'\(\)\*\+,\-\.\/:;<=>\?@\[\\\]^_`\{\|\}~]/.test(val) &&
+		//	/[!"#$%&'\(\)\*\+,\-\.\/:;<=>\?@\[\\\]^_`\{\|\}~]/.test(v) &&
 			/\d/.test(v) &&
 			!/\s/.test(v) &&
 			v.length > 5 &&
