@@ -485,6 +485,14 @@
 		return false;
 	};
 	
+	// BROWSER FEATURE SUPPORT
+	$.sniff = {
+		flash: $.flashSupport,
+		placeholder: function() {
+			return ("placeholder" in document.createElement("input"));
+		}
+	};
+	
 	////////////////
 	// COOKIES
 	
