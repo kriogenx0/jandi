@@ -49,9 +49,9 @@ a:focus
 {
 	outline: 0 none;
 }
-input::-moz-focus-inner
-select::-moz-focus-inner
-a::-moz-focus-inner
+input::-moz-focus-inner,
+select::-moz-focus-inner,
+a::-moz-focus-inner,
 button::-moz-focus-inner
 {
  	border: 0;
