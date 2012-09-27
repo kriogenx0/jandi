@@ -1,7 +1,7 @@
 /*
 // jandi
-// Version 1.3.3
-// 2012-08-26
+// Version 1.3.4
+// 2012-09-27
 //
 // javascript and i
 // jandi.kriogenx.net
@@ -1853,6 +1853,98 @@
 		return a;
 	};
 	
+	
+	// CSS BACKGROUND ANIMATOR
+	$.fn.animator = function(frames, o) {
+	  var t = $(this);
+	  // ANIMATOR OBJECT
+	  var a = {};
+	  // VALIDATE PARAMS
+	  if (o)
+	    o.frames = frames;
+	  else if (frames)
+	    o = {frames: frames};
+	  console.log(['frames', frames, o]);
+	  // DEFAULTS
+	  a.defaults = {
+	    frames: 1,
+	    duration: 200,
+	    direction: 'down'
+	  };
+	  o = a.options = $.extend({}, o, a.defaults, o);
+	  // VALIDATION OPTIONS
+	  o.direction = o.direction.toLowerCase();
+	  // PRIVATE VARS
+	  var p = {};
+	
+	  a.init = function() {
+	    console.log(['obj',a]);
+	    // DETERMINE FRAMES
+	    p.vertical = (o.direction == 'down' || o.direction == 'up');
+	    p.size = parseFloat(p.vertical ? t.height() : t.width());
+	    p.totalSize = p.size * o.frames;
+	    p.secondPosition = t.css('background-position').replace(/\s{2,}/g, ' ').split(' ')[0];
+	    if (!p.secondPosition || p.secondPosition == 'undefined') p.secondPosition = 'center';
+	    console.log(p);
+	    console.log(a);
+	  };
+	
+	  a.start = function() {
+	    p.current = 0;
+	    a.stop();
+	    p.interval = setInterval(p.next, o.duration / o.frames);
+	    a.animating = true;
+	  };
+	
+	  a.reverse = function() {
+	    p.current = o.frames;
+	    a.stop();
+	    p.interval = setInterval(p.prev, o.duration / o.frames);
+	    a.animating = true;
+	  };
+	
+	  a.stop = function() {
+	    clearInterval(p.interval);
+	    a.animating = false;
+	  };
+	
+	  p.next = function() {
+	    console.log('ran next');
+	    if (p.current < o.frames - 1) {
+	      p.current++;
+	      a.update();
+	    } else
+	      a.stop();
+	  };
+	
+	  p.prev = function() {
+	    if (p.current > 0) {
+	      p.current--;
+	      a.update();
+	    } else
+	      a.stop();
+	  };
+	
+	  a.update = function() {
+	    o.position = p.current * p.size * -1;
+	    if (p.vertical)
+	      o.backgroundPosition = p.secondPosition + ' ' + o.position + 'px';
+	    else
+	      o.backgroundPosition = p.position + 'px ' + p.secondPosition;
+	    console.log(['updating positoin', o.backgroundPosition]);
+	    t.css('background-position', o.backgroundPosition);
+	  };
+	
+	  a.down = a.start;
+	  a.up = a.reverse;
+	
+	  a.init();
+	
+	  return a;
+	};
+	
+	
+	/*****************/
 	// AVOID CONSOLE ERRORS
 	if (!window.console) {
 		window.console = {
