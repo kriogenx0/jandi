@@ -1859,12 +1859,12 @@
 	  var t = $(this);
 	  // ANIMATOR OBJECT
 	  var a = {};
+	  a.element = t;
 	  // VALIDATE PARAMS
 	  if (o)
 	    o.frames = frames;
 	  else if (frames)
 	    o = {frames: frames};
-	  console.log(['frames', frames, o]);
 	  // DEFAULTS
 	  a.defaults = {
 	    frames: 1,
@@ -1876,40 +1876,44 @@
 	  o.direction = o.direction.toLowerCase();
 	  // PRIVATE VARS
 	  var p = {};
+	  p.current = 0;
 	
 	  a.init = function() {
-	    console.log(['obj',a]);
 	    // DETERMINE FRAMES
 	    p.vertical = (o.direction == 'down' || o.direction == 'up');
 	    p.size = parseFloat(p.vertical ? t.height() : t.width());
 	    p.totalSize = p.size * o.frames;
 	    p.secondPosition = t.css('background-position').replace(/\s{2,}/g, ' ').split(' ')[0];
 	    if (!p.secondPosition || p.secondPosition == 'undefined') p.secondPosition = 'center';
-	    console.log(p);
-	    console.log(a);
 	  };
 	
-	  a.start = function() {
-	    p.current = 0;
+	  a.start = function(callback) {
 	    a.stop();
+	    p.current = 0;
 	    p.interval = setInterval(p.next, o.duration / o.frames);
 	    a.animating = true;
+	    if (callback) p.callback = callback;
 	  };
 	
-	  a.reverse = function() {
-	    p.current = o.frames;
+	  a.reverse = function(callback) {
 	    a.stop();
+	    p.current = o.frames;
 	    p.interval = setInterval(p.prev, o.duration / o.frames);
 	    a.animating = true;
+	    if (callback) p.callback = callback;
 	  };
 	
 	  a.stop = function() {
 	    clearInterval(p.interval);
+	    t.stop();
 	    a.animating = false;
+	    if (typeof p.callback == 'function') {
+	      p.callback();
+	      p.callback = null;
+	    }
 	  };
 	
 	  p.next = function() {
-	    console.log('ran next');
 	    if (p.current < o.frames - 1) {
 	      p.current++;
 	      a.update();
@@ -1931,7 +1935,6 @@
 	      o.backgroundPosition = p.secondPosition + ' ' + o.position + 'px';
 	    else
 	      o.backgroundPosition = p.position + 'px ' + p.secondPosition;
-	    console.log(['updating positoin', o.backgroundPosition]);
 	    t.css('background-position', o.backgroundPosition);
 	  };
 	
@@ -1942,6 +1945,7 @@
 	
 	  return a;
 	};
+
 	
 	
 	/*****************/
