@@ -1855,7 +1855,7 @@
 	
 	
 	// CSS BACKGROUND ANIMATOR
-	$.fn.animator = function(frames, o) {
+	$.fn.bgAnimator = function(frames, o) {
 	  var t = $(this);
 	  // ANIMATOR OBJECT
 	  var a = {};

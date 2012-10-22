@@ -120,6 +120,25 @@
 {
 	float: left;	
 }
+.lay-1of2
+{
+  width: 49.5%;
+}
+.lay-1of3
+{
+  width: 33.3%;
+}
+.lay-2of3
+{
+  width: 66.6%;
+}
+.lay-1of2,
+.lay-1of3,
+.lay-2of3
+{
+  float: left;
+}
+
 
 /*****************/
 /* TEXT */
