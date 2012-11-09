@@ -1902,7 +1902,7 @@
 	    p.vertical = (o.direction == 'down' || o.direction == 'up');
 	    p.size = parseFloat(p.vertical ? t.height() : t.width());
 	    p.totalSize = p.size * o.frames;
-	    p.secondPosition = t.css('background-position').replace(/\s{2,}/g, ' ').split(' ')[0];
+      p.secondPosition = t.css('background-position') ? t.css('background-position').replace(/\s{2,}/g, ' ').split(' ')[0] : t.css('background-position-x');
 	    if (!p.secondPosition || p.secondPosition == 'undefined') p.secondPosition = 'center';
 	  };
 	
