@@ -106,8 +106,15 @@
 	};
 	
 	$.format.money = function(v) {
-		v = $.format.numbercommas(v);
-		return '$' + v;
+  	v = parseFloat((v + '').replace(/[^0-9\.\-]/g, '')).toFixed(2);
+		x = v.split('.');
+		x1 = x[0];
+		var d = x.length > 1 ? '.' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		}
+		return '$' + x1 + d;
 	};
 	
 	$.format.phoneParenthesis = function(v) {
