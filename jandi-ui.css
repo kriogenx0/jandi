@@ -1,17 +1,87 @@
 /*
 // JANDI BASE UI
 // USED FOR GROUND RULES FOR CSS
+//
+// JANDY TYPES:
+// t - text
+// y - layout
 */
+
+/*****************/
+/* TEXT */
+
+.t-tera
+{
+	font-size: 100px;
+	line-height: 120px;
+	letter-spacing: -2px;
+}
+.t-giga
+{
+	font-size: 60px;
+	line-height: 72px;
+	letter-spacing: -1px;
+}
+h1,
+.t-mega
+{
+	font-size: 32px;
+	line-height: 38px;
+}
+h2,
+.t-kilo
+{
+	font-size: 24px;
+	line-height: 30px;
+}
+h3
+{
+	font-size: 20px;	
+}
+h4
+{
+	font-size: 18px;
+}
+.t-mini
+{
+	font-size: 13px;
+	line-height: 18px;
+}
+.t-micro
+{
+	font-size: 10px;
+	line-height: 16px;
+}
+
+pre
+{
+	text-shadow: none;
+}
+strong
+{
+	font-weight: 600;
+}
+.t-center
+{
+	text-align: center;
+}
+.t-right
+{
+	text-align: right;
+}
+
+.t-blur,
+.textbox-blurred
+{
+	color: #777;
+	font-style: italic;	
+}
 
 /* BASICS */
 
 .ui-template
 {
 	display: none;	
-}
-.ui-center
-{
-	text-align: center;	
 }
 .ui-rule
 {
@@ -137,33 +207,6 @@
 .lay-2of3
 {
   float: left;
-}
-
-
-/*****************/
-/* TEXT */
-pre
-{
-	text-shadow: none;
-}
-strong
-{
-	font-weight: 600;
-}
-.text-center
-{
-	text-align: center;
-}
-.text-right
-{
-	text-align: right;
-}
-
-.text-blurred,
-.textbox-blurred
-{
-	color: #777;
-	font-style: italic;	
 }
 
 /* MISC */
