@@ -1,7 +1,7 @@
 /*
 // jandi
-// Version 1.3.4
-// 2012-09-27
+// Version 1.3.5
+// 2012-11-12
 //
 // javascript and i
 // jandi.kriogenx.net
@@ -89,7 +89,7 @@
 	};
 	
 	$.format.number = function(v) {
-	    v = parseFloat((v + '').replace(/[^0-9\.\-]/g, ''));
+	    v = parseFloat((v + '').replace(/[^\d\.\-]/g, ''));
 		return (!v || isNaN(v)) ? 0 : v;
 	};
 	
@@ -106,7 +106,7 @@
 	};
 	
 	$.format.money = function(v) {
-  	v = parseFloat((v + '').replace(/[^0-9\.\-]/g, '')).toFixed(2);
+  	v = parseFloat((v + '').replace(/[^\d\.\-]/g, '')).toFixed(2);
 		x = v.split('.');
 		x1 = x[0];
 		var d = x.length > 1 ? '.' + x[1] : '';
@@ -116,6 +116,10 @@
 		}
 		return '$' + x1 + d;
 	};
+	
+	$.format.mileage = function(v) {
+  	return $.format.number((v + '').replace(/[^\d\.\-]/g, '').substr(0, 6));
+	}
 	
 	$.format.phoneParenthesis = function(v) {
 		v = v.replace(/\D/g, "");
