@@ -91,15 +91,18 @@ strong
 }
 
 /* LAYOUT */
-.layout-padding
+.layout-padding,
+.y-kilo
 {
 	padding: 10px;
 }
-.layout-thick
+.layout-thick,
+.y-mega
 {
 	padding: 20px;
 }
-.layout-thicker
+.layout-thicker,
+.y-giga
 {
 	padding: 30px;
 }
@@ -109,7 +112,8 @@ strong
 	padding: 20px 40px;
 }
 .ui-deep,
-.layout-deep
+.layout-deep,
+.y-tera
 {
 	padding: 40px;	
 }
