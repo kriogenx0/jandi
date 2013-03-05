@@ -1,6 +1,6 @@
 /*
 // jandi
-// Version 1.4.1
+// Version 1.5
 // 2013-03-05
 //
 // javascript and i
