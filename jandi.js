@@ -1,7 +1,7 @@
 /*
 // jandi
-// Version 1.4
-// 2012-11-19
+// Version 1.4.1
+// 2013-03-05
 //
 // javascript and i
 // jandi.kriogenx.net
@@ -531,7 +531,7 @@
 	};
 	
 	$.jsonCookie = function(name, value, days, options) {
-		if (typeof(value) == "undefined")
+		if (typeof value == "undefined")
 			return $.parseJSON($.cookie(name));
 		else
 			return $.cookie(name, $.serialize(value), days, options);
@@ -558,17 +558,14 @@
 	$.cookie.get = function(name) {
 		if (!document.cookie) return;
 		
-		var cookieValue = null;
-		var cookies = document.cookie.split(';');
-		for (var i = 0; i < cookies.length; i++) {
-			var cookie = $.trim(cookies[i]);
-			// Does this cookie string begin with the name we want?
-			if (cookie.substring(0, name.length + 1) == (name + '=')) {
-				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-				break;
+		var cookies = document.cookie.toString().split('; ');
+		var cookieArr;
+		for (var i = cookies.length; i > 0 ; i--) {
+			cookieArr = cookies[i].split('=');
+			if (cookieArr[0] == name) {
+				return decodeURIComponent(cookieArr[1]);
 			}
 		}
-		return cookieValue;	
 		
 	};
 	$.cookie.set = function (name, value, days, options)
@@ -580,6 +577,14 @@
 			days = date.toGMTString();
 		}
 		var expires = days ? '; expires=' + days : '';
+			
+		/*
+		if (hours) {
+			var exdate = new Date();
+			exdate.setTime(exdate.getTime() + (hours * 60 * 60 * 1000));
+			str += "; expires=" + exdate.toUTCString();
+		}
+		*/
 		
 		// OPTIONS
 		var o = {};
@@ -598,33 +603,12 @@
 		var str = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
 		$.debug("COOKIE SET: " + str);
 		document.cookie = str;
-			
-			/*
-		options = options || {};
-		if (!options.path) options.path = "/";
-		//
-		var c_value = escape(value);
-		// BUILD STR
-		var str = c_name + "=" + c_value;
-		if (hours) {
-			var exdate = new Date();
-			exdate.setTime(exdate.getTime() + (hours * 60 * 60 * 1000));
-			str += "; expires=" + exdate.toUTCString();
-		}
-		if (options.path) str += '; path=' + (options.path);
-		if (options.domain) str += '; domain=' + (options.domain);
-		if (options.secure) str += '; secure';
-		ss.debug("cookie: " + str);
-		document.cookie = str;
-		*/
 	};
 	
 	$.cookie.deleteAll = function() {
-		var arr = document.cookie.toString().split("; ");
-		for (i in arr) {
-			var name = arr[i].substr(0, arr[i].indexOf("="));
-			$.debug(name);
-			$.cookie.remove(name);
+		var a = document.cookie.toString().split("; ");
+		for (var i = a.length; i > 0; i--) {
+			$.cookie.remove(a[i].split('=')[0];
 		}
 	};
 	
@@ -634,8 +618,8 @@
 	};
 	$.cookie.showAll = function() {
 		var arr = document.cookie.toString().split("; ");
-		for (i in arr) {
-			$.debug(arr[i]);
+		for (var i = a.length; i > 0; i--) {
+			$.debug(a[i]);
 		}
 	};
 	
