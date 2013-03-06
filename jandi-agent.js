@@ -112,6 +112,11 @@ jandi_agent = (function() {
     },
     // MOTOROLA
     {
+        name: 'Motorola Xoom',
+        agent: 'Xoom',
+        type: 'tablet'
+    },
+    {
       agent: 'xoom',
       type: 'tablet'
     },
@@ -250,9 +255,10 @@ jandi_agent = (function() {
   // Optionally takes a userAgent
   self.run = function(userAgent) {
     userAgent || (userAgent = navigator.userAgent);
+    userAgentLower = userAgent.toLowerCase();
 
     // FAILSAFE
-    var device = {};
+    var device = null;
     
     var startTime = new Date().getTime();
 
@@ -269,7 +275,7 @@ jandi_agent = (function() {
           }
       }
       else if (self.devices[i].agentSearch) {
-        if (new RegExp(self.devices[i].agentSearch).test(userAgent)) {
+        if (new RegExp(self.devices[i].agentSearch).test(userAgent), 'i') {
             device = self.devices[i];
             break;
         }
@@ -284,13 +290,23 @@ jandi_agent = (function() {
         }
         // STRING
         else {
-            if (userAgent.indexOf(self.devices[i].agent) > -1) {
+            if (userAgentLower.indexOf(self.devices[i].agent.toLowerCase()) > -1) {
                 device = self.devices[i];
                 break;
             }
         }
           
       }
+    }
+    
+    if (device == null) {
+        device = {};
+        if (userAgent.indexOf('tablet') > -1)
+            device.type = 'tablet';
+        if (userAgent.indexOf('phone') > -1)
+            device.type = 'phone';
+        if (userAgent.indexOf('mobi') > -1 || userAgent.indexOf('mini') > -1)
+            device.mobile = true;
     }
 
     // TYPE & MOBILE FLAGS
@@ -299,7 +315,7 @@ jandi_agent = (function() {
       if (device.type == 'phone' || device.type == 'tablet' || device.type == 'music')
         device.mobile = true;
     }
-      
+
     // ADD FLAGS
     if (device.flag) {
       device[device.flag] = true;
@@ -309,6 +325,8 @@ jandi_agent = (function() {
     
     console.log(['jandi_agent - time taken', endTime - startTime]);
     console.log(['jandi_agent - device', device]);
+    
+    device.userAgent = userAgent;
 
     return self.device = device;
   };
