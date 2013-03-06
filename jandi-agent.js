@@ -67,19 +67,6 @@ jandi_agent = (function() {
   self.devices = [
     // Apple
     {
-      name: 'Apple Macintosh',
-      agent: 'Mac OS X 10',
-      type: 'desktop',
-      flag: 'mac'
-    },
-    {
-      name: 'iPhone',
-      agent: 'iPhone',
-      type: 'phone',
-      smart: 1,
-      flag: 'iphone'
-    },
-    {
       name: 'iPad',
       agent: 'iPad',
       type: 'tablet',
@@ -92,6 +79,19 @@ jandi_agent = (function() {
       type: 'music',
       smart: 1,
       flag: 'ipod'
+    },
+    {
+      name: 'iPhone',
+      agent: 'iPhone',
+      type: 'phone',
+      smart: 1,
+      flag: 'iphone'
+    },
+    {
+      name: 'Apple Macintosh',
+      agent: 'Mac OS X 10',
+      type: 'desktop',
+      flag: 'mac'
     },
     // Android
     {
