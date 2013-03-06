@@ -155,6 +155,10 @@ jandi_agent = (function() {
       agent: 'psp',
       mobile: 1
     },
+    // TVs
+    {
+      agent: 'googletv'
+    },
     // OTHERS
     {    
         // GOOGLE
@@ -289,9 +293,11 @@ jandi_agent = (function() {
       }
     }
 
-    // TYPE FLAGS
+    // TYPE & MOBILE FLAGS
     if (device.type) {
       device[device.type] = true;
+      if (device.type == 'phone' || device.type == 'tablet' || device.type == 'music')
+        device.mobile = true;
     }
       
     // ADD FLAGS
@@ -332,6 +338,8 @@ jandi_agent = (function() {
       self.run();
     }
   };
+  
+  self.getDevice = self.runOnce;
 
   // Initialize
   // Optionally takes a userAgent

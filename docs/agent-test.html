@@ -2,12 +2,14 @@
 <html>
 <head>
 <title></title>
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript" src="../jandi.js"></script>
 <script type="text/javascript" src="../jandi-agent.js"></script>
 </head>
 <body>
 
 <script type="text/javascript">
-document.write('<h1>' + jandi_agent.device + '</h1>');
+document.write('<h1>' + JSON.stringify(jandi_agent.getDevice()) + '</h1>');
 </script>
 </body>
 </html>

@@ -608,7 +608,7 @@
 	$.cookie.deleteAll = function() {
 		var a = document.cookie.toString().split("; ");
 		for (var i = a.length; i > 0; i--) {
-			$.cookie.remove(a[i].split('=')[0];
+			$.cookie.remove(a[i].split('=')[0]);
 		}
 	};
 	
