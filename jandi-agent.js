@@ -323,8 +323,7 @@ jandi_agent = (function() {
     
     var endTime = new Date().getTime();
     
-    console.log(['jandi_agent - time taken', endTime - startTime]);
-    console.log(['jandi_agent - device', device]);
+    //console.log(['jandi_agent - time taken', endTime - startTime]);
     
     device.userAgent = userAgent;
 
@@ -380,4 +379,3 @@ jandi.agent = jandi_agent;
 
 // START
 jandi_agent.init();
-jandi_agent.alert();
