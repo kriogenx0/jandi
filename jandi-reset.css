@@ -1,4 +1,7 @@
-/* GENERAL CSS RESET */
+/*
+// jandi-reset
+// CSS RESET
+*/
 body
 {
 	margin: 0;
@@ -166,67 +169,7 @@ sup
 	vertical-align: super;
 	line-height: inherit;
 }
-
-/* JANDI UI */
 .clear
 {
 	clear: both;
 }
-.ui-hidden,
-.ui-templates
-{
-	display: none;	
-}
-.page-width
-{
-	width: 960px;
-	margin: 0 auto;
-}
-/* TABLE BLOCK */
-.table-block
-{
-	width: 100%;
-}
-.table-block,
-.table-block > tr,
-.table-block > tr > th,
-.table-block > tr > td,
-.table-block > tbody > tr > th,
-.table-block > tbody > tr > td
-{
-	border: 0 none;
-	border-spacing: 0;
-	padding: 0;
-	margin: 0;
-	vertical-align: top;
-}
-/* BASIC FLOATING */
-.half-left,
-.half-right
-{
-	width: 49%;	
-}
-.third-left,
-.third-right
-{
-	width: 33%;	
-}
-.twoThirds-left,
-.twoThirds-right
-{
-	width: 66%;
-}
-.half-left,
-.third-left,
-.twoThirds-left
-{
-	float: left;	
-}
-.half-right,
-.third-right,
-.twoThirds-right
-{
-	float: right;
-	text-align: right;
-}
-
