@@ -1959,6 +1959,49 @@
 	
 	  return a;
 	};
+  
+  
+  ///////////////////////
+  // IMAGE LOAD CALLBACKS FOR WHEN IMAGES ARE CACHED TOO
+  
+  $.imageLoad = function(img, callback) {
+    if (typeof img == 'string') img = $(img);
+    if (typeof callback != 'function') callback = function(){};
+    $.imageLoad.images = $.imageLoad.images || [];
+    
+    var src = img.attr('src');
+    if ($.imageLoad.images[src]) return;
+    
+    $.imageLoad.images[src] = {
+      loaded: null,
+      error: null,
+      complete: null,
+      reloaded: null,
+      reloadTimes: 0
+    };
+    img.load(function() {
+      $.imageLoad.images[src].loaded = true;
+      callback($.imageLoad.images[src], img);
+    });
+    img.error(function() {
+      $.imageLoad.images[src].error = true;
+      callback($.imageLoad.images[src], img);
+    });
+    setTimeout(function() {
+      $.imageLoad.images[src].complete = img.prop('complete');
+      // ADD QUERYSTRING TO IMG, TO RELOAD IMAGE
+      if (!$.imageLoad.images[src].loaded && !$.imageLoad.images[src].error && $.imageLoad.images[src].complete) {
+        $.imageLoad.images[src].reloaded = true;
+        $.imageLoad.images[src].reloadTimes ? ++$.imageLoad.images[src].reloadTimes : ($.imageLoad.images[src].reloadTimes = 1);
+        if ($.imageLoad.images[src].reloadTimes > 2) return;
+        img.attr('src', src + (src.indexOf('?') == -1 ? '&' : '?' ) + 'image_reload=' + Math.floor((Math.random()*100000)+1) );
+      }
+    }, 500);
+  };
+  
+  $.imageLoad($('img').first(), function(i, j) {
+    console.log([i, j]);
+  });
 
 	
 	
