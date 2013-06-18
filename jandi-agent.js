@@ -17,9 +17,6 @@ mobile - tablets, phones, music are considered mobile, unless flagged
 email
 */
 
-// Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0
-// Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31
-
 var jandi_agent = (function() {
   var self = {};
 
@@ -168,7 +165,7 @@ var jandi_agent = (function() {
     },
     {
       name: 'Smart Phone',
-      agentRegex: 'palm|opera mini|hiptop|smartphone|mobile|treo',
+      agentRegex: 'palm|opera mini|hiptop|smartphone|treo',
       type: 'phone'
     },
     // OLD
