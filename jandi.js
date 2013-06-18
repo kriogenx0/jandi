@@ -561,14 +561,18 @@
 		var cookies = document.cookie.toString().split('; ');
 		var cookieArr;
 		for (var i = cookies.length; i > 0 ; i--) {
-			cookieArr = cookies[i].split('=');
+		  if (typeof cookies[i] != 'string') {
+		    //console.log('skipped: ' + cookies[i] + ' ' + i);
+		    continue;
+		  }
+			cookieArr = cookies[i].toString().split('=');
 			if (cookieArr[0] == name) {
 				return decodeURIComponent(cookieArr[1]);
 			}
 		}
 		
 	};
-	$.cookie.set = function (name, value, days, options)
+	$.cookie.set = function(name, value, days, options)
 	{
 		//value = value || "";
 		if (days) {
