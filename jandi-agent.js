@@ -17,7 +17,9 @@ mobile - tablets, phones, music are considered mobile, unless flagged
 email
 */
 
-jandi_agent = (function() {
+// Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31
+
+var jandi_agent = (function() {
   var self = {};
 
   self.operatingSystems = [
@@ -28,20 +30,21 @@ jandi_agent = (function() {
     },
     {
       name: 'Windows',
-      agent: 'Windows'
+      agent: 'Windows',
+      flag: 'pc'
     }
   ];
 
   self.browsers = [
     {
-      name: 'Google Chrome',
-      agent: 'Chrome',
-      flag: 'chrome'
-    },
-    {
       name: 'Safari',
       agent: 'Safari',
       flag: 'safari'
+    },
+    {
+      name: 'Chrome',
+      agent: 'Chrome',
+      flag: 'chrome'
     },
     {
       name: "Firefox",
@@ -59,8 +62,15 @@ jandi_agent = (function() {
     {
       name: 'Internet Explorer',
       agent: 'MSIE|Explorer',
-      type: 'desktop',
       flag: 'ie'
+    }
+  ];
+  
+  self.webEngine = [
+    {
+      name: 'WebKit',
+      agent: 'WebKit',
+      flag: 'webkit'
     }
   ];
 
@@ -71,27 +81,31 @@ jandi_agent = (function() {
       agent: 'iPad',
       type: 'tablet',
       smart: 1,
-      flag: 'ipad'
+      flag: 'ipad',
+      os: 'ios'
     },
     {
       name: 'iPod',
       agent: 'iPod',
       type: 'music',
       smart: 1,
-      flag: 'ipod'
+      flag: 'ipod',
+      os: 'ios'
     },
     {
       name: 'iPhone',
       agent: 'iPhone',
       type: 'phone',
       smart: 1,
-      flag: 'iphone'
+      flag: 'iphone',
+      os: 'ios'
     },
     {
       name: 'Apple Macintosh',
       agent: 'Mac OS X 10',
       type: 'desktop',
-      flag: 'mac'
+      flag: 'mac',
+      os: 'mac os x'
     },
     // Android
     {
@@ -99,11 +113,35 @@ jandi_agent = (function() {
       smart: 1,
       mobile: 1
     },
+    // Windows Desktops
+    {
+      agent: 'Windows NT',
+      type: 'desktop'
+    },
+    // Windows Phones
+    {
+      agent: "windows phone os 7",
+      type: 'phone'
+    },
+    {
+      agent: "windows ce",
+      type: 'phone'
+    },
+    {
+      agent: 'iemobile',
+      type: 'phone',
+      os: 'windows'
+    },
     // Blackberry
     {
       name: 'Blackberry Playbook',
       agent: 'playbook',
       type: 'tablet'
+    },
+    {
+      name: 'Blackberry',
+      agent: 'blackberry',
+      type: 'phone'
     },
     // HTC
     {
@@ -112,12 +150,8 @@ jandi_agent = (function() {
     },
     // MOTOROLA
     {
-        name: 'Motorola Xoom',
-        agent: 'Xoom',
-        type: 'tablet'
-    },
-    {
-      agent: 'xoom',
+      name: 'Motorola Xoom',
+      agent: 'Xoom',
       type: 'tablet'
     },
     // KINDLE
@@ -132,17 +166,19 @@ jandi_agent = (function() {
       dumb: 1
     },
     {
-      agentSearch: 'palm|opera mini|hiptop|windows ce|smartphone|mobile|treo',
+      name: 'Smart Phone',
+      agentRegex: 'palm|opera mini|hiptop|smartphone|mobile|treo',
       type: 'phone'
     },
     // OLD
     {
       name: 'Symbian',
-      agent: ['Symbian', 'Series60', 'Series70', 'Series80', 'Series90']
+      agent: ['Symbian', 'Series60', 'Series70', 'Series80', 'Series90'],
+      typr: 'phone'
     },
     // BOTS
     {
-      agentSearch: 'alexa|bot|crawler|crawling|facebookexternalhit|feedburner|google web preview|nagios|postrank|pingdom|slurp|spider|yahoo|yandex',
+      agentRegex: 'alexa|bot|crawler|crawling|facebookexternalhit|feedburner|google web preview|nagios|postrank|pingdom|slurp|spider|yahoo|yandex',
       type: 'bot'
     },
     {
@@ -158,93 +194,103 @@ jandi_agent = (function() {
     // GAMES
     {
       agent: 'psp',
-      mobile: 1
+      type: 'game'
+    },
+    {
+      agent: 'xbox',
+      type: 'game'
+    },
+    {
+      agent: 'wii',
+      type: 'game'
+    },
+    {
+      agent: ['nintendo','nitro'],
+      type: 'game'
+    },
+    {
+      agent: 'playstation',
+      type: 'game'
     },
     // TVs
     {
-      agent: 'googletv'
+      agent: 'googletv',
+      type: 'tv'
     },
     // OTHERS
-    {    
-        // GOOGLE
-        googleTv: "googletv",
-    
-        xoom: "xoom",
-        nuvifone: "nuvifone",
-    
-        // WINDOWS
-        deviceWinPhone7: "windows phone os 7",
-        deviceWinMob: "windows ce",
-        deviceWindows: "windows",
-        deviceIeMob: "iemobile",
-        devicePpc: "ppc", //Stands for PocketPC
-        enginePie: "wm5 pie",  //An old Windows Mobile
-    
-        blackberry: "blackberry",
-        vndRIM: "vnd.rim", //Detectable when BB devices emulate IE or Firefox
-        blackberryStorm: "blackberry95", //Storm 1 and 2
-        blackberryBold: "blackberry97", //Bold
-        blackberryTour: "blackberry96", //Tour
-        blackberryCurve: "blackberry89", //Curve 2
-        blackberryTorch: "blackberry 98", //Torch
-    
-        palm: "palm",
-        webOS: "webos", //For Palm's new WebOS devices
-        blazer: "blazer", //Old Palm browser
-        xiino: "xiino",
-        deviceKindle: "kindle", //Amazon Kindle, eInk one.
-    
-        //Initialize variables for mobile-specific content.
-        vndwap: "vnd.wap",
-        wml: "wml",
-    
-        //Initialize variables for random devices and mobile browsers.
-        //Some of these may not support JavaScript
-        deviceBrew: "brew",
-        deviceDanger: "danger",
-        deviceHiptop: "hiptop",
-        devicePlaystation: "playstation",
-        deviceNintendoDs: "nitro",
-        deviceNintendo: "nintendo",
-        deviceWii: "wii",
-        deviceXbox: "xbox",
-        deviceArchos: "archos",
-        engineOpera: "opera", //Popular browser
-        engineNetfront: "netfront", //Common embedded OS browser
-        engineUpBrowser: "up.browser", //common on some phones
-        engineOpenWeb: "openweb", //Transcoding by OpenWave server
-        deviceMidp: "midp", //a mobile Java technology
-        uplink: "up.link",
-        engineTelecaQ: 'teleca q', //a modern feature phone browser
-    
-        devicePda: "pda",
-        mini: "mini",  //Some mobile browsers put 'mini' in their names.
-        mobile: "mobile", //Some mobile browsers put 'mobile' in their user agent strings.
-        mobi: "mobi", //Some mobile browsers put 'mobi' in their user agent strings.
-    
-        //Use Maemo, Tablet, and Linux to test for Nokia's Internet Tablets.
-        maemo: "maemo",
-        maemoTablet: "tablet",
-        linux: "linux",
-        qtembedded: "qt embedded", //for Sony Mylo and others
-        mylocom2: "com2", //for Sony Mylo also
-    
-        //In some UserAgents, the only clue is the manufacturer.
-        manuSonyEricsson: "sonyericsson",
-        manuericsson: "ericsson",
-        manuSamsung1: "sec-sgh",
-        manuSony: "sony",
-        manuHtc: "htc", //Popular Android and WinMo manufacturer
-    
-        //In some UserAgents, the only clue is the operator.
-        svcDocomo: "docomo",
-        svcKddi: "kddi",
-        svcVodafone: "vodafone",
-    
-        //Disambiguation strings.
-        disUpdate: "update" //pda vs. update
-      }
+    {
+      agent: "nuvifone"
+    },
+    {
+      name: 'Mobile',
+      agent: ['mini', 'mobile']
+    }
   ];
+  
+  var otherTypes = {
+      // WINDOWS
+      devicePpc: "ppc", //Stands for PocketPC
+      enginePie: "wm5 pie",  //An old Windows Mobile
+  
+      vndRIM: "vnd.rim", //Detectable when BB devices emulate IE or Firefox
+  
+      palm: "palm",
+      webOS: "webos", //For Palm's new WebOS devices
+      blazer: "blazer", //Old Palm browser
+      xiino: "xiino",
+      deviceKindle: "kindle", //Amazon Kindle, eInk one.
+  
+      //Initialize variables for mobile-specific content.
+      vndwap: "vnd.wap",
+      wml: "wml",
+  
+      //Initialize variables for random devices and mobile browsers.
+      //Some of these may not support JavaScript
+      deviceBrew: "brew",
+      deviceDanger: "danger",
+      deviceHiptop: "hiptop",
+      deviceArchos: "archos",
+      
+      engineOpera: "opera", //Popular browser
+      engineNetfront: "netfront", //Common embedded OS browser
+      engineUpBrowser: "up.browser", //common on some phones
+      engineOpenWeb: "openweb", //Transcoding by OpenWave server
+      deviceMidp: "midp", //a mobile Java technology
+      uplink: "up.link",
+      engineTelecaQ: 'teleca q', //a modern feature phone browser
+  
+      devicePda: "pda",
+  
+      //Use Maemo, Tablet, and Linux to test for Nokia's Internet Tablets.
+      maemo: "maemo",
+      maemoTablet: "tablet",
+      linux: "linux",
+      qtembedded: "qt embedded", //for Sony Mylo and others
+      mylocom2: "com2", //for Sony Mylo also
+  
+      //In some UserAgents, the only clue is the manufacturer.
+      manuSonyEricsson: "sonyericsson",
+      manuericsson: "ericsson",
+      manuSamsung1: "sec-sgh",
+      manuSony: "sony",
+      manuHtc: "htc", //Popular Android and WinMo manufacturer
+  
+      //In some UserAgents, the only clue is the operator.
+      svcDocomo: "docomo",
+      svcKddi: "kddi",
+      svcVodafone: "vodafone",
+  
+      //Disambiguation strings.
+      disUpdate: "update" //pda vs. update
+  };
+  /*
+      blackberryStorm: "blackberry95", //Storm 1 and 2
+      blackberryBold: "blackberry97", //Bold
+      blackberryTour: "blackberry96", //Tour
+      blackberryCurve: "blackberry89", //Curve 2
+      blackberryTorch: "blackberry 98", //Torch
+      mobi: "mobi", //Some mobile browsers put 'mobi' in their user agent strings.
+  */
 
   var debug = function(m) {
     if (typeof(console) != "undefined" && console.log) {
@@ -258,47 +304,46 @@ jandi_agent = (function() {
     userAgentLower = userAgent.toLowerCase();
 
     // FAILSAFE
-    var device = null;
     
-    var startTime = new Date().getTime();
+    //var startTime = new Date().getTime();
 
     // Loop Through Devices
-    var devicesLength = self.devices.length;
-    for (var i = 0; i < devicesLength; i++) {
-      // console.log(self.devices[i]);
-      if (self.devices[i].detect) {
-          if (typeof self.devices[i].detect == 'function') {
-            if (self.devices[i].detect() ) {
-              device = self.devices[i];
+    var device = null, deviceLoop;
+    for (var i = self.devices.length-1; i > 0; i--) {
+      deviceLoop = self.devices[i];
+      // console.log(deviceLoop);
+      if (deviceLoop.detect) {
+        if (typeof deviceLoop.detect == 'function' && deviceLoop.detect()) {
+          device = deviceLoop;
+          break;
+        }
+      }
+      else if (deviceLoop.agentRegex) {
+        //console.log('agentRegex - ' + deviceLoop.agentRegex + ' - ' + (new RegExp(deviceLoop.agentRegex, 'i')).test(userAgent));
+        if ((new RegExp(deviceLoop.agentRegex, 'i')).test(userAgent)) {
+          device = deviceLoop;
+          break;
+        }
+      }
+      else if (deviceLoop.agent) {
+        var agentType = $.type(deviceLoop.agent);
+        if (agentType == 'array') {
+          for (var j = deviceLoop.agent.length - 1; j > 0; j--) {
+            if (userAgentLower.indexOf(deviceLoop.agent[j].toLowerCase()) > -1) {
+              device = deviceLoop;
               break;
             }
           }
-      }
-      else if (self.devices[i].agentSearch) {
-        if (new RegExp(self.devices[i].agentSearch).test(userAgent), 'i') {
-            device = self.devices[i];
-            break;
-        }
-          
-      }
-      else if (self.devices[i].agent) {
-        var agentType = $.type(self.devices[i].agent);
-        if (agentType == 'array') {
-            for (var j = self.devices[i].agent.length; j > 0; j--) {
-                self.devices[i].agent[j];
-            }
         }
         // STRING
-        else {
-            if (userAgentLower.indexOf(self.devices[i].agent.toLowerCase()) > -1) {
-                device = self.devices[i];
-                break;
-            }
+        else if (userAgentLower.indexOf(deviceLoop.agent.toLowerCase()) > -1) {
+          device = deviceLoop;
+          break;
         }
-          
       }
     }
     
+    // DEVICE NOT FOUND
     if (device == null) {
         device = {};
         if (userAgent.indexOf('tablet') > -1)
@@ -308,6 +353,82 @@ jandi_agent = (function() {
         if (userAgent.indexOf('mobi') > -1 || userAgent.indexOf('mini') > -1)
             device.mobile = true;
     }
+    
+    // OPERATING SYSTEM
+    var os = null, osLoop;
+    for (var i = self.operatingSystems.length-1; i > 0; i--) {
+      osLoop = self.operatingSystems[i];
+      if (osLoop.detect) {
+        if (typeof osLoop.detect == 'function' && osLoop.detect()) {
+          os = osLoop;
+          break;
+        }
+      }
+      else if (osLoop.agentRegex) {
+        if ((new RegExp(osLoop.agentRegex, 'i')).test(userAgent)) {
+          os = osLoop;
+          break;
+        }
+      }
+      else if (osLoop.agent) {
+        var agentType = $.type(osLoop.agent);
+        if (agentType == 'array') {
+          for (var j = osLoop.agent.length - 1; j > 0; j--) {
+            // osLoop.agent[j];
+            if (userAgentLower.indexOf(osLoop.agent[j].toLowerCase()) > -1) {
+              os = osLoop;
+              break;
+            }
+          }
+        }
+        // STRING
+        else if (userAgentLower.indexOf(osLoop.agent.toLowerCase()) > -1) {
+          os = osLoop;
+          break;
+        }
+      }
+    }
+    if (os && os.name)
+      device.os = os.name;
+    
+    // BROWSER
+    var browser = {name:null}, browserLoop;
+    for (var i = self.browsers.length-1; i > 0; i--) {
+      browserLoop = self.browsers[i];
+      if (typeof browserLoop == 'undefined')
+        continue;
+      if (typeof browserLoop.detect == 'function') {
+        if (browserLoop.detect()) {
+          browser = browserLoop;
+          break;
+        }
+      }
+      else if (browserLoop.agentRegex) {
+        if ((new RegExp(browserLoop.agentRegex, 'i')).test(userAgent)) {
+          browser = browserLoop;
+          break;
+        }
+      }
+      else if (browserLoop.agent) {
+        var agentType = $.type(browserLoop.agent);
+        if (agentType == 'array') {
+          for (var j = browserLoop.agent.length - 1; j > 0; j--) {
+            // browserLoop.agent[j];
+            if (userAgentLower.indexOf(browserLoop.agent[j].toLowerCase()) > -1) {
+              browser = browserLoop;
+              break;
+            }
+          }
+        }
+        // STRING
+        else if (userAgentLower.indexOf(browserLoop.agent.toLowerCase()) > -1) {
+          browser = browserLoop;
+          break;
+        }
+      }
+    }
+    if (browser.name)
+      device.browser = browser.name;
 
     // TYPE & MOBILE FLAGS
     if (device.type) {
@@ -321,8 +442,7 @@ jandi_agent = (function() {
       device[device.flag] = true;
     }
     
-    var endTime = new Date().getTime();
-    
+    //var endTime = new Date().getTime();
     //console.log(['jandi_agent - time taken', endTime - startTime]);
     
     device.userAgent = userAgent;
@@ -333,7 +453,7 @@ jandi_agent = (function() {
   self.runOnce = function(userAgent) {
     var device;
     if (device = $.cookie('jandi_agent')) {
-        return device;
+        //return device;
     }
     /*
     // DONT REQUIRE $.cookie
@@ -352,7 +472,7 @@ jandi_agent = (function() {
     }
     else {
       //$.cookie('jandi_agent', self.run(), {expires: 3650, path: '/'});
-      self.run();
+      return self.run();
     }
   };
   

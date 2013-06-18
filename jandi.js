@@ -605,7 +605,7 @@
 		var secure = o.secure ? '; secure' : '';
 		
 		var str = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
-		$.debug("COOKIE SET: " + str);
+		//$.debug("COOKIE SET: " + str);
 		document.cookie = str;
 	};
 	
@@ -618,7 +618,7 @@
 	
 	$.cookie.remove = function(name) {
 		$.cookie.set(name, null, -1000);
-		$.debug("DELETED COOKIE: " + name);
+		//$.debug("DELETED COOKIE: " + name);
 	};
 	$.cookie.showAll = function() {
 		var arr = document.cookie.toString().split("; ");
