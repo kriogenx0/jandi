@@ -71,16 +71,17 @@ var jandi_agent = (function() {
       flag: 'webkit'
     }
   ];
+  
+  // LOWER HAVE GREATER PRIORITY
 
   self.devices = [
     // Apple
     {
-      name: 'iPad',
-      agent: 'iPad',
-      type: 'tablet',
-      smart: 1,
-      flag: 'ipad',
-      os: 'ios'
+      name: 'Apple Macintosh',
+      agent: 'Mac OS X 10',
+      type: 'desktop',
+      flag: 'mac',
+      os: 'mac os x'
     },
     {
       name: 'iPod',
@@ -99,11 +100,12 @@ var jandi_agent = (function() {
       os: 'ios'
     },
     {
-      name: 'Apple Macintosh',
-      agent: 'Mac OS X 10',
-      type: 'desktop',
-      flag: 'mac',
-      os: 'mac os x'
+      name: 'iPad',
+      agent: 'iPad',
+      type: 'tablet',
+      smart: 1,
+      flag: 'ipad',
+      os: 'ios'
     },
     // Android
     {
