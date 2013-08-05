@@ -1,6 +1,6 @@
 /*
 // jandi
-// Version 1.6
+// Version 1.6.4
 // 2013-06-06
 //
 // javascript and i
@@ -17,55 +17,58 @@
 
 (function($){
 
-	/////////////////
+	//====
 	// APP
 
 	$.app = {};
+
 	$.app.detectEnvironment = function() {
 		var l = location.hostname || location.name;
 		if (l.indexOf(".local") > -1 || l.indexOf("local.") > -1) a.local = true;
 		if (l.indexOf(".dev") > -1 || l.indexOf("dev.") > -1 || a.local) a.dev = true;
 	};
+
 	$.app.debug = function() {
 		// arguments;
 	};
-	  $.app.route = function( r, url ) {
-	    if (!r) r = this.routes;
-	    if (!url) url = location.pathname.toLowerCase().replace(/^\/+/g,'');
-	    // $.debug( ['routes', r, url]);
-	
-	    for( i in r ) {
-	      //$.debug( ['r', r[i].pattern, r[i].view, url.match( r[i].pattern ) ] );
-	      $.debug( ['LOADING ROUTE', r[i] ] );
-	
-	      // CHECK IF ROUTE IS STRING
-	      if (typeof r[i] == 'string') {
-	        if (typeof app.view[r[i]] == 'function')
-	          $(app.view[r[i]]);
-	        else if (app.view[r[i]].init)
-	          $(app.view[r[i]].init);
-	      }
-	      else if
-	        (
-	          r[i].pattern && r[i].view &&
-	          ( url.match( r[i].pattern ) || ( r[i].pattern.test && r[i].pattern.test( url ) ) )
-	        )
-	      {
-	        /*
-	        if (r[i].view.init) {
-	          $(r[i].view.init);
-	        } else if ($.type(r[i].view) == 'function') {
-	          $(r[i].view);
-	        }
-	       */
-	        if (typeof r[i].view == 'function')
-	          $(r[i].view);
-	        else if (app.view[r[i]].init)
-	          $(app.view[r[i]].init);
-	        break;
-	      }
-	    }
-	  };
+
+  $.app.route = function( r, url ) {
+    if (!r) r = this.routes;
+    if (!url) url = location.pathname.toLowerCase().replace(/^\/+/g,'');
+    // $.debug( ['routes', r, url]);
+
+    for( i in r ) {
+      //$.debug( ['r', r[i].pattern, r[i].view, url.match( r[i].pattern ) ] );
+      $.debug( ['LOADING ROUTE', r[i] ] );
+
+      // CHECK IF ROUTE IS STRING
+      if (typeof r[i] == 'string') {
+        if (typeof app.view[r[i]] == 'function')
+          $(app.view[r[i]]);
+        else if (app.view[r[i]].init)
+          $(app.view[r[i]].init);
+      }
+      else if
+        (
+          r[i].pattern && r[i].view &&
+          ( url.match( r[i].pattern ) || ( r[i].pattern.test && r[i].pattern.test( url ) ) )
+        )
+      {
+        /*
+        if (r[i].view.init) {
+          $(r[i].view.init);
+        } else if ($.type(r[i].view) == 'function') {
+          $(r[i].view);
+        }
+       */
+        if (typeof r[i].view == 'function')
+          $(r[i].view);
+        else if (app.view[r[i]].init)
+          $(app.view[r[i]].init);
+        break;
+      }
+    }
+  };
 
 	$.app.init = function() {
 		$.app.detectEnvironment();
@@ -73,7 +76,7 @@
 			$.app.route( $.app.routes || app.routes);
 	};
 	
-	////////////////
+	//=======
 	// FORMAT
 	
 	$.format = function(value, type) {
@@ -158,7 +161,7 @@
 		return s.replace(/\s*$/, "");
 	};
 	
-	///////////////////////
+	//=========
 	// VALIDATE
 	
 	// ADD SUPPORT FOR MULTIPLE VALUES AND MULTIPLE TYPES
@@ -224,7 +227,7 @@
 		return /^(?:2131|1800|35\d{3})\d{11}$/.test(v);
 	};
 		  
-	////////////////////
+	//==========
 	// UTILITIES
 		  
 	$.debug = function(text, type) {
@@ -250,7 +253,7 @@
 		}
 	};
 	
-	///////////////////
+	//=============
 	// STATIC UTILS
 	
 	$.nonCharacterKeys = [9,16,17,18,27,37,38,39,40,91,117,224];
@@ -285,9 +288,8 @@
 		}
 	};
 	
+	//===============
 	// DATA UTILITIES
-	/////////////////
-	
 	
 	$.removeObjectFromArray = function(arr, prop, val) {
 		if ($.type(arr) != "array") return arr;
@@ -438,9 +440,8 @@
 	};
 	
 
-	
+	//=============
 	// UI UTILITIES
-	/////////////////
 
 	$.fn.noSelect = function() {
 		var t = $(this);
@@ -482,7 +483,6 @@
 	$.fn.voidLink = function() {
 		return $(this).attr('href', 'javascript: void(0)');
 	}
-	
 	
 	// EVENT BINDER, TRIGGERER
 	$.ev = function(e, fn) {
@@ -626,10 +626,10 @@
 			$.debug(a[i]);
 		}
 	};
-	
-	
-	
-	/* CSS TOOLS */
+
+	//==========
+	// CSS TOOLS
+
 	$.fn.rotate = function (val)
 	{
 		var style = $(this).css('transform') || 'none';
@@ -709,7 +709,7 @@
 		return this;
 	};
 	
-	//////////////////////
+	//=================
 	// DOM MANIPULATION
 	
 	$.create = function(sel) {
@@ -954,11 +954,9 @@
 		};
 		
 		var pre = function() {
-			
 		};
 		
 		var post = function() {
-			
 		};
 		
 		var run = function() {
@@ -967,14 +965,9 @@
 		};
 		
 		var reset = function() {
-			
 		};
 		
-		
 		var init = function() {
-			
-			
-			
 		};
 		
 		
@@ -1626,7 +1619,7 @@
 	};
 	
 	
-	////////////////
+	//=============
 	// GEO LOCATION
 	
 	$.locator = function() {
@@ -1729,68 +1722,67 @@
 		*/
 		
 	
-	    if (locations && locations.length > 0)
-	    	var myLatLng = new google.maps.LatLng(locations[0].lat, locations[0].lon);
+    if (locations && locations.length > 0)
+    	var myLatLng = new google.maps.LatLng(locations[0].lat, locations[0].lon);
 		else
 			var myLatLng = new google.maps.LatLng(0, 0);
 		
 		var options = {
-	        zoom: zoom || 12,
-	        center: myLatLng,
-	        mapTypeControl: false,
-	        mapTypeId: google.maps.MapTypeId.ROADMAP
-	    };
-	
-	    var map_canvas = t[0];
-	    
-	    var map = new google.maps.Map(map_canvas, options);
-	
-	    if (locations && locations.length > 0) {
-	    
-	        var bounds = new google.maps.LatLngBounds();
-	
+        zoom: zoom || 12,
+        center: myLatLng,
+        mapTypeControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map_canvas = t[0];
+    
+    var map = new google.maps.Map(map_canvas, options);
+
+    if (locations && locations.length > 0) {
+    
+      var bounds = new google.maps.LatLngBounds();
+
 			// LOOP LOCATIONS
-	        for (var i = 0; i < locations.length; i++) {
-	        	var loc = locations[i];
-	        	
-	        	var marker = {
-	        		title: loc.name,
-	        		position: new google.maps.LatLng( loc.lat, loc.lon ),
+      for (var i = 0; i < locations.length; i++) {
+      	var loc = locations[i];
+      	
+      	var marker = {
+      		title: loc.name,
+      		position: new google.maps.LatLng( loc.lat, loc.lon ),
 					icon: loc.icon
-	        	};
-	        	
-	            var googleMarker = new google.maps.Marker(marker);
-	            googleMarker.setMap(map);
-	
-	            bounds.extend(googleMarker.getPosition());
-	            
-	            // DIALOG CONTENT
-	            var dialogContent = '<div class="googleMaps-dialog"><div class="location-title">' + loc.name + '</div>';
-	        	dialogContent += loc.address + '<br />' + loc.city + ', ' + loc.state + ' ' + loc.zip + '<br />';
-	        	if (loc.phone) dialogContent += loc.phone + '<br />';
-	        	if (loc.website) dialogContent += '<a href="' + loc.website + '" target="_blank">' + loc.website + '</a>';
-	        	dialogContent += '</div>';
-	        	
-	        	var dialogContent = {
-	        		content: dialogContent
-	        	};
-	
-	            //if (infoWindowContents && infoWindowContents.length > i)
-	            createInfoWindow(map, googleMarker, dialogContent);
-	        }
-	
-	        if (Math.abs(bounds.getNorthEast().lat() - bounds.getSouthWest().lat()) < .003) {
-	            bounds.extend(new google.maps.LatLng(bounds.getNorthEast().lat() + .003, bounds.getNorthEast().lng() - .003));
-	            bounds.extend(new google.maps.LatLng(bounds.getSouthWest().lat() - .003, bounds.getSouthWest().lng() + .003));
-	        }
-	
-	        if (locations.length > 1) {
-	            map.fitBounds(bounds);
-	        }
-	
-	        map.setCenter(bounds.getCenter());
-	    }
-	   
+      	};
+      	
+        var googleMarker = new google.maps.Marker(marker);
+        googleMarker.setMap(map);
+
+        bounds.extend(googleMarker.getPosition());
+        
+        // DIALOG CONTENT
+        var dialogContent = '<div class="googleMaps-dialog"><div class="location-title">' + loc.name + '</div>';
+      	dialogContent += loc.address + '<br />' + loc.city + ', ' + loc.state + ' ' + loc.zip + '<br />';
+      	if (loc.phone) dialogContent += loc.phone + '<br />';
+      	if (loc.website) dialogContent += '<a href="' + loc.website + '" target="_blank">' + loc.website + '</a>';
+      	dialogContent += '</div>';
+      	
+      	var dialogContent = {
+      		content: dialogContent
+      	};
+
+          //if (infoWindowContents && infoWindowContents.length > i)
+          createInfoWindow(map, googleMarker, dialogContent);
+      }
+
+      if (Math.abs(bounds.getNorthEast().lat() - bounds.getSouthWest().lat()) < .003) {
+          bounds.extend(new google.maps.LatLng(bounds.getNorthEast().lat() + .003, bounds.getNorthEast().lng() - .003));
+          bounds.extend(new google.maps.LatLng(bounds.getSouthWest().lat() - .003, bounds.getSouthWest().lng() + .003));
+      }
+
+      if (locations.length > 1) {
+          map.fitBounds(bounds);
+      }
+
+      map.setCenter(bounds.getCenter());
+    }
 	}
 	
 	$.intervalLoader = function(fn, seconds, times) {
@@ -1813,7 +1805,7 @@
 		return $(this).stop().animate(css,options);
     };
 	
-	/*****************/
+	//=========
 	// JANDI UI
 	
 	$.fn.disableLoader = function(options) {
@@ -1965,7 +1957,7 @@
 	};
   
   
-  ///////////////////////
+  //=====================
   // IMAGE LOAD CALLBACKS FOR WHEN IMAGES ARE CACHED TOO
   
   $.imageLoad = function(img, callback) {
@@ -2009,7 +2001,7 @@
 
 	
 	
-	/*****************/
+	//=====================
 	// AVOID CONSOLE ERRORS
 	if (!window.console) {
 		window.console = {
