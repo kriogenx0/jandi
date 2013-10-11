@@ -1,80 +1,20 @@
 /*
 // jandi
-// Version 1.6.4
-// 2013-06-06
+// Version 1.6.5
+// 2013-10-11
 //
 // javascript and i
 // jandi.kriogenx.net
 // Alex Vaos
 // simplex0@gmail.com
-// 2011-08-30
+// Started 2011-08-30
 // jandi.kriogenx.net/source/license.txt
 //
 // REQUIRES:
 // jQuery
 */
 
-
 (function($){
-
-	//====
-	// APP
-
-	$.app = {};
-
-	$.app.detectEnvironment = function() {
-		var l = location.hostname || location.name;
-		if (l.indexOf(".local") > -1 || l.indexOf("local.") > -1) a.local = true;
-		if (l.indexOf(".dev") > -1 || l.indexOf("dev.") > -1 || a.local) a.dev = true;
-	};
-
-	$.app.debug = function() {
-		// arguments;
-	};
-
-  $.app.route = function( r, url ) {
-    if (!r) r = this.routes;
-    if (!url) url = location.pathname.toLowerCase().replace(/^\/+/g,'');
-    // $.debug( ['routes', r, url]);
-
-    for( i in r ) {
-      //$.debug( ['r', r[i].pattern, r[i].view, url.match( r[i].pattern ) ] );
-      $.debug( ['LOADING ROUTE', r[i] ] );
-
-      // CHECK IF ROUTE IS STRING
-      if (typeof r[i] == 'string') {
-        if (typeof app.view[r[i]] == 'function')
-          $(app.view[r[i]]);
-        else if (app.view[r[i]].init)
-          $(app.view[r[i]].init);
-      }
-      else if
-        (
-          r[i].pattern && r[i].view &&
-          ( url.match( r[i].pattern ) || ( r[i].pattern.test && r[i].pattern.test( url ) ) )
-        )
-      {
-        /*
-        if (r[i].view.init) {
-          $(r[i].view.init);
-        } else if ($.type(r[i].view) == 'function') {
-          $(r[i].view);
-        }
-       */
-        if (typeof r[i].view == 'function')
-          $(r[i].view);
-        else if (app.view[r[i]].init)
-          $(app.view[r[i]].init);
-        break;
-      }
-    }
-  };
-
-	$.app.init = function() {
-		$.app.detectEnvironment();
-		if ($.app.routes)
-			$.app.route( $.app.routes || app.routes);
-	};
 	
 	//=======
 	// FORMAT
@@ -226,10 +166,10 @@
 	$.validate.jcb = function(v) {
 		return /^(?:2131|1800|35\d{3})\d{11}$/.test(v);
 	};
-		  
+
 	//==========
 	// UTILITIES
-		  
+
 	$.debug = function(text, type) {
 		if (window.console && window.console.log) {
 			if (type == 'info' && window.console.info) {
@@ -316,24 +256,24 @@
 		return false;
 	}
 	
-	$.serialize = function (obj) {  
-		var t = typeof (obj);  
-		if (t != "object" || obj === null) {  
-			// simple data type  
-			if (t == "string") obj = '"'+obj+'"';  
-			return String(obj);  
-		}  
-		else {  
-			// recurse array or object  
-			var n, v, json = [], arr = (obj && obj.constructor == Array);  
-			for (n in obj) {  
-				v = obj[n]; t = typeof(v);  
-				if (t == "string") v = '"'+v+'"';  
-				else if (t == "object" && v !== null) v = $.serialize(v);  
-				json.push((arr ? "" : '"' + n + '":') + String(v));  
-			}  
-			return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");  
-		}  
+	$.serialize = function (obj) {
+		var t = typeof (obj);
+		if (t != "object" || obj === null) {
+			// simple data type
+			if (t == "string") obj = '"'+obj+'"';
+			return String(obj);
+		}
+		else {
+			// recurse array or object
+			var n, v, json = [], arr = (obj && obj.constructor == Array);
+			for (n in obj) {
+				v = obj[n]; t = typeof(v);
+				if (t == "string") v = '"'+v+'"';
+				else if (t == "object" && v !== null) v = $.serialize(v);
+				json.push((arr ? "" : '"' + n + '":') + String(v));
+			}
+			return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+		}
 	};
 	
 	
@@ -536,96 +476,100 @@
 		else
 			return $.cookie(name, $.serialize(value), days, options);
 	};
-	
-	$.cookie = function(name, value, days, options) {	
-		// DELETE
-		if (value === null) {
-			$.cookie.remove(name);
-		}
-		// SET
-		else if (typeof(value) != 'undefined') {
-			$.cookie.set(name, value, days, options);
-		}
-		// GET
-		else if (name) { // only name given, get cookie
-			return $.cookie.get(name);
-		}
-		// SHOW ALL
-		else {
-			return $.cookie.showAll();	
-		}
-	};
-	$.cookie.get = function(name) {
-		if (!document.cookie) return;
-		
-		var cookies = document.cookie.toString().split('; ');
-		var cookieArr;
-		for (var i = cookies.length; i > 0 ; i--) {
-		  if (typeof cookies[i] != 'string') {
-		    //console.log('skipped: ' + cookies[i] + ' ' + i);
-		    continue;
-		  }
-			cookieArr = cookies[i].toString().split('=');
-			if (cookieArr[0] == name) {
-				return decodeURIComponent(cookieArr[1]);
-			}
-		}
-		
-	};
-	$.cookie.set = function(name, value, days, options)
-	{
-		//value = value || "";
-		if (days) {
-			var date = new Date();
-			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-			days = date.toGMTString();
-		}
-		var expires = days ? '; expires=' + days : '';
-			
-		/*
-		if (hours) {
-			var exdate = new Date();
-			exdate.setTime(exdate.getTime() + (hours * 60 * 60 * 1000));
-			str += "; expires=" + exdate.toUTCString();
-		}
-		*/
-		
-		// OPTIONS
-		var o = {};
-		if ($.type(options) == "string") o.domain = options;
-		else {
-			o = options || {};
-			if (!o.path) o.path = "/";
-			if (!o.domain) o.domain = $.cookieHost();
-		}		
-		
-		// BUILD
-		var path = o.path ? '; path=' + (o.path) : '';
-		var domain = o.domain ? '; domain=' + (o.domain) : '';
-		var secure = o.secure ? '; secure' : '';
-		
-		var str = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
-		//$.debug("COOKIE SET: " + str);
-		document.cookie = str;
-	};
-	
-	$.cookie.deleteAll = function() {
-		var a = document.cookie.toString().split("; ");
-		for (var i = a.length; i > 0; i--) {
-			$.cookie.remove(a[i].split('=')[0]);
-		}
-	};
-	
-	$.cookie.remove = function(name) {
-		$.cookie.set(name, null, -1000);
-		//$.debug("DELETED COOKIE: " + name);
-	};
-	$.cookie.showAll = function() {
-		var arr = document.cookie.toString().split("; ");
-		for (var i = a.length; i > 0; i--) {
-			$.debug(a[i]);
-		}
-	};
+
+  if (typeof $.cookie == 'undefined') {
+
+    $.cookie = function(name, value, days, options) {	
+      // DELETE
+      if (value === null) {
+        $.cookie.remove(name);
+      }
+      // SET
+      else if (typeof(value) != 'undefined') {
+        $.cookie.set(name, value, days, options);
+      }
+      // GET
+      else if (name) { // only name given, get cookie
+        return $.cookie.get(name);
+      }
+      // SHOW ALL
+      else {
+        return $.cookie.showAll();	
+      }
+    };
+    $.cookie.get = function(name) {
+      if (!document.cookie) return;
+
+      var cookies = document.cookie.toString().split('; ');
+      var cookieArr;
+      for (var i = cookies.length; i > 0 ; i--) {
+        if (typeof cookies[i] != 'string') {
+          //console.log('skipped: ' + cookies[i] + ' ' + i);
+          continue;
+        }
+        cookieArr = cookies[i].toString().split('=');
+        if (cookieArr[0] == name) {
+          return decodeURIComponent(cookieArr[1]);
+        }
+      }
+
+    };
+    $.cookie.set = function(name, value, days, options)
+    {
+      //value = value || "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        days = date.toGMTString();
+      }
+      var expires = days ? '; expires=' + days : '';
+
+      /*
+      if (hours) {
+        var exdate = new Date();
+        exdate.setTime(exdate.getTime() + (hours * 60 * 60 * 1000));
+        str += "; expires=" + exdate.toUTCString();
+      }
+      */
+
+      // OPTIONS
+      var o = {};
+      if ($.type(options) == "string") o.domain = options;
+      else {
+        o = options || {};
+        if (!o.path) o.path = "/";
+        if (!o.domain) o.domain = $.cookieHost();
+      }		
+
+      // BUILD
+      var path = o.path ? '; path=' + (o.path) : '';
+      var domain = o.domain ? '; domain=' + (o.domain) : '';
+      var secure = o.secure ? '; secure' : '';
+
+      var str = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
+      //$.debug("COOKIE SET: " + str);
+      document.cookie = str;
+    };
+
+    $.cookie.deleteAll = function() {
+      var a = document.cookie.toString().split("; ");
+      for (var i = a.length; i > 0; i--) {
+        $.cookie.remove(a[i].split('=')[0]);
+      }
+    };
+
+    $.cookie.remove = function(name) {
+      $.cookie.set(name, null, -1000);
+      //$.debug("DELETED COOKIE: " + name);
+    };
+    $.cookie.showAll = function() {
+      var arr = document.cookie.toString().split("; ");
+      for (var i = a.length; i > 0; i--) {
+        $.debug(a[i]);
+      }
+    };
+
+  }
 
 	//==========
 	// CSS TOOLS
@@ -712,6 +656,7 @@
 	//=================
 	// DOM MANIPULATION
 	
+  // Create DOM element based off of CSS Selector
 	$.create = function(sel) {
 		if (typeof sel != "string") return sel;
 		var t = "div", c, p;
@@ -757,7 +702,6 @@
 	}
 	
 	$.messages = function(opts) {
-		
 		var
 		_d = {
 			container: "body",
@@ -796,7 +740,6 @@
 		}
 	};
 	
-	
 	$.fn.emptyTextHandler = function(text) {
 		var c = this;
 		if (!text && c.attr("title")) text = c.attr("title");
@@ -820,7 +763,6 @@
 		});
 		$(function() { c.blur(); });
 	};
-	
 	
 	$.fn.picker = function(options) {
 	
@@ -935,19 +877,12 @@
 	$.fn.pusher = function(o) {
 		
 		var t = $(this);
-		
 		var cl = [];
-		
 		var transitions = [];
-		
 		var detect = function() {
-			
 			cl = t.attr("class").split(" ");
-			
 			for (i = 0; i < cl.length; i++) {
 				if (cl[i]) {
-				
-				
 					transitions.push(cl[i]);
 				}
 			};
@@ -969,8 +904,7 @@
 		
 		var init = function() {
 		};
-		
-		
+
 		return {
 			items: t,
 			run: run,
@@ -978,8 +912,6 @@
 		};	
 	};
 	
-	
-	/* */
 	$.fn.hoverClass = function(cls) {
 		this.hover(
 			function() {
@@ -1002,8 +934,6 @@
 			$(this).removeClass(cls);
 		});
 	};
-	
-	
 	
 	$.fn.screenKeep = function(ctn, opts) {
 		opts = opts || {};
@@ -1034,7 +964,6 @@
 		if (ctn.css("position") == "static") ctn.css("position", "relative");
 		
 		var w = $(window);
-		
 		
 		var resizeEvent = function() {
 			
@@ -1095,7 +1024,6 @@
 			}
 		
 			//$.debug("SCROLL: " + scrollTop + " - TOP:" + top + " - MAXHEIGHT: " + maxheight);
-			
 		};
 		
 		$(resizeEvent);
@@ -1103,7 +1031,6 @@
 		w.resize(resizeEvent);
 					
 	};
-		
 		
 	// TAKES EITHER AN ARRAY OR OBJECT
 	// valueAsKeyOrObjectKey can be TRUE for using array key
@@ -1154,24 +1081,18 @@
 		});
 	};
 	
-	
-	$.fn.slideLeft = function(o){
-		
+	$.fn.slideLeft = function(o) {
 		var t = $(this);
-		
 		t.wrapInner("<div>");
-		
+
 		var d = t.children().first();
-		
 		d.width(parseFloat(t.width()) + 1);
 			
 		t.css("overflow", "hidden");
-		
 		t.animate({width: 0}, o);
-		
 	};
 		
-		
+  // ENABLE / DISABLE FORM ELEMENTS
 	$.fn.enable = function(keepValue) {
 		var t = $(this);
 		t.removeAttr("disabled");
@@ -1181,6 +1102,7 @@
 			}
 		}
 	};
+
 	$.fn.disable = function(keepValue) {
 		var t = $(this);
 		t.attr("disabled", 1);
@@ -1286,12 +1208,9 @@
 			destination.children().removeClass("ui-template");
 		};
 		
-		
-		
 		// INIT
 		template = $.trim(t.html());
 		clear();
-		
 		
 		return {
 			clear: clear,
@@ -1302,7 +1221,6 @@
 			populate: render
 		};
 	};
-	
 	
 	// TEST DATE
 	// var val = "+1y -2mo 5.3d -w h -5m 10s";
@@ -1472,7 +1390,6 @@
 		$(window).resize(resize);
 	};
 	
-	
 	$.fn.scrollWindow = function(options) {
 		var defaults = {
 			duration: 500,
@@ -1583,16 +1500,13 @@
 		
 		};
 		
-		
 		a.init();
-		
 		return a;
 	};
 	
 	$.regexEscape = function(text) {	// ESCAPE -,^$#/.*+?|()[]{}\
 	    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 	};
-	
 	
 	// OBJECTS & ARRAYS
 	
@@ -1628,7 +1542,6 @@
 		});	
 	};
 	
-	
 	$.pagePath = function() {
 		return location.pathname.toLowerCase();
 	};
@@ -1662,8 +1575,6 @@
 		}
 	}
 	
-	
-	
 	/*
 	// MARKER
 	{ 
@@ -1692,7 +1603,6 @@
 	}
 	$.locationPostIntances = 0;
 	
-	
 	$.fn.googleMap = function(locations, zoom) {
 	
 		$.googleMapsDialog = $.googleMapsDialog || null;
@@ -1713,14 +1623,12 @@
 		if (t.width() == 0) t.width(500);
 		if (t.height() == 0) t.height(300);
 	
-	    
-	    /*
-	    // LOCATIONS
+    /*
+    // LOCATIONS
 		{
 			name, lat, lon, address, city, state, zip, icon, phone, website
 		}
 		*/
-		
 	
     if (locations && locations.length > 0)
     	var myLatLng = new google.maps.LatLng(locations[0].lat, locations[0].lon);
@@ -1735,35 +1643,33 @@
     };
 
     var map_canvas = t[0];
-    
     var map = new google.maps.Map(map_canvas, options);
 
     if (locations && locations.length > 0) {
-    
       var bounds = new google.maps.LatLngBounds();
 
 			// LOOP LOCATIONS
       for (var i = 0; i < locations.length; i++) {
       	var loc = locations[i];
-      	
+
       	var marker = {
       		title: loc.name,
       		position: new google.maps.LatLng( loc.lat, loc.lon ),
 					icon: loc.icon
       	};
-      	
+
         var googleMarker = new google.maps.Marker(marker);
         googleMarker.setMap(map);
 
         bounds.extend(googleMarker.getPosition());
-        
+
         // DIALOG CONTENT
         var dialogContent = '<div class="googleMaps-dialog"><div class="location-title">' + loc.name + '</div>';
       	dialogContent += loc.address + '<br />' + loc.city + ', ' + loc.state + ' ' + loc.zip + '<br />';
       	if (loc.phone) dialogContent += loc.phone + '<br />';
       	if (loc.website) dialogContent += '<a href="' + loc.website + '" target="_blank">' + loc.website + '</a>';
       	dialogContent += '</div>';
-      	
+
       	var dialogContent = {
       		content: dialogContent
       	};
@@ -1955,19 +1861,18 @@
 	
 	  return a;
 	};
-  
-  
+
   //=====================
   // IMAGE LOAD CALLBACKS FOR WHEN IMAGES ARE CACHED TOO
-  
+
   $.imageLoad = function(img, callback) {
     if (typeof img == 'string') img = $(img);
     if (typeof callback != 'function') callback = function(){};
     $.imageLoad.images = $.imageLoad.images || [];
-    
+
     var src = img.attr('src');
     if ($.imageLoad.images[src]) return;
-    
+
     $.imageLoad.images[src] = {
       loaded: null,
       error: null,
@@ -1994,12 +1899,11 @@
       }
     }, 500);
   };
-  
+
   $.imageLoad($('img').first(), function(i, j) {
     console.log([i, j]);
   });
 
-	
 	
 	//=====================
 	// AVOID CONSOLE ERRORS
@@ -2008,6 +1912,178 @@
 			log: function(){}
 		};
 	}
+	
+  // APP MODULES & UI COMPONENTS
+  if (typeof $.slideInLink == 'undefined') {
+    $.slideInLink = function() {
+      var module = {};
+
+      module.el = 'slideInLink';
+
+      module.dom = {
+        button: 'slideInLink-button',
+        iframe: 'slideInLink-iframe'
+      };
+
+      module.init = function(element_or_link) {
+
+        if (typeof element_or_link == 'object') {
+          module.initializeElements(element_or_link);
+        } else if (typeof element_or_link == 'string') {
+          module.loadLinkUrl(element_or_link);
+        }
+
+        module.initializeDom();
+
+        module.dom.button.click(module.slideOut);
+
+        module.slideOut();
+      };
+
+      module.initializeDom = function() {
+
+        if (typeof module.el == 'string') {
+
+          var el = $(module.el);
+
+          // BUILD DOM
+          if (el.length == 0) {
+            module.el = $('<div class="' + module.el + '">');
+            module.el.appendTo($('body'));
+          }
+        }
+
+        if (typeof module.dom.iframe == 'string') {
+          module.dom.iframe = $('<iframe class="' + module.dom.iframe + '" frameborder="0" />');
+          module.dom.iframe.appendTo(module.el);
+        }
+
+        // BUTTON
+        if (typeof module.dom.button == 'string') {
+          module.dom.button = $('<div class="' + module.dom.button + '" />');
+          module.dom.button.appendTo(module.el);
+        }
+
+      };
+
+      module.loadLinkUrl = function(linkUrl) {
+        module.dom.iframe.attr('src', linkUrl);
+        module.slideIn();
+      };
+
+      module.initializeElements = function(element) {
+        if (typeof element != 'object')
+          return;
+
+        $.each(element, function() {
+          var t = $(this);
+
+          t.addClass('slideInLink-linked');
+          t.click(function(e) {
+            if (e && e.preventDefault)
+              e.preventDefault();
+            module.loadLinkUrl(t.attr('href'));
+
+            return false;
+          });
+
+        });
+      };
+
+      module.slideOut = function() {
+        module.el.animate(
+          {
+            width: 0
+          },
+          {
+            queue: false,
+            complete: function() {
+              module.el.hide();
+              module.showing = false;
+            }
+          }
+        );
+      };
+
+      module.slideIn = function() {
+
+        module.showing = true;
+        module.el.show();
+        module.el.animate(
+          {
+            width: '97%'
+          },
+          {
+            queue: false,
+            complete: function() {
+              module.el.css('overflow', 'visible');
+            }
+          }
+        );
+
+      };
+
+      return module;
+    }();
+  }
+
+  // RESPONSIVE TRIGGERS FOR DIFFERENT DEVICES
+  var responsiveTriggers = function() {
+
+    var w = $(window);
+    var doc = $(document);
+    var ww;
+    var module = {
+      devices: [
+        {
+          name: 'mobile',
+          max: 640
+        },
+        {
+          name: 'desktop',
+          min: 640
+        }
+      ]
+    };
+
+    module.onResize = function() {
+      ww = w.width();
+
+      var d;
+      for (k in module.devices) {
+        d = module.devices[k];
+        if (!d.initialized && (!d.min || ww > d.min) && (!d.max || ww < d.max) ) {
+          d.initialized = true;
+          console.log(['triggered', d.name]);
+          doc.trigger('device-' + d.name);
+        }
+      }
+    };
+
+    module.init = function(devices) {
+      if (devices) module.devices = devices;
+      $(module.onResize);
+      w.resize(module.onResize);
+    };
+
+    module.when = function(deviceName, fn) {
+      // FIND DEVICE
+      var d;
+      for (k in module.devices) {
+        d = module.devices[k];
+        if (d.name && d.name == deviceName) {
+          console.log(['when assigned', deviceName, d]);
+          doc.bind('device-' + d.name, fn);
+          break;
+        }
+      }
+    };
+
+    module.init();
+
+    return module;
+  }();
+
 
 
 })(jQuery);
