@@ -1,6 +1,6 @@
 /*
 // jandi
-// Version 1.6.5
+// Version 1.6.6
 // 2013-10-11
 //
 // javascript and i
@@ -45,7 +45,7 @@
 		while (rgx.test(x1)) {
 			x1 = x1.replace(rgx, '$1' + ',' + '$2');
 		}
-		return x1 + x2;		
+		return x1 + x2;
 	};
 	
 	$.format.money = function(v) {
@@ -105,36 +105,63 @@
 	// VALIDATE
 	
 	// ADD SUPPORT FOR MULTIPLE VALUES AND MULTIPLE TYPES
+	// TYPES: required, empty, alphanumeric, email, phone, password, passwordStrict, creditCard, dinersClub, amex, visa, discover, jcb
 	
 	$.validate = function(value, type) {
 		var t = $.validate;
-		value = value + ""; //STRING
-		type = type.toLowerCase();
-		//debug([VALIDATING: ", val, type]);
+
+		if (typeof value == 'number')
+  		value += '';
+		
+		if (typeof type == 'string')
+  		type = type.toLowerCase();
+		
 		if (typeof t[type] == 'function')
 			return t[type](value);
 		// REGEX
 		else if (typeof(type) == "object" && typeof(type.test) != "undefined")
 			return type.test(value);
+		else if (typeof type == 'string' && type.length > 0)
+		  console.log('$.validate - VALIDATION TYPE NOT FOUND: ' + type);
 		else
 			return value.length > 0;
 	};
+	
+	$.validate.methodExists = function(type) {
+	  return typeof this[type] != 'undefined';
+	};
+	
+	$.validate.required = function(v) {
+		return v.length > 0;
+	};
+	
 	$.validate.empty = function(v) {
-		return typeof(v) != 'object' && v.length > 0;
+		return typeof v == 'undefined' || (v + '').length == 0;
+	};
+	
+	$.validate.personname = function(v) {
+	  return /^[a-z'\s\.,-]+$/i.test(v) && v.length > 1 && v.length < 50;
+	};
+	
+	$.validate.alphanumeric = function(v) {
+		return /^[a-z0-9]+$/i.test(v);
 	};
 	
 	$.validate.email = function(v) {
 		//		/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z][a-z.]{0,4}[a-z]?$/i.test(v);
-	}
+	};
+
 	$.validate.phone = function(v) {
 		v = (v + '').replace(/\D/g, '');
 		return v.length > 6 && v.length < 11;
-	}
+	};
+
 	$.validate.password = function(v) {
 		return v.length > 5 && v.length < 32;
-	}
-	$.validate.passwordStrict = function(v) {
+	};
+
+	$.validate.passwordstrict = function(v) {
 		// CAPITAL LETTER & NUMBER
 		return (
 			/[A-Z]/.test(v) &&
@@ -144,44 +171,50 @@
 			v.length > 5 &&
 			v.length < 20
 		);
-	}
+	};
+
 	$.validate.creditcard = function(v) {
 		return /^\d{4}[ \-]?\d{4}[ \-\d]{4,9}\d$/.test(v);
 	};
+
 	$.validate.dinersclub = function(v) {
 		return /^3(0[0-5])|([68]\d)\d[ \-]?\d{6}[ \-]?\d{5}$/.test(v);
 	};
+
 	$.validate.amex = function(v) {
 		return /^3[47]\d{2}[ \-]?\d{6}[ \-]?\d{5}$/.test(v);
 	};
+
 	$.validate.visa = function(v) {
 		return /^4\d{3}[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/.test(v);
 	};
+
 	$.validate.mastercard = function(v) {
 		return /^5\d{3}[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/.test(v);
 	};
+
 	$.validate.discover = function(v) {
 		return /^6011[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/.test(v);
 	};
+
 	$.validate.jcb = function(v) {
 		return /^(?:2131|1800|35\d{3})\d{11}$/.test(v);
+	};
+	
+	$.validate.cvv = $.validate.ccv = $.validate.cardsecurity = function(v) {
+	  return /^\d{3,4}$/.test(v);
 	};
 
 	//==========
 	// UTILITIES
 
-	$.debug = function(text, type) {
-		if (window.console && window.console.log) {
-			if (type == 'info' && window.console.info) {
-				window.console.info(text);
-			}
-			else if (type == 'warn' && window.console.warn) {
-				window.console.warn(text);
-			}
-			else {
-				window.console.log(text);
-			}
-		}
+	$.debug = function() {
+	  if (!window.console || !window.console.log) return;
+
+    if (arguments.length == 1)
+      console.log(arguments[0]);
+    else
+      console.log(arguments);
 	};
 	
 	$.run = function(code) {
