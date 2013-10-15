@@ -1,7 +1,7 @@
 /*
 // jandi
-// Version 1.6.6
-// 2013-10-11
+// Version 1.7.0
+// 2013-10-15
 //
 // javascript and i
 // jandi.kriogenx.net
