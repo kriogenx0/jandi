@@ -15,6 +15,9 @@
 */
 
 (function($){
+
+  if (typeof window.jandi == 'undefined')
+    var jandi = window.jandi = {};
   
   //=======
   // FORMAT
@@ -140,7 +143,7 @@
   };
   
   $.validate.personname = function(v) {
-    return /^[a-z'\s\.,-]+$/i.test(v) && v.length > 1 && v.length < 50;
+    return /^[a-z'\s\.,-]+$/i.test(v) && v.length > 0 && v.length < 50;
   };
   
   $.validate.alphanumeric = function(v) {
@@ -158,7 +161,7 @@
   };
 
   $.validate.password = function(v) {
-    return v.length > 5 && v.length < 32;
+    return v.length > 4 && v.length < 33;
   };
 
   $.validate.passwordstrict = function(v) {
@@ -204,297 +207,6 @@
   $.validate.cvv = $.validate.ccv = $.validate.cardsecurity = function(v) {
     return /^\d{3,4}$/.test(v);
   };
-
-  //==========
-  // UTILITIES
-
-  $.debug = function() {
-    if (!window.console || !window.console.log) return;
-
-    if (arguments.length == 1)
-      console.log(arguments[0]);
-    else
-      console.log(arguments);
-  };
-  
-  $.run = function(code) {
-    try {
-      return new Function("return " + code)();
-    } catch (e) {
-      $.debug("RUN ERROR:");
-      $.debug(code);
-    }
-  };
-  
-  //=============
-  // STATIC UTILS
-  
-  $.nonCharacterKeys = [9,16,17,18,27,37,38,39,40,91,117,224];
-  
-  // USE $.param FOR OBJECT TO QUERYSTRING
-  // USE $.querystring FOR QUERYSTRING TO OBJECT
-
-  $.queryString = function(key, url) {
-    url = url || location.search;
-    // REMOVE QUESTION MARK
-    if (url.substring(0, 1) == "?") url = url.substring(1);
-    
-    var arr = url.replace(/;/g, '&').split('&'),
-      t,
-      o = {},
-      name, val
-    ;
-    
-    for (i = 0; i < arr.length; i++)
-    {
-      t = arr[i].split('=', 2);
-      name = unescape(t[0]);
-      val = unescape(t[1]);
-        
-      o[name] = val;
-    }
-    
-    if (key && url) {
-      return o[key];
-    } else if (url) {
-      return o;
-    }
-  };
-  
-  //===============
-  // DATA UTILITIES
-  
-  $.removeObjectFromArray = function(arr, prop, val) {
-    if ($.type(arr) != "array") return arr;
-    
-    for (var i = arr.length - 1; i > -1; i--) {
-      
-      if (arr[i][prop] == val) {
-        arr.splice(i, 1);  
-      }
-      
-    }
-    return arr;
-    
-  }
-  
-  $.valueInObjectArray = function(arr, prop, val) {
-    if ($.type(arr) != "array") return arr;
-    
-    for (var i = arr.length - 1; i > -1; i--) {
-      if (arr[i][prop] == val) {
-        return i;
-      }
-    }
-    return false;
-  }
-  
-  $.serialize = function (obj) {
-    var t = typeof (obj);
-    if (t != "object" || obj === null) {
-      // simple data type
-      if (t == "string") obj = '"'+obj+'"';
-      return String(obj);
-    }
-    else {
-      // recurse array or object
-      var n, v, json = [], arr = (obj && obj.constructor == Array);
-      for (n in obj) {
-        v = obj[n]; t = typeof(v);
-        if (t == "string") v = '"'+v+'"';
-        else if (t == "object" && v !== null) v = $.serialize(v);
-        json.push((arr ? "" : '"' + n + '":') + String(v));
-      }
-      return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
-    }
-  };
-  
-  
-  $.dump = function (arr, level) {
-    var dumped_text = "";
-    if(!level) level = 0;
-    
-    //The padding given at the beginning of the line.
-    var level_padding = "";
-    for(var j=0;j<level+1;j++) level_padding += "    ";
-    
-    if(typeof(arr) == 'object') { //Array/Hashes/Objects 
-      for(var item in arr) {
-        var value = arr[item];
-        
-        if(typeof(value) == 'object') { //If it is an array,
-          dumped_text += level_padding + "'" + item + "' ...\n";
-          dumped_text += dump(value,level+1);
-        } else {
-          dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
-        }
-      }
-    } else { //Stings/Chars/Numbers etc.
-      dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
-    }
-    return dumped_text;
-  };
-  
-  /*
-  arrayToObject
-  used to loop through array values
-  
-  26 in $.arrayToObject(['25', '30']) // returns true
-  */
-  $.arrayToObject = function(a)
-  {
-    var o = {};
-    for (var i=0;i<a.length;i++) {
-      o[a[i]] = true;
-    }
-    return o;
-  }
-  $.objectToArray = function(o)
-  {
-    var a = [];
-    for (p in o) {
-      a[p] = o[p];
-    }
-    return a;
-  }
-  $.objectToNewArray = function(o)
-  {
-    var a = [];
-    for (p in o) {
-      a.push(o[p]);
-    }
-    return a;
-  }
-  
-  if (typeof(jandi) == "undefined") var jandi = {};
-  /*
-  jandi.inArray = function(val, array)
-  {
-    
-    var r = false, l = array.length;
-    for (var i = 0; i < l; i++) {
-      if (val == array[i]) r = true;
-    }
-    return r;
-    //return val in $.arrayToObject(array);
-  }
-  */
-  
-  $.pushDistinct = function(val, arr)
-  {
-    /*
-    // CHECK ITEM
-    if (val) {
-      // CHECK FOR ARRAY
-      if (val.push) {
-        for (i in it) {
-          // RECURSIVE
-          arr = cleanItems(it[i], arr);
-        }
-        return arr;
-      } else {
-        // PUSH TO ARRAY
-        //return $.pushDistinct(it, arr);
-        if (($.inArray(val, arr)) == -1) arr.push(val);
-      }      
-    }
-    return false;
-    */
-    
-    if (arr && arr.push) {
-      if (($.inArray(val, arr)) == -1) arr.push(val);
-    }
-    return arr;
-  }
-  
-  $.stripCss = function(val) {
-    val = parseInt(val.replace("px","").replace("%","").replace("em",""));
-    return isNaN(val) ? 0 : val;
-  };
-  
-
-  //=============
-  // UI UTILITIES
-
-  $.fn.noSelect = function() {
-    var t = $(this);
-  
-    if ($.browser.mozilla) {
-      return t.each(function() {
-        t.css({
-          'MozUserSelect': 'none'
-        });
-      });
-    } else if ($.browser.msie) {
-      t.onselectstart = function() { return false; }
-      t.bind('selectstart', function() { return false; });
-      /*
-      return t.each(function() {
-      t.bind('mousedown.disableTextSelect', function() {
-      return false;
-      });
-      });*/
-  
-      /*
-      if (typeof t.onselectstart != "undefined") //IE route
-      t.onselectstart = function() { return false }
-      else if (typeof t.style.MozUserSelect != "undefined") //Firefox route
-      t.style.MozUserSelect = "none"
-      */
-  
-    } else {
-      t.each(function() {
-        t.bind('selectstart.disableTextSelect', function() {
-          return false;
-        });
-      });
-  
-      t.mousedown(function() { return false; });
-    }
-  }
-  
-  $.fn.voidLink = function() {
-    return $(this).attr('href', 'javascript: void(0)');
-  }
-  
-  // EVENT BINDER, TRIGGERER
-  $.ev = function(e, fn) {
-      var f = this.fnArray[e];
-      if ($.type(f) != "array") f = [];
-      // ADD EVENT
-      if (fn) {
-          f.push(fn);
-      }
-      // DELETE EVENTS
-      else if (fn === 0) {
-          this.fnArray[e] = [];
-      }
-      // RUN EVENTS
-      else if ($.type(f) == "array") {
-          for (x in f) {
-              f[x]();
-          }
-      }
-  };
-  $.ev.fnArray = [];  
-  
-  
-  // FLASH SUPPORT
-  $.flashSupport = function() {
-    try {
-      if ( new ActiveXObject('ShockwaveFlash.ShockwaveFlash') ) return true;
-    } catch (e) {}
-    if (navigator.mimeTypes && navigator.mimeTypes ["application/x-shockwave-flash"] != undefined) return true;
-    return false;
-  };
-  
-  // BROWSER FEATURE SUPPORT
-  $.sniff = {
-    flash: $.flashSupport,
-    placeholder: function() {
-      return ("placeholder" in document.createElement("input"));
-    }
-  };
   
   ////////////////
   // COOKIES
@@ -530,6 +242,7 @@
         return $.cookie.showAll();  
       }
     };
+
     $.cookie.get = function(name) {
       if (!document.cookie) return;
 
@@ -545,10 +258,9 @@
           return decodeURIComponent(cookieArr[1]);
         }
       }
-
     };
-    $.cookie.set = function(name, value, days, options)
-    {
+
+    $.cookie.set = function(name, value, days, options) {
       //value = value || "";
       if (days) {
         var date = new Date();
@@ -595,6 +307,7 @@
       $.cookie.set(name, null, -1000);
       //$.debug("DELETED COOKIE: " + name);
     };
+
     $.cookie.showAll = function() {
       var arr = document.cookie.toString().split("; ");
       for (var i = a.length; i > 0; i--) {
@@ -604,6 +317,377 @@
 
   }
 
+  //==========
+  // UTILITIES
+
+  $.debug = function() {
+    if (!window.console || !window.console.log) return;
+
+    if (arguments.length == 1)
+      console.log(arguments[0]);
+    else
+      console.log(arguments);
+  };
+  
+  $.run = function(code) {
+    try {
+      return new Function("return " + code)();
+    } catch (e) {
+      $.debug("RUN ERROR:");
+      $.debug(code);
+    }
+  };
+  
+  //=============
+  // jQuery TOOLS
+  
+  $.fn.checked = function() {
+    return $(this).is(':checked');
+  };
+  $.fn.check = function() {
+    this.attr("checked", "checked");
+  };
+  $.fn.uncheck = function() {
+    this.removeAttr("checked");
+  }
+    
+  // FOR EXAMPLE, WHEN TEXT CHANGES IN TEXTBOX, IGNORING OTHER KEYS LIKE COMMAND, OPTION, SHIFT
+  $.fn.propertyChange = function(fn) {
+    if ($.browser.msie) {
+      this.keydown(function() {
+        setTimeout(fn, 10);
+      });
+    }
+    else {    
+      // THIS COMMAND DOESNT WORK IN IE. WILL TRIGGER CHANGE AND MAKE INFINITE LOOP
+      this.bind('input propertychange', fn);
+    }
+  }
+  
+  $.fn.characterKey = function(fn, ig) {
+    if (!fn) return this.keyup();
+    ig = ig || jandi.nonCharacterKeys;
+    this.keyup(function(e) {
+      // IGNORE KEYS
+      for (k in ig) {
+        if (ig[k] == e.which && ig[k] != 224) return;
+      }
+      // 224 is for paste
+      //$.debug(e);
+      fn();
+    });
+  };
+  
+  $.fn.enterKey = function(fn, ig) {
+    if (!fn) return this.keyup();
+    this.keydown(function(e) {
+      if (e.keyCode == 13) {
+        if (e.preventDefault) e.preventDefault();
+        fn();
+      }
+    });
+  };
+  
+  //=============
+  // STATIC UTILS
+  
+  jandi.nonCharacterKeys = [9,16,17,18,27,37,38,39,40,91,117,224];
+  
+  // USE $.param FOR OBJECT TO QUERYSTRING
+  // USE $.querystring FOR QUERYSTRING TO OBJECT
+
+  $.queryString = jandi.queryString = function(key, url) {
+    url = url || location.search;
+    // REMOVE QUESTION MARK
+    if (url.substring(0, 1) == "?") url = url.substring(1);
+    
+    var arr = url.replace(/;/g, '&').split('&'),
+      t,
+      o = {},
+      name, val
+    ;
+    
+    for (i = 0; i < arr.length; i++)
+    {
+      t = arr[i].split('=', 2);
+      name = unescape(t[0]);
+      val = unescape(t[1]);
+        
+      o[name] = val;
+    }
+    
+    if (key && url) {
+      return o[key];
+    } else if (url) {
+      return o;
+    }
+  };
+  
+  //===============
+  // DATA, ARRAY, & OBJECT UTILITIES
+  
+  jandi.isData = jandi.loopable = function(o) {
+    if ($.type(o) == "array" || $.type(o) == "object") return true;
+    return false;
+  };
+  
+  jandi.removeObjectFromArray = function(arr, prop, val) {
+    if ($.type(arr) != "array") return arr;
+    
+    for (var i = arr.length - 1; i > -1; i--) {
+      
+      if (arr[i][prop] == val) {
+        arr.splice(i, 1);  
+      }
+      
+    }
+    return arr;
+  }
+  
+  jandi.valueInObjectArray = function(arr, prop, val) {
+    if ($.type(arr) != "array") return arr;
+    
+    for (var i = arr.length - 1; i > -1; i--) {
+      if (arr[i][prop] == val) {
+        return i;
+      }
+    }
+    return false;
+  }
+  
+  jandi.serialize = function (obj) {
+    var t = typeof (obj);
+    if (t != "object" || obj === null) {
+      // simple data type
+      if (t == "string") obj = '"'+obj+'"';
+      return String(obj);
+    }
+    else {
+      // recurse array or object
+      var n, v, json = [], arr = (obj && obj.constructor == Array);
+      for (n in obj) {
+        v = obj[n]; t = typeof(v);
+        if (t == "string") v = '"'+v+'"';
+        else if (t == "object" && v !== null) v = $.serialize(v);
+        json.push((arr ? "" : '"' + n + '":') + String(v));
+      }
+      return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+    }
+  };
+  
+  jandi.dump = function (arr, level) {
+    var dumped_text = "";
+    if(!level) level = 0;
+    
+    //The padding given at the beginning of the line.
+    var level_padding = "";
+    for(var j=0;j<level+1;j++) level_padding += "    ";
+    
+    if(typeof(arr) == 'object') { //Array/Hashes/Objects 
+      for(var item in arr) {
+        var value = arr[item];
+        
+        if(typeof(value) == 'object') { //If it is an array,
+          dumped_text += level_padding + "'" + item + "' ...\n";
+          dumped_text += dump(value,level+1);
+        } else {
+          dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+        }
+      }
+    } else { //Stings/Chars/Numbers etc.
+      dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
+    }
+    return dumped_text;
+  };
+  
+  /*
+  arrayToObject
+  used to loop through array values
+  
+  26 in $.arrayToObject(['25', '30']) // returns true
+  */
+  jandi.arrayToObject = function(a)
+  {
+    var o = {}, al = a.length;
+    for (var i = 0; i < al; i++) {
+      o[i] = a[i];
+    }
+    return o;
+  };
+
+  jandi.objectToArray = function(o)
+  {
+    var a = [];
+    for (p in o) {
+      a[p] = o[p];
+    }
+    return a;
+  };
+
+  jandi.objectToNewArray = function(o)
+  {
+    var a = [];
+    for (p in o) {
+      a.push(o[p]);
+    }
+    return a;
+  };
+  
+  if (typeof(jandi) == "undefined") var jandi = {};
+  /*
+  jandi.inArray = function(val, array)
+  {
+    
+    var r = false, l = array.length;
+    for (var i = 0; i < l; i++) {
+      if (val == array[i]) r = true;
+    }
+    return r;
+    //return val in $.arrayToObject(array);
+  }
+  */
+  
+  // ADDING TO OBJECT OR ARRAY WITHOUT DESTROYING EXISTING VALUE
+  // o.prop = $.addTo(o.prop, val)
+  jandi.addTo = function(prop, val) {
+    if (typeof(prop) == "undefined" || typeof(prop) == "null") return val;
+    else return [ prop, val ];
+  }
+  
+  // PARSE A SET OF CLASSES FOR PREFIX AND TURN IT INTO KEYVALUES
+  jandi.classToObject = function(cls, prefix, o) {
+    var a = cls;
+    if ($.type(a) != "array") a = a.split(" ");
+    var o = o || {}, m;
+    // EACH CLASS
+    for (x in a) {
+      m = a[x].match(/(\-?[\w]+)/g);
+      if (m && prefix == m[0]) {
+        o[ m[1].substr(1) ] = $.addTo(o[ m[1].substr(1) ],  (typeof(m[2]) != "undefined" ? m[2].substr(1) : true ) );
+      }
+    }
+    return o;
+  };
+  
+  jandi.pushDistinct = function(val, arr)
+  {
+    /*
+    // CHECK ITEM
+    if (val) {
+      // CHECK FOR ARRAY
+      if (val.push) {
+        for (i in it) {
+          // RECURSIVE
+          arr = cleanItems(it[i], arr);
+        }
+        return arr;
+      } else {
+        // PUSH TO ARRAY
+        //return $.pushDistinct(it, arr);
+        if (($.inArray(val, arr)) == -1) arr.push(val);
+      }      
+    }
+    return false;
+    */
+    
+    if (arr && arr.push) {
+      if (($.inArray(val, arr)) == -1) arr.push(val);
+    }
+    return arr;
+  }
+
+  //=============
+  // UI UTILITIES  
+
+  $.stripCss = function(val) {
+    val = parseInt(val.replace("px","").replace("%","").replace("em",""));
+    return isNaN(val) ? 0 : val;
+  };
+
+  $.fn.noSelect = function() {
+    var t = $(this);
+  
+    if ($.browser.mozilla) {
+      return t.each(function() {
+        t.css({
+          'MozUserSelect': 'none'
+        });
+      });
+    } else if ($.browser.msie) {
+      t.onselectstart = function() { return false; }
+      t.bind('selectstart', function() { return false; });
+      /*
+      return t.each(function() {
+      t.bind('mousedown.disableTextSelect', function() {
+      return false;
+      });
+      });*/
+  
+      /*
+      if (typeof t.onselectstart != "undefined") //IE route
+      t.onselectstart = function() { return false }
+      else if (typeof t.style.MozUserSelect != "undefined") //Firefox route
+      t.style.MozUserSelect = "none"
+      */
+  
+    } else {
+      t.each(function() {
+        t.bind('selectstart.disableTextSelect', function() {
+          return false;
+        });
+      });
+  
+      t.mousedown(function() { return false; });
+    }
+  }
+  
+  $.fn.voidLink = function() {
+    return $(this).attr('href', 'javascript: void(0)');
+  }
+  
+  //=============
+  // EVENT BINDER, TRIGGERER
+
+  $.ev = function(e, fn) {
+      var f = this.fnArray[e];
+      if ($.type(f) != "array") f = [];
+      // ADD EVENT
+      if (fn) {
+          f.push(fn);
+      }
+      // DELETE EVENTS
+      else if (fn === 0) {
+          this.fnArray[e] = [];
+      }
+      // RUN EVENTS
+      else if ($.type(f) == "array") {
+          for (x in f) {
+              f[x]();
+          }
+      }
+  };
+  $.ev.fnArray = [];
+
+  //=============
+  // SNIFF FUNCTIONALITY
+  
+  // FLASH SUPPORT
+  $.flashSupport = function() {
+    try {
+      if ( new ActiveXObject('ShockwaveFlash.ShockwaveFlash') ) return true;
+    } catch (e) {}
+    if (navigator.mimeTypes && navigator.mimeTypes ["application/x-shockwave-flash"] != undefined) return true;
+    return false;
+  };
+  
+  // BROWSER FEATURE SUPPORT
+  $.sniff = {
+    flash: $.flashSupport,
+    placeholder: function() {
+      return ("placeholder" in document.createElement("input"));
+    }
+  };
+  
   //==========
   // CSS TOOLS
 
@@ -705,17 +789,17 @@
     return $("<" + t + ">").addClass(c);
   };
   
-  $.findOrCreate = function(el, ctn) {
+  $.findOrCreate = function(selector, ctn) {
     var r;
     if (ctn) {
-      r = ctn.find(el);
+      r = ctn.find(selector);
     } else {
-      r = $(el);
+      r = $(selector);
     }
     // CHECK
     if (!(r.length > 0)) {
-      $.debug("jandi - NOT FOUND, WILL CREATE: " + el);  
-      r = $.create(el);
+      $.debug("jandi - NOT FOUND, WILL CREATE: " + selector);  
+      r = $.create(selector);
       if (ctn)
         ctn.append(r);
     }
@@ -724,15 +808,6 @@
   
   ////////////////////
   // UI TOOLS
-  $.fn.checked = function() {
-    return $(this).is(':checked');
-  };
-  $.fn.check = function() {
-    this.attr("checked", "checked");
-  };
-  $.fn.uncheck = function() {
-    this.removeAttr("checked");
-  }
   
   $.messages = function(opts) {
     var
@@ -902,11 +977,6 @@
     return o;  
   }
   
-  $.loopable = function(o) {
-    if ($.type(o) == "array" || $.type(o) == "object") return true;
-    return false;
-  };
-  
   $.fn.pusher = function(o) {
     
     var t = $(this);
@@ -980,8 +1050,7 @@
     var d = {
       honorPadding: true,
       setHeight: false,
-      // NOT WORKING
-      lockWidth: false,
+      lockWidth: false, // MAY NOT WORK CORRECTLY
       topOffset: 0,
       fixed: 1
     };
@@ -1309,43 +1378,6 @@
     return dob;
   };  
   
-  // USED FOR ACTUALLY CHANGE THE TEXT IN TEXTBOX, INCLUDES PASTING TEXT
-  $.fn.propertyChange = function(fn) {
-    if ($.browser.msie) {
-      this.keydown(function() {
-        setTimeout(fn, 10);
-      });
-    }
-    else {    
-      // DOESNT WORK IN IE.  WILL TRIGGER CHANGE AND MAKE INFINITE LOOP
-      this.bind('input propertychange', fn);
-    }
-  }
-  
-  $.fn.characterKey = function(fn, ig) {
-    if (!fn) return this.keyup();
-    ig = ig || $.nonCharacterKeys;
-    this.keyup(function(e) {
-      // IGNORE KEYS
-      for (k in ig) {
-        if (ig[k] == e.which && ig[k] != 224) return;
-      }
-      // 224 is for paste
-      //$.debug(e);
-      fn();
-    });
-  };
-  
-  $.fn.enterKey = function(fn, ig) {
-    if (!fn) return this.keyup();
-    this.keydown(function(e) {
-      if (e.keyCode == 13) {
-        if (e.preventDefault) e.preventDefault();
-        fn();
-      }
-    });
-  };
-  
   $.formValues = function(form) {
     if (!(typeof(form) == 'object')) form = $(form);
     var els = form.find(':input'),
@@ -1468,112 +1500,12 @@
   };
   $.slideMessageTimer;
   
-  // NOT WORKING YET
-  // AJAX CALL WITH FEATURES
-  // TIMEOUT, ATTEMPTS, QUEUE
-  // AJAX CALL WITH CACHING, SUCCESS, ABORT, ATTEMPTS
-  
-  $.jajax = function(options) {
-    var a = {};
-    
-    a.defaults = {
-      // JQUERY OPTIONS
-      method:      'get',
-      success:    null,
-      //
-      nextCall:    'multiple',
-              // multiple    multiple new calls at once, cache all
-              // cancel    cancel new call when pending call exists
-              // abort    abort next call regardless
-              // queue    put call in line regardless if its the same
-      attempts:    3,
-      timeout:    5,      // seconds before trying again
-      caching:    true
-    };
-    
-    // OPTIONS    
-    var o = $.extend({}, d, options);
-  
-    a.init = function() {
-      a.timesAttempted = 0;
-      a.calls = [];
-      
-      var x = {
-        data: a.data,
-        method: a.method,
-        success: function(d) {
-          
-        }
-      };
-      
-      if ($.type(a.success) == 'function') x.success = a.success;
-    
-      a.request = $.ajax(x);
-      
-      a.timesAttempted++;
-    };
-    
-    a.retry = function() {
-      
-    };
-    
-    a.call = function(data) {
-    
-      if (o.caching) {
-        o.findCall();
-      }
-      else {
-        var c = {
-          timesAttempted: 0,
-          timeout: null
-        };
-        
-        o.calls.push(c);
-      }
-    
-    };
-    
-    a.init();
-    return a;
-  };
-  
   $.regexEscape = function(text) {  // ESCAPE -,^$#/.*+?|()[]{}\
       return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
   };
-  
-  // OBJECTS & ARRAYS
-  
-  // ADDING TO OBJECT OR ARRAY WITHOUT DESTROYING EXISTING VALUE
-  // o.prop = $.addTo(o.prop, val)
-  $.addTo = function(prop, val) {
-    if (typeof(prop) == "undefined" || typeof(prop) == "null") return val;
-    else return [ prop, val ];
-  }
-  
-  // PARSE A SET OF CLASSES FOR PREFIX AND TURN IT INTO KEYVALUES
-  $.classToObject = function(cls, prefix, o) {
-    var a = cls;
-    if ($.type(a) != "array") a = a.split(" ");
-    var o = o || {}, m;
-    // EACH CLASS
-    for (x in a) {
-      m = a[x].match(/(\-?[\w]+)/g);
-      if (m && prefix == m[0]) {
-        o[ m[1].substr(1) ] = $.addTo(o[ m[1].substr(1) ],  (typeof(m[2]) != "undefined" ? m[2].substr(1) : true ) );
-      }
-    }
-    return o;
-  };
-  
-  
+
   //=============
-  // GEO LOCATION
-  
-  $.locator = function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      doStuff(position.coords.latitude, position.coords.longitude);
-    });  
-  };
+  // URL & ROUTES
   
   $.pagePath = function() {
     return location.pathname.toLowerCase();
@@ -1607,6 +1539,15 @@
       return uri.replace(/\s/g, '_').replace(/ /);
     }
   }
+  
+  //=============
+  // GEO LOCATION
+  
+  $.locator = function() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      doStuff(position.coords.latitude, position.coords.longitude);
+    });  
+  };
   
   /*
   // MARKER
@@ -1736,13 +1677,13 @@
     }, seconds * 1000);
   };
 
-    $.fn.janimate = function(css, complete, duration, options) {
+  $.fn.janimate = function(css, complete, duration, options) {
     options = options || {};
     options.complete = complete;
     options.duration = duration || 300;
     options.queue = options.queue || false;
     return $(this).stop().animate(css,options);
-    };
+  };
   
   //=========
   // JANDI UI
@@ -1946,9 +1887,78 @@
     };
   }
   
+  //=====================
+  // AJAX CALL WITH FEATURES (NOT WORKING YET!)
+  // TIMEOUT, ATTEMPTS, QUEUE
+  // AJAX CALL WITH CACHING, SUCCESS, ABORT, ATTEMPTS
+  
+  $.jajax = function(options) {
+    var a = {};
+    
+    a.defaults = {
+      // JQUERY OPTIONS
+      method:      'get',
+      success:    null,
+      //
+      nextCall:    'multiple',
+              // multiple    multiple new calls at once, cache all
+              // cancel    cancel new call when pending call exists
+              // abort    abort next call regardless
+              // queue    put call in line regardless if its the same
+      attempts:    3,
+      timeout:    5,      // seconds before trying again
+      caching:    true
+    };
+    
+    // OPTIONS    
+    var o = $.extend({}, d, options);
+  
+    a.init = function() {
+      a.timesAttempted = 0;
+      a.calls = [];
+      
+      var x = {
+        data: a.data,
+        method: a.method,
+        success: function(d) {
+          
+        }
+      };
+      
+      if ($.type(a.success) == 'function') x.success = a.success;
+    
+      a.request = $.ajax(x);
+      
+      a.timesAttempted++;
+    };
+    
+    a.retry = function() {
+      
+    };
+    
+    a.call = function(data) {
+    
+      if (o.caching) {
+        o.findCall();
+      }
+      else {
+        var c = {
+          timesAttempted: 0,
+          timeout: null
+        };
+        
+        o.calls.push(c);
+      }
+    
+    };
+    
+    a.init();
+    return a;
+  };
+  
   // APP MODULES & UI COMPONENTS
-  if (typeof $.slideInLink == 'undefined') {
-    $.slideInLink = function() {
+  if (typeof jandi.slideInLink == 'undefined') {
+    jandi.slideInLink = function() {
       var module = {};
 
       module.el = 'slideInLink';
@@ -2061,7 +2071,7 @@
   }
 
   // RESPONSIVE TRIGGERS FOR DIFFERENT DEVICES
-  var responsiveTriggers = function() {
+  jandi.responsiveTriggers = function() {
 
     var w = $(window);
     var doc = $(document);
@@ -2087,7 +2097,7 @@
         d = module.devices[k];
         if (!d.initialized && (!d.min || ww > d.min) && (!d.max || ww < d.max) ) {
           d.initialized = true;
-          console.log(['triggered', d.name]);
+          $.debug(['triggered', d.name]);
           doc.trigger('device-' + d.name);
         }
       }
@@ -2116,7 +2126,6 @@
 
     return module;
   }();
-
 
 
 })(jQuery);

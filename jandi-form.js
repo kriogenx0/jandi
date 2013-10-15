@@ -14,6 +14,7 @@ debugging
 EVENT OPTIONS:
 success
 error
+submit or complete
 
 HTML OPTIONS:
 data-validation
@@ -30,7 +31,8 @@ var jandi_form = function(form, options) {
     stopOnFirstError:   false,
     updateOnBlur:       true,     // IF THE FIELD HAD AN ERROR, VALIDATE AND UPDATE IT ON BLUR
     updateOnKeyUp:      true,     // IF THE FIELD HAD AN ERROR, VALIDATE AND UPDATE IT ON BLUR
-    ajax:               false
+    ajax:               false,
+    autoMessage:        false     // AUTOMAGICALLY CREATE ERROR MESSAGES BASED OFF NAME
   };
   
   var options = $.extend({}, defaults, options);
@@ -52,6 +54,11 @@ var jandi_form = function(form, options) {
     ajax: null,
     errors: null,
     submitted: false
+  };
+  
+  var debug = function() {
+    if (options.debugging)
+      $.debug(arguments);
   };
   
   var createFieldObjectFromSelector = function(domElement) {
@@ -93,7 +100,7 @@ var jandi_form = function(form, options) {
           }
         }
         
-        //console.log(['valid', valid]);
+        debug('jandi_form - FIELD: ', field, 'VALID: ', valid);
         
         return valid;
       }
@@ -104,6 +111,9 @@ var jandi_form = function(form, options) {
       if (field.error) return;
 
       message = message || field.errorMessage || false;
+      
+      if (!message && options.autoMessage)
+        message = 'This field is required';
       
       if (message) {
     
@@ -149,7 +159,8 @@ var jandi_form = function(form, options) {
     // EVENTS
     if (options.updateOnBlur) {
       field.dom.blur(function() {
-        field.update();
+        if (field.hadError)
+          field.update();
       });
     }
     
@@ -205,7 +216,7 @@ var jandi_form = function(form, options) {
             return false; // break
         }
       } else {
-        //$.debug(['no validation', field.name, field]);
+        debug('no validation', field.name, field);
       }
       
     });
@@ -224,12 +235,22 @@ var jandi_form = function(form, options) {
 
     r.validate();
     
-    //console.log(['errors', r.errors]);
+    debug('errors', r.errors);
      
-     // SUCCESS
     if (r.errors === 0) {
     
-      if (options.ajax) {
+      if (typeof options.submit == 'function') {
+        var result = options.submit(e);
+
+        if (result) {
+          if (typeof options.success == 'function')
+            options.success(e);
+        } else {
+          if (typeof options.error == 'function')
+            options.error(e);
+        }
+
+      } else if (options.ajax) {
         ajaxSubmit();
       } else {
         // r.success();
