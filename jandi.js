@@ -1,27 +1,19 @@
 /*
-// jandi
-// Version 1.7.0
-// 2013-10-15
-//
-// javascript and i
-// jandi.kriogenx.net
-// Alex Vaos
-// simplex0@gmail.com
-// Started 2011-08-30
-// jandi.kriogenx.net/source/license.txt
-//
-// REQUIRES:
-// jQuery
+jandi
+Version 1.7.0
+
+REQUIRES:
+jQuery
 */
 
 (function($){
 
   if (typeof window.jandi == 'undefined')
     var jandi = window.jandi = {};
-  
+
   //=======
   // FORMAT
-  
+
   $.format = function(value, type) {
       var s = $.format;
       if (typeof(value) == 'undefined')
