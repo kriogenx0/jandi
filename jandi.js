@@ -1,22 +1,39 @@
-/*
-jandi
-Version 1.7.0
 
-REQUIRES:
-jQuery
+/*
+// jandi
+// Version 1.7.0
+// 2013-10-15
+//
+// javascript and i
+// jandi.kriogenx.net
+// Alex Vaos
+// simplex0@gmail.com
+// Started 2011-08-30
+// jandi.kriogenx.net/source/license.txt
+//
+// REQUIRES:
+// jQuery
 */
 
-(function($){
+/*jslint ass: true, eqeq: true, white: true */
+/*jshint curly: false */
 
-  if (typeof window.jandi == 'undefined')
-    var jandi = window.jandi = {};
+(function ($) {
 
+  "use strict";
+
+  if (!window.jandi) {
+    window.jandi = {};
+  }
+  
+  var jandi = window.jandi;
+  
   //=======
   // FORMAT
-
+  
   $.format = function(value, type) {
       var s = $.format;
-      if (typeof(value) == 'undefined')
+      if (typeof value === 'undefined')
         return value;
       else if (typeof( s[type] ) == 'function')
         return s[type](value);
@@ -33,6 +50,7 @@ jQuery
   
   $.format.numbercommas = function(v) {
     v = $.format.number(v) + '';
+    var x, x1, x2;
     x = v.split('.');
     x1 = x[0];
     x2 = x.length > 1 ? '.' + x[1] : '';
@@ -45,6 +63,7 @@ jQuery
   
   $.format.money = function(v) {
     v = parseFloat((v + '').replace(/[^\d\.\-]/g, '')).toFixed(2);
+    var x, x1, x2;
     x = v.split('.');
     x1 = x[0];
     var d = x.length > 1 ? '.' + x[1] : '';
@@ -57,7 +76,7 @@ jQuery
   
   $.format.mileage = function(v) {
     return $.format.number((v + '').replace(/[^\d\.\-]/g, '').substr(0, 6));
-  }
+  };
   
   $.format.phoneParenthesis = function(v) {
     v = v.replace(/\D/g, "");
@@ -74,7 +93,7 @@ jQuery
   
   $.format.vin = function(v) {
     var a = v.replace(/[oq]/ig, 0).replace(/i/ig, 1).replace(/\W/g, "").toUpperCase().substring(0, 17);
-    return a == 0 ? '' : a;
+    return a == '0' ? '' : a;
   };
   
   $.format.creditcard = $.format.cc = function(v) {
@@ -131,73 +150,73 @@ jQuery
   };
   
   $.validate.empty = function(v) {
-    return typeof v == 'undefined' || (v + '').length == 0;
+    return v === null || (v + '').length === 0;
   };
   
   $.validate.personname = function(v) {
-    return /^[a-z'\s\.,-]+$/i.test(v) && v.length > 0 && v.length < 50;
+    return (/^[a-z'\s\.,-]+$/i).test(v) && v.length > 0 && v.length < 50;
   };
   
   $.validate.alphanumeric = function(v) {
-    return /^[a-z0-9]+$/i.test(v);
+    return (/^[a-z0-9]+$/i).test(v);
   };
   
   $.validate.email = function(v) {
     //    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z][a-z.]{0,4}[a-z]?$/i.test(v);
+    return (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z][a-z.]{0,4}[a-z]?$/i).test(v);
   };
 
   $.validate.phone = function(v) {
-    v = (v + '').replace(/\D/g, '');
+    v = v.replace(/\D/g, '');
     return v.length > 6 && v.length < 11;
   };
 
   $.validate.password = function(v) {
-    return v.length > 4 && v.length < 33;
+    return v.length > 0 && v.length < 33;
   };
 
   $.validate.passwordstrict = function(v) {
     // CAPITAL LETTER & NUMBER
     return (
-      /[A-Z]/.test(v) &&
+      (/[A-Z]/).test(v) &&
     //  /[!"#$%&'\(\)\*\+,\-\.\/:;<=>\?@\[\\\]^_`\{\|\}~]/.test(v) &&
-      /\d/.test(v) &&
-      !/\s/.test(v) &&
+      (/\d/).test(v) &&
+      !(/\s/).test(v) &&
       v.length > 5 &&
       v.length < 20
     );
   };
 
   $.validate.creditcard = function(v) {
-    return /^\d{4}[ \-]?\d{4}[ \-\d]{4,9}\d$/.test(v);
+    return (/^\d{4}[ \-]?\d{4}[ \-\d]{4,9}\d$/).test(v);
   };
 
   $.validate.dinersclub = function(v) {
-    return /^3(0[0-5])|([68]\d)\d[ \-]?\d{6}[ \-]?\d{5}$/.test(v);
+    return (/^3(0[0-5])|([68]\d)\d[ \-]?\d{6}[ \-]?\d{5}$/).test(v);
   };
 
   $.validate.amex = function(v) {
-    return /^3[47]\d{2}[ \-]?\d{6}[ \-]?\d{5}$/.test(v);
+    return (/^3[47]\d{2}[ \-]?\d{6}[ \-]?\d{5}$/).test(v);
   };
 
   $.validate.visa = function(v) {
-    return /^4\d{3}[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/.test(v);
+    return (/^4\d{3}[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/).test(v);
   };
 
   $.validate.mastercard = function(v) {
-    return /^5\d{3}[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/.test(v);
+    return (/^5\d{3}[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/).test(v);
   };
 
   $.validate.discover = function(v) {
-    return /^6011[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/.test(v);
+    return (/^6011[ \-]?\d{4}[ \-]?\d{4}[ \-]?\d{4}$/).test(v);
   };
 
   $.validate.jcb = function(v) {
-    return /^(?:2131|1800|35\d{3})\d{11}$/.test(v);
+    return (/^(?:2131|1800|35\d{3})\d{11}$/).test(v);
   };
   
   $.validate.cvv = $.validate.ccv = $.validate.cardsecurity = function(v) {
-    return /^\d{3,4}$/.test(v);
+    return (/^\d{3,4}$/).test(v);
   };
   
   ////////////////
@@ -302,8 +321,8 @@ jQuery
 
     $.cookie.showAll = function() {
       var arr = document.cookie.toString().split("; ");
-      for (var i = a.length; i > 0; i--) {
-        $.debug(a[i]);
+      for (var i = arr.length; i > 0; i--) {
+        $.debug(arr[i]);
       }
     };
 
@@ -336,12 +355,14 @@ jQuery
   $.fn.checked = function() {
     return $(this).is(':checked');
   };
+
   $.fn.check = function() {
     this.attr("checked", "checked");
   };
+
   $.fn.uncheck = function() {
     this.removeAttr("checked");
-  }
+  };
     
   // FOR EXAMPLE, WHEN TEXT CHANGES IN TEXTBOX, IGNORING OTHER KEYS LIKE COMMAND, OPTION, SHIFT
   $.fn.propertyChange = function(fn) {
@@ -354,14 +375,14 @@ jQuery
       // THIS COMMAND DOESNT WORK IN IE. WILL TRIGGER CHANGE AND MAKE INFINITE LOOP
       this.bind('input propertychange', fn);
     }
-  }
+  };
   
   $.fn.characterKey = function(fn, ig) {
     if (!fn) return this.keyup();
     ig = ig || jandi.nonCharacterKeys;
     this.keyup(function(e) {
       // IGNORE KEYS
-      for (k in ig) {
+      for (var k in ig) {
         if (ig[k] == e.which && ig[k] != 224) return;
       }
       // 224 is for paste
@@ -399,11 +420,11 @@ jQuery
       name, val
     ;
     
-    for (i = 0; i < arr.length; i++)
+    for (var i = 0; i < arr.length; i++)
     {
       t = arr[i].split('=', 2);
-      name = unescape(t[0]);
-      val = unescape(t[1]);
+      name = decodeURI(t[0]);
+      val = decodeURI(t[1]);
         
       o[name] = val;
     }
@@ -434,7 +455,7 @@ jQuery
       
     }
     return arr;
-  }
+  };
   
   jandi.valueInObjectArray = function(arr, prop, val) {
     if ($.type(arr) != "array") return arr;
@@ -445,7 +466,7 @@ jQuery
       }
     }
     return false;
-  }
+  };
   
   jandi.serialize = function (obj) {
     var t = typeof (obj);
@@ -457,11 +478,13 @@ jQuery
     else {
       // recurse array or object
       var n, v, json = [], arr = (obj && obj.constructor == Array);
-      for (n in obj) {
-        v = obj[n]; t = typeof(v);
-        if (t == "string") v = '"'+v+'"';
-        else if (t == "object" && v !== null) v = $.serialize(v);
-        json.push((arr ? "" : '"' + n + '":') + String(v));
+      if (!arr) {
+        for (n in obj) {
+          v = obj[n]; t = typeof(v);
+          if (t == "string") v = '"'+v+'"';
+          else if (t == "object" && v !== null) v = $.serialize(v);
+          json.push((arr ? "" : '"' + n + '":') + String(v));
+        }
       }
       return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
     }
@@ -481,7 +504,7 @@ jQuery
         
         if(typeof(value) == 'object') { //If it is an array,
           dumped_text += level_padding + "'" + item + "' ...\n";
-          dumped_text += dump(value,level+1);
+          dumped_text += jandi.dump(value,level+1);
         } else {
           dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
         }
@@ -510,7 +533,7 @@ jQuery
   jandi.objectToArray = function(o)
   {
     var a = [];
-    for (p in o) {
+    for (var p in o) {
       a[p] = o[p];
     }
     return a;
@@ -519,13 +542,12 @@ jQuery
   jandi.objectToNewArray = function(o)
   {
     var a = [];
-    for (p in o) {
+    for (var p in o) {
       a.push(o[p]);
     }
     return a;
   };
   
-  if (typeof(jandi) == "undefined") var jandi = {};
   /*
   jandi.inArray = function(val, array)
   {
@@ -547,12 +569,12 @@ jQuery
   }
   
   // PARSE A SET OF CLASSES FOR PREFIX AND TURN IT INTO KEYVALUES
-  jandi.classToObject = function(cls, prefix, o) {
+  jandi.classToObject = function(cls, prefix, object) {
     var a = cls;
     if ($.type(a) != "array") a = a.split(" ");
-    var o = o || {}, m;
+    var o = object || {}, m;
     // EACH CLASS
-    for (x in a) {
+    for (var x in a) {
       m = a[x].match(/(\-?[\w]+)/g);
       if (m && prefix == m[0]) {
         o[ m[1].substr(1) ] = $.addTo(o[ m[1].substr(1) ],  (typeof(m[2]) != "undefined" ? m[2].substr(1) : true ) );
@@ -568,7 +590,7 @@ jQuery
     if (val) {
       // CHECK FOR ARRAY
       if (val.push) {
-        for (i in it) {
+        for (var i in it) {
           // RECURSIVE
           arr = cleanItems(it[i], arr);
         }
@@ -586,12 +608,12 @@ jQuery
       if (($.inArray(val, arr)) == -1) arr.push(val);
     }
     return arr;
-  }
+  };
 
   //=============
   // UI UTILITIES  
 
-  $.stripCss = function(val) {
+  jandi.stripCss = function(val) {
     val = parseInt(val.replace("px","").replace("%","").replace("em",""));
     return isNaN(val) ? 0 : val;
   };
@@ -606,7 +628,7 @@ jQuery
         });
       });
     } else if ($.browser.msie) {
-      t.onselectstart = function() { return false; }
+      t.onselectstart = function() { return false; };
       t.bind('selectstart', function() { return false; });
       /*
       return t.each(function() {
@@ -631,11 +653,11 @@ jQuery
   
       t.mousedown(function() { return false; });
     }
-  }
+  };
   
   $.fn.voidLink = function() {
     return $(this).attr('href', 'javascript: void(0)');
-  }
+  };
   
   //=============
   // EVENT BINDER, TRIGGERER
@@ -653,7 +675,7 @@ jQuery
       }
       // RUN EVENTS
       else if ($.type(f) == "array") {
-          for (x in f) {
+          for (var x in f) {
               f[x]();
           }
       }
@@ -686,18 +708,15 @@ jQuery
   $.fn.rotate = function (val)
   {
     var style = $(this).css('transform') || 'none';
-    
     var rotateUnits = "deg";
     
     // GET
-    if (typeof val == 'undefined')
-    {
-      if (style)
-      {
-        var m = style.match(/rotate\(([^)]+)\)/);
-        if (m && m[1])
+    if (typeof val == 'undefined') {
+      if (style) {
+        var ma = style.match(/rotate\(([^)]+)\)/);
+        if (ma && ma[1])
         {
-          return m[1];
+          return ma[1];
         }
       }
       
@@ -789,7 +808,7 @@ jQuery
       r = $(selector);
     }
     // CHECK
-    if (!(r.length > 0)) {
+    if (!r.length) {
       $.debug("jandi - NOT FOUND, WILL CREATE: " + selector);  
       r = $.create(selector);
       if (ctn)
@@ -813,7 +832,7 @@ jQuery
     container = null,
     interval = null,
     show = function(txt) {
-      if (this.container.text().length == 0)
+      if (!this.container.text().length)
         this.container.css("display", "none");
       this.container.text(txt);
       this.container.slideDown();
@@ -830,14 +849,15 @@ jQuery
     },
     init = function() {
       container = $(_o.container);
-    }
+    };
+
     return {
       show: show,
       container: container,
       set: set,
       clear: clear,
       init: init  
-    }
+    };
   };
   
   $.fn.emptyTextHandler = function(text) {
@@ -848,7 +868,7 @@ jQuery
     
     c.focus(function() {
       var v = c.val();
-      if (v == "" || v == text) {
+      if (!v || v == text) {
         c.val("");
         c.removeClass("ui-text-blurred");
       }
@@ -918,7 +938,7 @@ jQuery
         if (index != inputLength) {
           i.keyup(function(e) {
             // IGNORE KEYS
-            for (k in ignoreKeys) {
+            for (var k in ignoreKeys) {
               if (ignoreKeys[k] == e.which) return;
             }
             // TEST VALUE LENGTH
@@ -935,7 +955,7 @@ jQuery
     var t = $(this);
     var y = t.attr('type');
     return t.is('textarea') || (t.is('input') && (y == 'text' || y == 'password' || y == 'email' || y == 'search' || y == 'url' || y == 'tel' || y == 'number'));
-  }
+  };
   
   $.fn.ifExists = function(fn) {
     if (this.length) {
@@ -950,7 +970,7 @@ jQuery
     } catch (e) {
       return false;
     }
-  }
+  };
   
   $.findEach = function(objects, container) {
     var o = objects;
@@ -958,53 +978,15 @@ jQuery
     var f = $;
     if (container) {
       var c = $(container);
-      for (x in o) {
+      for (var x in o) {
         o[x] = c.find(o[x]);
       }
     } else {
-      for (x in o) {
+      for (var x in o) {
         o[x] = $(o[x]);
       }
     }
     return o;  
-  }
-  
-  $.fn.pusher = function(o) {
-    
-    var t = $(this);
-    var cl = [];
-    var transitions = [];
-    var detect = function() {
-      cl = t.attr("class").split(" ");
-      for (i = 0; i < cl.length; i++) {
-        if (cl[i]) {
-          transitions.push(cl[i]);
-        }
-      };
-    };
-    
-    var pre = function() {
-    };
-    
-    var post = function() {
-    };
-    
-    var run = function() {
-      pre();
-      post();
-    };
-    
-    var reset = function() {
-    };
-    
-    var init = function() {
-    };
-
-    return {
-      items: t,
-      run: run,
-      reset: reset
-    };  
   };
   
   $.fn.hoverClass = function(cls) {
@@ -1265,8 +1247,16 @@ jQuery
       rendering = "";
     };
     
+    var rep = function(loop, key, value) {
+      if (loop) {
+        //if (value && value.replace) value = value.replace(/\"/g, "\\\\\\\"");
+        return loop.replace(new RegExp("(\\\$\\\[" + key + "\\\])", "g"), value);
+      }
+    };
+    
     var addEachObjectInArray = function(ao) {
       if ($.type(ao) == "array") {
+        var x, k;
         for (x in ao) {
           var l = template;
           if ($.loopable(ao[x])) {
@@ -1279,13 +1269,6 @@ jQuery
         }  
       }
     };
-    
-    var rep = function(loop, key, value) {
-      if (loop) {
-        //if (value && value.replace) value = value.replace(/\"/g, "\\\\\\\"");
-        return loop.replace(new RegExp("(\\\$\\\[" + key + "\\\])", "g"), value);
-      }
-    }
     
     var add = function(k, v) {
       return rendering += rep(k, v);
@@ -1325,14 +1308,14 @@ jQuery
   }
   
   $.timer = function(val, format, dateObj) {
-    dob = dateObj || new Date();
+    var dob = dateObj || new Date();
     if (!dob.getDate) dob = new Date();
     
     if (!val) return dob;
     
     var commands = val.split(" ");
     
-    for (x in commands) {
+    for (var x in commands) {
     
       var t = commands[x];
       
@@ -1376,6 +1359,7 @@ jQuery
       vals = [],
       n;
     els.each(function(){
+      var t = $(this);
       if (n = t.attr('name'))
         vals[n] = t.val();
     });
@@ -1384,7 +1368,7 @@ jQuery
   
   $.initalizeModules = function(m) {
     //$.each(m, function(i, o) { if (o.init) o.init(); });
-    for (x in m) {
+    for (var x in m) {
       if (m[x] && m[x].init)
         m[x].init();
       else if (typeof(m[x]) == 'function')
@@ -1521,7 +1505,7 @@ jQuery
     else {
       return uri.replace(/\s/g, '-').replace(/\//g, '~');
     }
-  }
+  };
   
   $.dirtyUri = function(uri) {
     if ($.loopable(uri)) {
@@ -1530,132 +1514,7 @@ jQuery
     else {
       return uri.replace(/\s/g, '_').replace(/ /);
     }
-  }
-  
-  //=============
-  // GEO LOCATION
-  
-  $.locator = function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      doStuff(position.coords.latitude, position.coords.longitude);
-    });  
   };
-  
-  /*
-  // MARKER
-  { 
-      title: "First Vehicle Services-Davie", 
-      position: new google.maps.LatLng(26.065590, -80.238861),
-      icon: "http://www.ase.com///CMSWebParts/ASE/Images/PushPins/Blue_markerA.png"
-  }
-  */
-  
-  $.locationPost = function(url, vars) {
-  
-    $.locationPostIntances++;
-    
-    var f = $('<form id="jandi-locationPost-' + $.locationPostIntances + '" method="post" action="' + url + '">');
-    
-    for (x in vars) {
-      f.append('<input type="hidden" name="' + x + '" value="' + vars[x] + '" />');
-    }
-    
-    var b = $('body');
-    b.append(f);
-    if (!f.length) f = b.find("form#jandi-locationPost-" + $.locationPostIntances);
-    
-    f.submit();
-  
-  }
-  $.locationPostIntances = 0;
-  
-  $.fn.googleMap = function(locations, zoom) {
-  
-    $.googleMapsDialog = $.googleMapsDialog || null;
-    var createInfoWindow = function(map, marker, infoWindowProperties) {
-        var info = new google.maps.InfoWindow(infoWindowProperties);
-    
-        google.maps.event.addListener(marker, 'click', function () {
-            if ($.googleMapsDialog != null)
-                $.googleMapsDialog.close();
-    
-            info.open(map, marker);
-            $.googleMapsDialog = info;
-        });
-    }
-  
-    var t = jQuery(this);
-    
-    if (t.width() == 0) t.width(500);
-    if (t.height() == 0) t.height(300);
-  
-    /*
-    // LOCATIONS
-    {
-      name, lat, lon, address, city, state, zip, icon, phone, website
-    }
-    */
-  
-    if (locations && locations.length > 0)
-      var myLatLng = new google.maps.LatLng(locations[0].lat, locations[0].lon);
-    else
-      var myLatLng = new google.maps.LatLng(0, 0);
-    
-    var options = {
-        zoom: zoom || 12,
-        center: myLatLng,
-        mapTypeControl: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    var map_canvas = t[0];
-    var map = new google.maps.Map(map_canvas, options);
-
-    if (locations && locations.length > 0) {
-      var bounds = new google.maps.LatLngBounds();
-
-      // LOOP LOCATIONS
-      for (var i = 0; i < locations.length; i++) {
-        var loc = locations[i];
-
-        var marker = {
-          title: loc.name,
-          position: new google.maps.LatLng( loc.lat, loc.lon ),
-          icon: loc.icon
-        };
-
-        var googleMarker = new google.maps.Marker(marker);
-        googleMarker.setMap(map);
-
-        bounds.extend(googleMarker.getPosition());
-
-        // DIALOG CONTENT
-        var dialogContent = '<div class="googleMaps-dialog"><div class="location-title">' + loc.name + '</div>';
-        dialogContent += loc.address + '<br />' + loc.city + ', ' + loc.state + ' ' + loc.zip + '<br />';
-        if (loc.phone) dialogContent += loc.phone + '<br />';
-        if (loc.website) dialogContent += '<a href="' + loc.website + '" target="_blank">' + loc.website + '</a>';
-        dialogContent += '</div>';
-
-        var dialogContent = {
-          content: dialogContent
-        };
-
-          //if (infoWindowContents && infoWindowContents.length > i)
-          createInfoWindow(map, googleMarker, dialogContent);
-      }
-
-      if (Math.abs(bounds.getNorthEast().lat() - bounds.getSouthWest().lat()) < .003) {
-          bounds.extend(new google.maps.LatLng(bounds.getNorthEast().lat() + .003, bounds.getNorthEast().lng() - .003));
-          bounds.extend(new google.maps.LatLng(bounds.getSouthWest().lat() - .003, bounds.getSouthWest().lng() + .003));
-      }
-
-      if (locations.length > 1) {
-          map.fitBounds(bounds);
-      }
-
-      map.setCenter(bounds.getCenter());
-    }
-  }
   
   $.intervalLoader = function(fn, seconds, times) {
     if (typeof(fn) != 'function') return false;
@@ -2085,7 +1944,7 @@ jQuery
       ww = w.width();
 
       var d;
-      for (k in module.devices) {
+      for (var k in module.devices) {
         d = module.devices[k];
         if (!d.initialized && (!d.min || ww > d.min) && (!d.max || ww < d.max) ) {
           d.initialized = true;
@@ -2104,7 +1963,7 @@ jQuery
     module.when = function(deviceName, fn) {
       // FIND DEVICE
       var d;
-      for (k in module.devices) {
+      for (var k in module.devices) {
         d = module.devices[k];
         if (d.name && d.name == deviceName) {
           console.log(['when assigned', deviceName, d]);
@@ -2114,7 +1973,7 @@ jQuery
       }
     };
 
-    module.init();
+    //module.init();
 
     return module;
   }();
