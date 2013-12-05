@@ -1,18 +1,16 @@
 jandi
 =====
 
-Version 1.7.1
-2013-10-15
+Version 1.8.0
 
 javascript and i - an essential set of tools
 
-jandi.kriogenx.net
-
-Alex Vaos - simplex0@gmail.com
-Started 2011-08-30
+jandi.kriogenx.net   
+Alex Vaos - simplex0@gmail.com   
+Started 2011-08-30   
 jandi.kriogenx.net/source/license.txt
 
-# Packages
+## Packages
 * jandi - an essential set of tools for validation, formatting, cookies,
   css
 * jandi-reset - a good clean reset, that only resets what browsers may
