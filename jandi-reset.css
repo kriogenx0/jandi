@@ -7,10 +7,6 @@ body
 	margin: 0;
 	padding: 0;
 	font: 12px Arial, sans-serif;
-	overflow-y: scroll;
-	/* IE 7 < SCROLL */
-	*overflow: hidden;
-	*overflow-y: hidden;
 }
 body,
 div,
@@ -20,12 +16,6 @@ dd,
 ul,
 ol,
 li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
 pre,
 code,
 form,
@@ -33,7 +23,6 @@ fieldset,
 legend,
 input,
 textarea,
-p,
 blockquote,
 th,
 td
@@ -84,9 +73,17 @@ a:hover
 {
 	text-decoration: none;		
 }
+a
+{
+  color: #666;
+}
+a:hover
+{
+  color: #111;
+}
 a *
 {
-*cursor: pointer; 
+*cursor: pointer;
 }
 a
 {
@@ -95,14 +92,6 @@ a
 p a
 {
 	display: inline;	
-}
-b,
-i,
-s
-{
-	font-weight: normal;
-	font-style: normal;
-	text-decoration: normal;
 }
 ul,
 ul li
