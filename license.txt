@@ -1,5 +1,5 @@
 jandi
-Copyright 2012 jandi and Alex Vaos
+Copyright 2014 jandi and Alex Vaos
 jandi.kriogenx.net
 
 Permission is hereby granted, free of charge, to any person obtaining

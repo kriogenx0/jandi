@@ -1,0 +1,25 @@
+/* LAYOUT */
+.body-wrapper
+{
+	background: #eee;
+	font: 12px Arial, Helvetica, sans-serif;
+	padding: 20px;
+}
+.page-wrapper
+{
+	background: #fff;
+	padding: 20px;
+	margin: 0 auto;
+	max-width: 1200px;
+	min-width: 960px;
+	width: 80%;
+}
+h1
+{
+	/*color: #DFA401;*/
+	color: #DFA401;
+}
+h1
+{
+	text-shadow:0 1px 0 #f0f0f0;
+}

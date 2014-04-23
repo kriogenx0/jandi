@@ -1,0 +1,95 @@
+.ui-tabulator .tabulator-tabs
+{
+	padding-left: 5px;
+	height: 30px;
+	line-height:normal;
+}
+.ui-tabulator .tabulator-tabs a
+{
+	float: left;
+	position: relative;
+	margin-right: -6px;
+	z-index: 1;
+	overflow: hidden;
+	height: 26px;
+	padding-top: 4px;
+}
+.ui-tabulator .tabulator-tabs a:hover
+{
+	z-index: 11;
+}
+.ui-tabulator .tabulator-tabs a.tab-active
+{
+	z-index: 10;
+}
+.ui-tabulator .tabulator-tabs a b,
+.ui-tabulator .tabulator-tabs a span,
+.ui-tabulator .tabulator-tabs a i
+{
+	margin: 0;
+	padding: 0;
+	height: 26px;
+	display: block;
+	float: left;
+	background-repeat: no-repeat;
+}
+.ui-tabulator .tabulator-tabs a b
+{
+	width: 15px;
+	background-position: 0 -26px;
+}
+.ui-tabulator .tabulator-tabs a i
+{
+	width: 15px;
+	background-position: 0 0;
+}
+.ui-tabulator .tabulator-tabs a span
+{
+	line-height: 24px;
+	padding: 0 7px 0 2px;
+	background-repeat: repeat-x;
+	background-position: 0 -52px;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: normal;
+	color: #fff;	
+}
+
+.ui-tabulator .tab-section
+{
+	padding-top: 5px;
+	padding-right: 2px;
+	padding-left: 2px;
+}
+.ui-tabulator .tabulator-content
+{
+	clear: both;	
+}
+/* COLOR DESIGN */
+.ui-tabulator .tabulator-tabs
+{
+	background: url(design/tabs_bg.gif) repeat-x bottom;
+}
+.ui-tabulator .tabulator-tabs a b,
+.ui-tabulator .tabulator-tabs a span,
+.ui-tabulator .tabulator-tabs a i
+{
+	height: 26px;
+	background-image: url(design/uiTab_sprite_over.png);
+}
+.ui-tabulator .tabulator-tabs a:hover b,
+.ui-tabulator .tabulator-tabs a.tab-active b
+{
+	background: url(design/uiTab_sprite.png) 0 -26px;
+}
+.ui-tabulator .tabulator-tabs a:hover i,
+.ui-tabulator .tabulator-tabs a.tab-active i
+{
+	background: url(design/uiTab_sprite.png) 0 0;
+}
+.ui-tabulator .tabulator-tabs a:hover span,
+.ui-tabulator .tabulator-tabs a.tab-active span
+{
+	background: url(design/uiTab_sprite.png) 0 -52px;
+	color:#3b5998;
+}

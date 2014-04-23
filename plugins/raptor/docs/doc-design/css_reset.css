@@ -1,0 +1,107 @@
+/* GENERAL CSS RESET */
+html, body
+{
+	margin: 0;
+	padding: 0;
+	font: 12px Arial;
+}
+textarea, input, select
+{
+	font: inherit;
+}
+a
+{
+	text-decoration: none;	
+}
+a:hover
+{
+	text-decoration: underline;	
+}
+b,i,s
+{
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: normal;
+}
+ul,ol,ul li, ol li
+{
+	/* padding: 5px 0 5px 15px; */
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+p,
+h1,h2,h3,h4,h5,h6
+{
+	margin: 0;
+	padding: 5px 0;
+	display: block;
+}
+h1
+{
+	font-size: 32px;
+}
+h2
+{
+	font-size: 24px;	
+}
+h3
+{
+	font-size: 20px;	
+}
+h4
+{
+	font-size: 18px;
+}
+h5
+{
+	font-size: 16px;
+}
+h6
+{
+	font-size: 14px;
+}
+/* COMMON CLASSES */
+.clear
+{
+	clear: both;
+}
+/* TABLE BLOCK */
+.table-block
+{
+	width: 100%;
+}
+.table-block,
+.table-block > tr,
+.table-block > tr > th,
+.table-block > tr > td,
+.table-block > tbody > tr > th,
+.table-block > tbody > tr > td
+{
+	border: 0 none;
+	border-spacing: 0;
+	padding: 0;
+	margin: 0;
+	vertical-align: top;
+}
+/* BASIC FLOATING */
+.half-left,
+.half-right
+{
+	width: 49%;	
+}
+.third-left,
+.third-right
+{
+	width: 33%;	
+}
+.half-left,
+.third-left
+{
+	float: left;	
+}
+.half-right,
+.third-right
+{
+	float: right;
+}

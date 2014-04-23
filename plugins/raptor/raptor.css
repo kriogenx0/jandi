@@ -1,0 +1,1260 @@
+/* GENERAL */
+.raptor-clear
+{
+	clear: both;
+	display: block;
+	height: 0;
+}
+
+/* RAPTOR BUTTON */
+.raptor-button,
+.raptor-button .button-left,
+.raptor-button .button-right,
+.raptor-button .button-bg,
+.raptor-button .button-contents,
+.raptor-button button,
+.raptor-button input
+{
+	display: block;
+	height: 22px;
+	outline: 0 none;
+}
+.raptor-button
+{
+	display: inline-block;
+	cursor: pointer;
+}
+.raptor-button button,
+.raptor-button input
+{
+	border: 0 none;
+	background: none;
+	cursor: pointer;
+}
+.raptor-button .button-bg
+{
+	background-repeat: repeat-x;
+	background-position: center top;
+	float: left;
+	text-decoration: none;	
+}
+.raptor-button .button-left,
+.raptor-button .button-right
+{
+	width: 5px;
+	background-repeat: no-repeat;
+	float: left;
+	font-size: 0;
+	overflow: hidden;
+}
+.raptor-button .button-left
+{
+	background-position: right top;
+}
+.raptor-button .button-right
+{
+	background-position: left top;
+}
+.raptor-button .button-contents
+{
+	padding: 0 5px;
+	line-height: 19px;
+	text-align: center;
+}
+.raptor-button,
+.raptor-button .button-contents,
+.raptor-button:hover,
+.raptor-button:hover .button-contents
+{
+	text-decoration: none;
+}
+.raptor-button .button-clear
+{
+	display: block;
+	clear: both;
+	font-size: 0;
+}
+
+/* RAPTOR COMBOSELECT */
+.raptor-comboSelect
+{
+	text-align: left;
+	display: inline-block;
+	*display: block;
+}
+.raptor-comboSelect,
+.raptor-comboSelect select
+{
+	font-size: 12px;
+}
+.raptor-comboSelect
+{
+	height: 20px;
+	position: relative;
+}
+.raptor-comboSelect,
+.raptor-comboSelect select
+{
+	min-width: 160px;
+}
+.raptor-comboSelect select
+{
+	opacity: 0;
+	filter:alpha(opacity=0);
+	position: absolute;
+	top: 0;
+	right: 20px;
+	left: 0;
+}
+.raptor-comboSelect input
+{
+	border: 0 none;
+	background: none;
+}
+
+.raptor-comboSelect .comboSelect-input,
+.raptor-comboSelect .comboSelect-left,
+.raptor-comboSelect .comboSelect-right,
+.raptor-comboSelect .comboSelect-right .comboSelect-right-icon
+{
+	display: block;
+	height: 20px;
+}
+.raptor-comboSelect .comboSelect-input
+{
+	background: repeat-x top;
+	padding: 0;
+	padding-left: 3px;
+	line-height: 26px;
+	overflow: hidden;
+}
+.raptor-comboSelect .comboSelect-left,
+.raptor-comboSelect .comboSelect-right,
+.raptor-comboSelect .comboSelect-input,
+.raptor-comboSelect .comboSelect-heading
+{
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.raptor-comboSelect.comboSelect-open .comboSelect-heading
+{
+	z-index: 100;
+	position: relative;	
+}
+.raptor-comboSelect .comboSelect-left
+{
+	width: 5px;
+	float: left;
+}
+.raptor-comboSelect .comboSelect-right
+{
+	width: 20px;
+	float: right;
+}
+.raptor-comboSelect .comboSelect-input
+{
+	background-repeat: repeat-x;
+}
+/* STYLE */
+.raptor-comboSelect,
+.raptor-comboSelect select,
+.raptor-comboSelect .comboSelect-input,
+.raptor-comboSelect .comboSelect-left,
+.raptor-comboSelect .comboSelect-right,
+.raptor-comboSelect .comboSelect-right .comboSelect-right-icon
+{
+	height: 28px;
+}
+.raptor-comboSelect .comboSelect-left
+{
+	width: 5px;
+}
+.raptor-comboSelect .comboSelect-right
+{
+	width: 28px;
+}
+.raptor-comboSelect .comboSelect-left,
+.raptor-comboSelect .comboSelect-right,
+.raptor-comboSelect .comboSelect-input
+{
+	background-image: url(uis/raptorui/comboSelects/select1_28x28_spr.png);
+}
+.raptor-comboSelect .comboSelect-left
+{
+	background-position: 0 0;
+}
+.raptor-comboSelect .comboSelect-input
+{
+	background-position: 0 -29px;	
+}
+.raptor-comboSelect .comboSelect-right
+{
+	background-position: 0 -58px;
+}
+.raptor-comboSelect.comboSelect-over .comboSelect-left,
+.raptor-comboSelect .comboSelect-heading.comboSelect-over .comboSelect-left
+{
+	background-position: 0 -87px;		
+}
+.raptor-comboSelect.comboSelect-over .comboSelect-input,
+.raptor-comboSelect .comboSelect-heading.comboSelect-over .comboSelect-input
+{
+	background-position: 0 -116px;	
+}
+.raptor-comboSelect.comboSelect-over .comboSelect-right
+.raptor-comboSelect .comboSelect-heading.comboSelect-over .comboSelect-right
+{
+	background-position: 0 -145px;
+}
+.raptor-comboSelect.comboSelect-open .comboSelect-left,
+.raptor-comboSelect.comboSelect-down .comboSelect-left,
+.raptor-comboSelect.comboSelect-open .comboSelect-heading .comboSelect-left,
+.raptor-comboSelect .comboSelect-heading.comboSelect-down .comboSelect-left
+{
+	background-position: 0 -174px;		
+}
+.raptor-comboSelect.comboSelect-open .comboSelect-input,
+.raptor-comboSelect.comboSelect-down .comboSelect-input,
+.raptor-comboSelect.comboSelect-open .comboSelect-heading .comboSelect-input,
+.raptor-comboSelect .comboSelect-heading.comboSelect-down .comboSelect-input
+{
+	background-position: 0 -203px;	
+}
+.raptor-comboSelect.comboSelect-open .comboSelect-right,
+.raptor-comboSelect.comboSelect-down .comboSelect-right,
+.raptor-comboSelect.comboSelect-open .comboSelect-heading .comboSelect-right,
+.raptor-comboSelect .comboSelect-heading.comboSelect-down .comboSelect-right
+{
+	background-position: 0 -232px;
+}
+.raptor-comboSelect .comboSelect-right .comboSelect-right-icon
+{
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
+.raptor-comboSelect .comboSelect-itemsMask
+{
+	position: absolute;
+	top: 26px; /* HEIGHT */
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.raptor-comboSelect.comboSelect-open .comboSelect-itemsMask
+{
+	z-index: 50;
+	visibility: visible;
+}
+.raptor-comboSelect .comboSelect-items
+{
+	position: absolute;
+	left: 0;
+	right: 0;
+	border: 1px solid #888;
+	max-height: 500px;
+	overflow: auto;
+}
+.raptor-comboSelect .comboSelect-option
+{
+	background: url(uis/raptorui/comboSelects/select1-items_24_spr.gif) repeat-x top;
+	height: 24px;
+	line-height: 24px;
+	cursor: pointer;
+	padding: 0 7px;
+	overflow: hidden;
+}
+.raptor-comboSelect .comboSelect-option.comboSelect-lowlight
+{
+	background-position: center;
+	color: #999;
+}
+.raptor-comboSelect .comboSelect-option.comboSelect-over
+{
+	background-position: bottom;
+}
+
+.raptor-comboSelect select
+{
+	display: none;	
+}
+
+
+.raptorui-select .select-option
+{
+	background-image: url(uis/raptorui/comboSelects/select1-items_24_spr.gif);
+	height: 24px;
+	line-height: 24px;
+}
+.raptorui-select .select-left,
+.raptorui-select .select-right,
+.raptorui-select .select-label
+{
+	background-image: url(uis/raptorui/comboSelects/select1_28x28_spr.png);	
+}
+
+
+
+
+
+
+
+/* RAPTOR SELECT */
+.raptor-select
+{
+	text-align: left;
+	display: inline-block;
+	*display: block;
+}
+.raptor-select,
+.raptor-select select
+{
+	font-size: 12px;
+}
+.raptor-select
+{
+	height: 20px;
+	position: relative;
+}
+.raptor-select,
+.raptor-select select
+{
+	min-width: 160px;
+}
+.raptor-select select
+{
+	opacity: 0;
+	filter:alpha(opacity=0);
+	position: absolute;
+	top: 0;
+	right: 20px;
+	left: 0;
+}
+.raptor-select .select-label,
+.raptor-select .select-left,
+.raptor-select .select-right,
+.raptor-select .select-right .select-right-icon
+{
+	display: block;
+	height: 20px;
+}
+.raptor-select .select-label
+{
+	background: repeat-x top;
+	padding-left: 3px;
+	line-height: 26px;
+	overflow: hidden;
+}
+.raptor-select .select-left,
+.raptor-select .select-right,
+.raptor-select .select-label,
+.raptor-select .select-heading
+{
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.raptor-select.select-open .select-heading
+{
+	z-index: 100;
+	position: relative;	
+}
+.raptor-select .select-left
+{
+	width: 5px;
+	float: left;
+}
+.raptor-select .select-right
+{
+	width: 20px;
+	float: right;
+}
+.raptor-select .select-label
+{
+	background-repeat: repeat-x;
+}
+.raptor-select .select-left,
+.raptor-select .select-right,
+.raptor-select .select-label
+{
+	background-image: url(uis/raptorui/selects/select1_28x28_spr.png);
+}
+.raptor-select .select-left
+{
+	background-position: 0 0;
+}
+.raptor-select .select-label
+{
+	background-position: 0 -29px;	
+}
+.raptor-select .select-right
+{
+	background-position: 0 -58px;
+}
+.raptor-select.select-over .select-left,
+.raptor-select .select-heading.select-over .select-left
+{
+	background-position: 0 -87px;		
+}
+.raptor-select.select-over .select-label,
+.raptor-select .select-heading.select-over .select-label
+{
+	background-position: 0 -116px;	
+}
+.raptor-select.select-over .select-right
+.raptor-select .select-heading.select-over .select-right
+{
+	background-position: 0 -145px;
+}
+.raptor-select.select-down .select-left,
+.raptor-select .select-heading.select-down .select-left
+{
+	background-position: 0 -174px;		
+}
+.raptor-select.select-down .select-label,
+.raptor-select .select-heading.select-down .select-label
+{
+	background-position: 0 -203px;	
+}
+.raptor-select.select-down .select-right,
+.raptor-select .select-heading.select-down .select-right
+{
+	background-position: 0 -232px;
+}
+.raptor-select .select-right .select-right-icon
+{
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
+.raptor-select .select-itemsMask
+{
+	position: absolute;
+	top: 26px; /* HEIGHT */
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.raptor-select.select-open .select-itemsMask
+{
+	z-index: 50;
+	visibility: visible;
+}
+.raptor-select .select-items
+{
+	position: absolute;
+	left: 0;
+	right: 0;
+	border: 1px solid #888;
+	max-height: 500px;
+	overflow: auto;
+}
+.raptor-select .select-option
+{
+	background: url(selects/select1-items_24_spr.gif) repeat-x top;
+	height: 24px;
+	line-height: 24px;
+	cursor: pointer;
+	padding: 0 7px;
+	overflow: hidden;
+}
+.raptor-select .select-option.select-over
+{
+	background-position: bottom;
+}
+
+.raptor-select select
+{
+	display: none;	
+}
+
+
+
+/* STYLE */
+.raptor-select,
+.raptor-select select,
+.raptor-select .select-label,
+.raptor-select .select-left,
+.raptor-select .select-right,
+.raptor-select .select-right .select-right-icon
+{
+	height: 28px;
+}
+.raptor-select .select-left
+{
+	background-image: url(uis/raptorui/selects/a123-select_l.gif);	
+	width: 5px;
+}
+.raptor-select .select-right
+{
+	background-image: url(uis/raptorui/selects/a123-select_r.gif);	
+	width: 28px;
+}
+
+/* raptor TEXTBOX */
+.raptor-textbox
+{
+	dissplay: inline-block;
+}
+.raptor-textbox,
+.raptor-textbox .textbox-bg,
+.raptor-textbox .textbox-left,
+.raptor-textbox .textbox-right,
+.raptor-textbox .textbox-bg input
+{
+	height: 22px;
+}
+.raptor-textbox span,
+.raptor-textbox input
+{
+	display: block;
+	padding: 0 2px;
+	height: 18px;
+	line-height: 18px;
+	border: 0 none;
+	color: #222;
+}
+.raptor-textbox .textbox-bg input
+{
+	background: none;
+	border: 0 none;
+}
+.raptor-textbox .textbox-left,
+.raptor-textbox .textbox-right
+{
+	font: 0px normal normal;
+	margin: 0;
+	padding: 0;
+	background-repeat: no-repeat;
+	display: block;
+}
+.raptor-textbox b,
+.raptor-textbox .textbox-left
+{
+	width: 4px;
+	float: left;
+	background-position: left bottom;
+}
+.raptor-textbox i,
+.raptor-textbox .textbox-right
+{
+	width: 4px;
+	float: left;
+	background-position: right top;
+}
+.raptor-textbox .textbox-bg
+{
+	background-position: 0 -23px;
+	background-repeat: repeat-x;
+	float: left;
+}
+.raptor-textbox b,
+.raptor-textbox i
+.raptor-textbox .textbox-bg
+{
+	background-image: url(uis/raptorui/textboxes/a123_textbox_spr.gif);
+}
+.raptor-textbox a
+{
+	width: 20px;
+	cursor: pointer;
+	float: left;
+}
+.raptor-textbox a
+{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url(uis/raptorui/textboxes/icon_magnifying.png);
+	display: block;
+}
+.raptor-textbox input
+{
+	float: left;
+	margin: 0;
+}
+.raptor-textbox.textbox-focus input,
+.raptor-textbox.textbox-over input
+{
+	color: #000;
+}
+
+
+.raptor-textbox input.inputBlurred
+{
+	font-style: italic;
+	color: #999;
+}
+.raptor-textbox
+{
+	text-align: left;
+	display: inline-block;
+	*display: block;
+}
+/* STYLED */
+.raptor-textbox,
+.raptor-textbox .textbox-bg,
+.raptor-textbox .textbox-left,
+.raptor-textbox .textbox-right
+{
+	height: 24px;	
+}
+.raptor-textbox
+{
+	padding-top: 0;	
+}
+.raptor-textbox .textbox-bg
+{
+	/* background-image: url(uis/raptorui/textboxes/a123_textbox_bg.gif); */
+	background-position: top;
+}
+.raptor-textbox .textbox-left
+{
+	/* background-image: url(uis/raptorui/textboxes/a123_textbox_l.gif); */
+	background-position: top left;
+}
+.raptor-textbox .textbox-right
+{
+	/* background-image: url(uis/raptorui/textboxes/a123_textbox_r.gif); */
+	background-position: top right;
+}
+.raptor-textbox.raptor-sprites .textbox-left
+{
+	background-position: left bottom;
+}
+.raptor-textbox.raptor-sprites .textbox-right
+{
+	background-position: top right;
+}
+.raptor-textbox.raptor-sprites .textbox-bg
+{
+	background-position: center;
+}
+.raptor-textbox input
+{
+	background: none;
+}
+
+/* A123 LIST PANEL */
+.raptor-listPanel
+{
+	background: #f2f2f2;
+	border: 1px solid #b8b8b8;
+	border-spacing: 1px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.raptor-listPanel ul,
+.raptor-listPanel ul li
+{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.raptor-listPanel ul
+{
+	border: 1px solid #fff;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	display: block;
+	padding: 1px;
+}
+.raptor-listPanel ul li
+{
+	padding: 6px 8px;
+	height: 15px;
+	clear: both;
+}
+.raptor-listPanel .listPanel-alt
+{
+	background-color: #eaeaea;
+}
+.raptor-listPanel li b
+{
+	display: block;
+	float: left;
+	width: 170px;
+	font-weight: bold;
+	color: #000;
+}
+.raptor-listPanel li i
+{
+	display: block;	
+	font-style: normal;
+	float: left;
+}
+
+/* A123 COLOR SWATCH */
+.raptor-colorSwatch-styled a
+{
+	float: left;
+	margin-right: 5px;
+	border: 1px solid #888;
+}
+.raptor-colorSwatch-styled a:hover,
+.raptor-colorSwatch-styled a.active
+{
+	border: 1px solid #000;
+}
+.raptor-colorSwatch-styled .colorSwatch-innerborder
+{
+	border: 1px solid #fff;
+	display: block;
+	width: 22px;
+	height: 34px;
+	text-decoration: none;
+	font-size: 0;
+	text-indent: -10000px;
+}
+.raptor-colorSwatch-styled a:hover .colorSwatch-innerborder,
+.raptor-colorSwatch-styled a.active .colorSwatch-innerborder
+{
+	border-color: #111;
+}
+.raptor-colorSwatch-styled select
+{
+	display: none;
+}
+.raptor-colorSwatch-styled .colorSwatch-titleFields
+{
+	margin: 5px 0;	
+}
+
+/* RAPTOR CHECKBOX */
+.raptor-checkbox
+{
+	display: inline-block;
+	cursor: pointer;
+	margin-right: 5px;
+}
+.raptor-checkbox .checkbox-label
+{
+	display: inline-block;	
+	vertical-align: middle;	
+}
+.raptor-checkbox .checkbox-box
+{
+	display: inline-block;
+	vertical-align: middle;	
+	background: url(uis/raptorui/images/checkbox_18x19_spr.png) no-repeat top left;
+	width: 18px;
+	height: 19px;
+	cursor: pointer;
+	position: relative;
+	margin-right: 4px;
+}
+.raptor-checkbox.checkbox-over .checkbox-box
+{
+	background-position: top center;
+}
+.raptor-checkbox.checkbox-down .checkbox-box
+{
+	background-position: top right;	
+}
+.raptor-checkbox .checkbox-box .checkbox-checkmark
+{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;	
+	z-index: 1;
+	display: none;
+}
+.raptor-checkbox.checkbox-checked .checkbox-box .checkbox-checkmark
+{
+	background: url(uis/raptorui/images/checkbox_18x19_spr.png) no-repeat bottom left;
+	display: block;	
+}
+.raptor-checkbox input
+{
+	display: none;	
+}
+
+/* RAPTOR CHECKBOX */
+.raptor-radio
+{
+	display: inline-block;
+	cursor: pointer;
+	margin-right: 5px;
+}
+.raptor-radio .radio-label
+{
+	display: inline-block;	
+	vertical-align: middle;	
+}
+.raptor-radio .radio-box
+{
+	display: inline-block;
+	vertical-align: middle;	
+	background: url(uis/raptorui/images/radio_18x19_spr.png) no-repeat top left;
+	width: 18px;
+	height: 19px;
+	cursor: pointer;
+	position: relative;
+	margin-right: 4px;
+}
+.raptor-radio.radio-over .radio-box
+{
+	background-position: top center;
+}
+.raptor-radio.radio-down .radio-box
+{
+	background-position: top right;	
+}
+.raptor-radio.radio-checked .radio-box
+{
+	background-position: bottom left;	
+}
+.raptor-radio.radio-checked.radio-over .radio-box
+{
+	background-position: bottom center;	
+}
+.raptor-radio.radio-checked.radio-down .radio-box
+{
+	background-position: bottom right;	
+}
+.raptor-radio .radio-box .radio-checkmark
+{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;	
+	z-index: 1;
+	display: none;
+}
+/*
+.raptor-radio.radio-checked .radio-box .radio-checkmark
+{
+	background: url(uis/raptorui/images/radio_18x19_spr.png) no-repeat bottom left;
+	display: block;
+}
+*/
+.raptor-radio input
+{
+	display: none;	
+}
+
+
+/* RAPTOR CHECKLIST */
+.raptor-checklist-styled
+{
+	overflow: auto;
+	border: 1px solid #ccc;
+	height: auto;
+	*height: 220px;
+	max-height: 220px;
+}
+.raptor-checklist-styled label
+{
+	display: block;
+	clear: both;
+}
+.raptor-checklist-styled label input,
+.raptor-checklist-styled label span
+{
+	float: left;
+	display: block;
+}
+.raptor-checklist-styled label span
+{
+	width: 200px;	
+}
+.raptor-checklist-styled .checklist-field
+{
+	display: block;	
+	clear: both;
+	background-color: #fff;
+	border-bottom: 1px solid #d8d8d8;
+	border-top: 1px solid #fefefe;
+	padding: 1px;
+}
+.raptor-checklist-styled .checklist-field.checklist-alt
+{
+	background-color: #f1f1f1;	
+}
+.raptor-checklist-styled .checklist-field label
+{
+	display: none;
+}
+.raptor-checklist-styled .checklist-field input,
+.raptor-checklist-styled .checklist-field input.checklist-textinput
+{
+	width: 225px !important;
+	height: 20px;
+	margin-left: 2px;
+}
+.raptor-checklist-styled .checklist-field .checklist-checkbox
+{
+	display: inline-block;
+	*display: block;
+	background: url(uis/raptorui/checkboxes/checkbox20x21_spr.png) no-repeat bottom left;
+	width: 20px;
+	height: 21px;
+	cursor: pointer;
+	float: left;
+	
+	font-size: 0;
+	text-decoration: none;
+	text-indent: -10000px;
+}
+.raptor-checklist-styled .checklist-field .checklist-checkbox:hover
+{
+	background-position: bottom right;
+	text-decoration: none;
+}
+.raptor-checklist-styled .checklist-field .checklist-checkbox.checkbox-checked
+{
+	background-position: top left;
+}
+.raptor-checklist-styled .checklist-field .checklist-checkbox.checkbox-checked:hover
+{
+	background-position: top right;
+}
+
+/* TABS */
+.raptor-tabs .tabs-nav
+{
+	padding-left: 5px;
+	height: 30px;
+	height: auto;
+	line-height:normal;
+}
+.raptor-tabs .tabs-nav a
+{
+	float: left;
+	position: relative;
+	margin-right: -6px;
+	margin-right: 10px;
+	z-index: 1;
+	overflow: hidden;
+	height: 29px;
+	text-decoration: none;
+	color: #111;
+	/*
+	padding-top: 4px;
+	*/
+}
+.raptor-tabs .tabs-nav a:hover
+{
+	z-index: 11;
+	text-decoration: none;
+}
+.raptor-tabs .tabs-nav a.tabs-active
+{
+	z-index: 10;
+}
+.raptor-tabs .tabs-nav a b,
+.raptor-tabs .tabs-nav a .tabs-left,
+.raptor-tabs .tabs-nav a .tabs-bg,
+.raptor-tabs .tabs-nav a .tabs-nav-content,
+.raptor-tabs .tabs-nav a i,
+.raptor-tabs .tabs-nav a .tabs-right
+{
+	margin: 0;
+	padding: 0;
+	height: 26px;
+	display: block;
+	float: left;
+	background-repeat: no-repeat;
+}
+.raptor-tabs .tabs-nav a b,
+.raptor-tabs .tabs-nav a .tabs-left
+{
+	width: 15px;
+	background-position: 0 -26px;
+}
+.raptor-tabs .tabs-nav a i,
+.raptor-tabs .tabs-nav a .tabs-right
+{
+	width: 15px;
+	background-position: 0 0;
+}
+.raptor-tabs .tabs-nav a .tabs-bg
+{
+	background-repeat: repeat-x;
+	background-position: 0 -52px;	
+}
+.raptor-tabs .tabs-nav a .tabs-nav-content
+{
+	line-height: 24px;
+	padding: 0 7px 0 2px;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.raptor-tabs .tabs-section
+{
+	padding-top: 5px;
+	padding-right: 2px;
+	padding-left: 2px;
+}
+.raptor-tabs .tabs-content
+{
+	clear: both;	
+}
+/* COLOR DESIGN */
+
+.raptor-tabs .tabs-nav
+{
+	/* background: url(uis/raptorui/tabs/tabs29-tabs_bg.gif) repeat-x bottom; */
+}
+.raptor-tabs .tabs-nav a b,
+.raptor-tabs .tabs-nav a .tabs-left,
+.raptor-tabs .tabs-nav a .tabs-bg,
+.raptor-tabs .tabs-nav a i,
+.raptor-tabs .tabs-nav a .tabs-right
+{
+	height: 29px;
+	/* background-image: url(uis/raptorui/tabs/uiTab_sprite_over.png); */
+}
+.raptor-tabs .tabs-nav a b,
+.raptor-tabs .tabs-nav a .tabs-left
+{
+	/* background-image: url(uis/raptorui/tabs/tabs29-inactive_left.png); */
+	background-position: top right;
+	width: 8px;
+}
+.raptor-tabs .tabs-nav a i,
+.raptor-tabs .tabs-nav a .tabs-right
+{
+	/* background-image: url(uis/raptorui/tabs/tabs29-inactive_right.png); */
+	background-position: top left;
+	width: 8px;
+}
+.raptor-tabs .tabs-nav a .tabs-bg
+{
+	/* background-image: url(uis/raptorui/tabs/tabs29-inactive_bg.gif); */
+	background-position: top;
+}
+.raptor-tabs .tabs-nav a .tabs-nav-content
+{
+	padding: 0 20px;		
+}
+
+/* HOVERS */
+/*
+.raptor-tabs .tabs-nav a:hover b,
+.raptor-tabs .tabs-nav a:hover .tabs-left,
+.raptor-tabs .tabs-nav a.tabs-active b,
+.raptor-tabs .tabs-nav a.tabs-active .tabs-left
+{
+	background-image: url(uis/raptorui/tabs/tabs29-active_left.png);
+}
+.raptor-tabs .tabs-nav a:hover i,
+.raptor-tabs .tabs-nav a:hover .tabs-right,
+.raptor-tabs .tabs-nav a.tabs-active i,
+.raptor-tabs .tabs-nav a.tabs-active .tabs-right
+{
+	background-image: url(uis/raptorui/tabs/tabs29-active_right.png);
+}
+
+.raptor-tabs .tabs-nav a:hover .tabs-bg,
+.raptor-tabs .tabs-nav a.tabs-active .tabs-bg
+{
+	background-image: url(uis/raptorui/tabs/tabs29-active_bg.gif);
+}
+*/
+.raptor-tabs .tabs-nav a:hover .tabs-nav-content,
+.raptor-tabs .tabs-nav a.tabs-active .tabs-nav-content
+{
+	color:#3b5998;
+	color: #ccc;
+}
+
+/* PANEL ROUNDED */
+.raptor-panel-rounded .panel-rounded-tl
+{
+	background-position: left top;
+}
+.raptor-panel-rounded .panel-rounded-tr
+{
+	background-position: right top;
+}
+.raptor-panel-rounded .panel-rounded-bl
+{
+	background-position: left bottom;
+}
+.raptor-panel-rounded .panel-rounded-br
+{
+	background-position: right bottom;
+}
+.raptor-panel-rounded .panel-rounded-l
+{
+	background-position: left;	
+}
+.raptor-panel-rounded .panel-rounded-r
+{
+	background-position: right;	
+}
+.raptor-panel-rounded .panel-rounded-tl,
+.raptor-panel-rounded .panel-rounded-tr,
+.raptor-panel-rounded .panel-rounded-bl,
+.raptor-panel-rounded .panel-rounded-br
+{
+	background-repeat: no-repeat;	
+}
+.raptor-panel-rounded .panel-rounded-l,
+.raptor-panel-rounded .panel-rounded-r
+{
+	background-repeat: repeat-y;
+}
+.raptor-panel-rounded .panel-rounded-t,
+.raptor-panel-rounded .panel-rounded-b
+{
+	background-repeat: repeat-x;	
+}
+
+/* LIST SELECT */
+.raptor-listSelect
+{
+	position: relative;	
+}
+.raptor-listSelect a,
+.raptor-listSelect .listSelect-option
+{
+	display: block;	
+	z-index: 10;
+	position: relative;
+	height: 25px;
+	line-height: 24px;
+	padding-left: 10px;
+	margin-right: 10px;
+	color: #444;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+}
+.raptor-listSelect a:hover,
+.raptor-listSelect a.active
+{
+	z-index: 11;	
+	color: #111;
+	text-decoration: none;
+}
+.raptor-listSelect select
+{
+	display: none;
+}
+.raptor-listSelect .listSelect-selector
+{
+	position: absolute;	
+	z-index: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+	margin-top: -2px; /* OFFSET */
+}
+.raptor-listSelect .listSelect-selector .listSelect-selector-left,
+.raptor-listSelect .listSelect-selector .listSelect-selector-right
+{
+	background-repeat: no-repeat;
+	background-position: left top;	
+	padding-left: 4px;
+}
+.raptor-listSelect .listSelect-selector .listSelect-selector-right
+{
+	background-position: right top;	
+	padding: 0 4px 0 0;
+}
+.raptor-listSelect .listSelect-selector .listSelect-selector-bg
+{
+	background-repeat: repeat-x;
+	background-position: top;	
+	height: 30px;
+}
+
+
+/* CUSTOM OPTIONS */
+.raptor-customOptions-styled {
+}
+.raptor-customOptions-styled .customOptions-optionsCtn
+{
+	border:1px solid #ccc;
+	height:auto;
+	max-height:220px;
+	overflow:auto;		
+}
+.raptor-customOptions-styled .customOptions-field
+{
+	display: block;	
+	clear: both;
+	background-color: #fff;
+	border-bottom: 1px solid #d8d8d8;
+	border-top: 1px solid #fefefe;
+	padding: 1px;
+}
+.raptor-customOptions-styled .customOptions-field.customOptions-alt
+{
+	background-color: #f1f1f1;	
+}
+.raptor-customOptions-styled .customOptions-field label
+{
+	display: none;
+}
+.raptor-customOptions-styled .customOptions-textCtn
+{
+	float: left;
+	width: 92%;
+}
+.raptor-customOptions-styled .customOptions-field .customOptions-textCtn .customOptions-textbox,
+.raptor-customOptions-styled .customOptions-field .customOptions-textCtn .customOptions-textInput
+{
+	background: none;
+	border-color: transparent;
+	border-width: 1px;
+	border-spacing: 0;
+	padding: 0 4px;
+	height: 23px;
+	line-height: 22px;
+	font-size: 12px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.raptor-customOptions-styled .customOptions-field .customOptions-textCtn .customOptions-textbox
+{
+	padding: 1px 0 1px 6px;	
+}
+.raptor-customOptions-styled.raptor-ie .customOptions-field .customOptions-textCtn .customOptions-textbox
+{
+	padding: 2px 0 2px 5px;
+}
+.raptor-customOptions-styled .customOptions-field .customOptions-textCtn input.customOptions-textInput,
+.raptor-customOptions-styled .customOptions-field .customOptions-textCtn input[type="text"]
+{
+	width: 100%;
+}
+
+.raptor-customOptions-styled .customOptions-textCtn.customOptions-editing .customOptions-textInput,
+.raptor-customOptions-styled .customOptions-textCtn .customOptions-textbox
+{
+	display: block;
+}
+.raptor-customOptions-styled .customOptions-textCtn.customOptions-editing .customOptions-textbox,
+.raptor-customOptions-styled .customOptions-textCtn .customOptions-textInput
+{
+	display: none;
+}
+.raptor-customOptions-styled .customOptions-xbox
+{
+	float: right;
+	display: inline-block;
+	*display: block;
+	/* background: url(uis/raptorui/customOptions/icon-xmark_20x20.png) no-repeat center center; */
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	margin-top: 2px;
+	margin-right: 2px;
+}
+.raptor-customOptions-styled .customOptions-addField
+{
+	margin-top: 4px;	
+}
+/* OTHERS */
+.raptor-padding
+{
+	padding: 10px;
+}

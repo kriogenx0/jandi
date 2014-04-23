@@ -1,0 +1,442 @@
+/* RAPTORUI TEXTBOX */
+.raptor-textbox,
+.raptor-textbox .textbox-bg,
+.raptor-textbox .textbox-left,
+.raptor-textbox .textbox-right,
+.raptor-textbox input,
+.raptor-textbox .textbox-bg input
+{
+	height: 28px;
+}
+.raptorui-textbox .textbox-left,
+.raptorui-textbox .textbox-bg,
+.raptorui-textbox .textbox-right
+{
+	background-image: url(textboxes/textbox1_4x28_spr.png);	
+}
+.raptorui-textbox .textbox-right
+{
+	background-position: 0 0;
+}
+.raptorui-textbox .textbox-bg
+{
+	background-position: 0 -29px;
+}
+.raptorui-textbox .textbox-left
+{
+	background-position: 0 -58px;
+}
+.raptorui-textbox.textbox-focus .textbox-right,
+.raptorui-textbox.textbox-over .textbox-right
+{
+	background-position: 0 -87px;
+}
+.raptorui-textbox.textbox-focus .textbox-bg,
+.raptorui-textbox.textbox-over .textbox-bg
+{
+	background-position: 0 -116px;
+}
+.raptorui-textbox.textbox-focus .textbox-left,
+.raptorui-textbox.textbox-over .textbox-left
+{
+	background-position: 0 -145px;
+}
+
+
+/* RAPTORUI BUTTON */
+.raptorui-button,
+.raptorui-button .button-left,
+.raptorui-button .button-right,
+.raptorui-button .button-bg,
+.raptorui-button .button-contents,
+.raptorui-button button,
+.raptorui-button input
+{
+	height: 30px;
+	text-decoration: none;
+}
+.raptorui-button.raptor-button .button-contents
+{
+	line-height: 30px;
+	color: #000;
+	padding: 0 7px;
+	min-width: 70px;
+	font-size: 13px;
+	font-weight: bold;
+}
+.raptorui-button .button-left,
+.raptorui-button .button-bg,
+.raptorui-button .button-right
+{
+	background-image: url(buttons/button1_5x30_spr.png);	
+}
+.raptorui-button .button-left,
+.raptorui-button .button-right
+{
+	width: 5px;	
+}
+.raptorui-button .button-left
+{
+	background-position: 0 0;
+}
+.raptorui-button .button-bg
+{
+	background-position: 0 -31px;
+}
+.raptorui-button .button-right
+{
+	background-position: 0 -62px;
+}
+.raptorui-button:hover .button-left,
+.raptorui-button.button-over .button-left
+{
+	background-position: 0 -93px;
+}
+.raptorui-button:hover .button-bg,
+.raptorui-button.button-over .button-bg
+{
+	background-position: 0 -124px;
+}
+.raptorui-button:hover .button-right,
+.raptorui-button.button-over .button-right
+{
+	background-position: 0 -155px;
+}
+.raptorui-button.button-down .button-left
+{
+	background-position: 0 -186px;
+}
+.raptorui-button.button-down .button-bg
+{
+	background-position: 0 -217px;
+}
+.raptorui-button.button-down .button-right
+{
+	background-position: 0 -248px;
+}
+.raptorui-button .button-contents
+{
+	color: #fff;
+}
+/*
+.raptorui-button .button-left,
+.raptorui-button .button-right,
+.raptorui-button .button-bg,
+.raptorui-button:hover .button-left,
+.raptorui-button:hover .button-right,
+.raptorui-button:hover .button-bg
+{
+	background-image: url(buttons/button-36_spr.png);
+}
+*/
+.raptorui-button.button-full .button-bg
+{
+	width: 220px;
+}
+/* RAPTORUI SELECT */
+.raptorui-select .select-label
+{
+	background-image: url(selects/1_bg.gif);
+}
+.raptorui-select .select-left
+{
+	background-image: url(selects/1_left.gif);
+}
+.raptorui-select .select-right
+{
+	background-image: url(selects/1_right.gif);
+}
+.raptorui-select .select-option
+{
+	background-image: url(selects/select1-items_24_spr.gif);
+	height: 24px;
+	line-height: 24px;
+}
+.raptorui-select .select-left,
+.raptorui-select .select-right,
+.raptorui-select .select-label
+{
+	background-image: url(selects/select1_28x28_spr.png);	
+}
+
+
+/* RAPTORUI PANEL */
+.raptorui-panel
+{
+	background: #f2f2f2;
+	border: 1px solid #b8b8b8;
+	border-spacing: 1px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.raptorui-panel .panel-secondbg-bg2
+{
+	border: 1px solid #fff;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.raptorui-panel .panel-padding
+{
+	padding: 20px;
+}
+.raptorui-panel h1
+{
+	letter-spacing: -1px;
+	color: #9f9f9f;
+	font-weight: normal;
+	margin-bottom: 20px;
+}
+/* raptorui-panel */
+.raptorui-light
+{
+	background: #f2f2f2;
+	border: 1px solid #b8b8b8;
+	border-spacing: 1px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+}
+.raptorui-light .panel-secondbg-bg2
+{
+	border: 1px solid #fff;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+}
+.raptorui-light .panel-padding
+{
+	padding: 12px;
+}
+.raptorui-light h1
+{
+	letter-spacing: -1px;
+	color: #9f9f9f;
+	font-weight: normal;
+	margin-bottom: 20px;
+}
+/* PANEL3 */
+.panel3
+{
+	border: 1px solid #eaeaea;
+	border-spacing: 1px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	background: url(images/panel3-topbg.png) repeat-x top;
+}
+.panel3 .panel-secondbg-bg2
+{
+	border: 1px solid #c0c0c0;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	background: url(images/panel3-bottombg.png) repeat-x bottom;
+}
+.panel3 .panel-padding
+{
+	padding: 12px;
+}
+.panel3 h1
+{
+	letter-spacing: -1px;
+	color: #333;
+	text-shadow: 0 1px 1px #fff;
+	font-weight: normal;
+	font-size: 20px;
+	padding: 0;
+}
+/* PANEL DIVIDER */
+.panel-divider
+{
+	border-top: 1px solid #cdcdcd;
+	margin: 5px 0 0;
+	overflow: visible;
+	height: 10px; /* SHORTEN BY 10PX */
+}
+.panel-divider .divider-inside,
+.panel-divider b
+{
+	display: block;
+	border-top: 1px solid #fff;
+	background: url(images/divider_shadow.png) no-repeat center top;
+	_background: url(images/divider_shadow.gif) no-repeat center top;
+	height: 20px;
+}
+/* CUSTOM OPTIONS */
+
+.raptor-customOptions-styled .customOptions-xbox
+{
+	background-image: url(customOptions/icon-xmark_20x20.png);
+}
+/* PANEL DARK ROUNDED */
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-t,
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-b
+{
+	height: 7px;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-tl,
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-l,
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-bl
+{
+	padding-left: 7px;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-tr,
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-r,
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-br
+{
+	padding-right: 7px;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-tl
+{
+	background: url(images/actions-panel_tl.png) no-repeat bottom left;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-t
+{
+	background: url(images/actions-panel_t.png) repeat-x bottom;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-tr
+{
+	background: url(images/actions-panel_tr.png) no-repeat bottom right;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-l
+{
+	background: url(images/actions-panel_bg.png) repeat-y left;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-r
+{
+	background: url(images/actions-panel_bg.png) repeat-y right;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-bl
+{
+	background: url(images/actions-panel_bl.png) no-repeat top left;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-b
+{
+	background: url(images/actions-panel_bg.png) repeat-x top;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-br
+{
+	background: url(images/actions-panel_br.png) no-repeat top right;
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-bg
+{
+	background: url(images/actions-panel_bg.png);
+}
+.raptorui-panel-rounded.raptor-panel-rounded .panel-rounded-contents
+{
+	background: url(images/actions-panel_topbg.png) repeat-x top;
+	margin: 0 -7px;
+	padding: 0 7px;
+	min-height: 52px;
+}
+/* */
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-tl,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-l,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-bl
+{
+	padding-left: 9px;
+}
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-tr,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-r,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-br
+{
+	padding-right: 9px;
+}
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-t,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-b
+{
+	height: 9px;
+}
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-tl
+{
+	background-image: url(images/shading_tl.png);
+}
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-tr
+{
+	background-image: url(images/shading_tr.png);
+}
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-bl
+{
+	background-image: url(images/shading_bl.png);
+}
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-br
+{
+	background-image: url(images/shading_br.png);
+}
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-t,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-l,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-r,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-b,
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-bg
+{
+	background-image: url(images/shading_bg.png);
+}
+.a123-panel-shaded.raptor-panel-rounded .panel-rounded-contents
+{
+	background: none;
+}
+/* A123 TALL TABS */
+.raptorui-tabs.raptor-tabs .tabs-nav
+{
+	padding-left: 5px;
+	position: relative;
+	z-index: 100;
+	top: 2px;
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a,
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-left,
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-bg,
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-right
+{
+	height: 43px;
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-left,
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-right
+{
+	width: 5px;
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-left
+{
+	background-image: url(images/raptorui-button_l.png);
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-right
+{
+	background-image: url(images/raptorui-button_r.png);
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-bg
+{
+	background-image: url(images/raptorui-button_bg.png);
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a .tabs-nav-content
+{
+	line-height:34px;
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a:hover .tabs-nav-content,
+.raptorui-tabs.raptor-tabs .tabs-nav a.tabs-active .tabs-nav-content
+{
+	color: #111;
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a:hover .tabs-left,
+.raptorui-tabs.raptor-tabs .tabs-nav a.tabs-active .tabs-left
+{
+	background-image: url(images/tabs-tall_l.png);
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a:hover .tabs-right,
+.raptorui-tabs.raptor-tabs .tabs-nav a.tabs-active .tabs-right
+{
+	background-image: url(images/tabs-tall_r.png);
+}
+.raptorui-tabs.raptor-tabs .tabs-nav a:hover .tabs-bg,
+.raptorui-tabs.raptor-tabs .tabs-nav a.tabs-active .tabs-bg
+{
+	background-image: url(images/tabs-tall_bg.png);
+}
+/* LIST SELECT */
+.raptorui-listSelect .listSelect-selector .listSelect-selector-left
+{
+	background-image: url(images/list-selected_l.png);
+}
+.raptorui-listSelect .listSelect-selector .listSelect-selector-right
+{
+	background-image: url(images/list-selected_r.png);
+}
+.raptorui-listSelect .listSelect-selector .listSelect-selector-bg
+{
+	background-image: url(images/list-selected_bg.png);
+}

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>RaptorUI</title>
+
+<script type="text/javascript" src="jquery.js"></script>
+
+<link href="doc-design/css_reset.css" rel="stylesheet" type="text/css" />
+<link href="doc-design/layout.css" rel="stylesheet" type="text/css" />
+
+<!-- stylesheets -->
+
+<link href="../raptor.css" rel="stylesheet" type="text/css" />
+<script src="../raptor.js" type="text/javascript"></script>
+
+<link href="../uis/raptorui/ui.css" rel="stylesheet" type="text/css" />
+<script src="../uis/raptorui/ui.js" type="text/javascript"></script>
+
+<style type="text/css">
+.example-raptor
+{
+	margin: 10px 0;	
+}
+</style>
+
+</head>
+<body>
+
+<div class="body-wrapper">
+	<div class="background-tiled">
+		<div class="background-top">
+			<div class="page-wrapper">
+		
+				<div class="panel">
+					<!-- logo --><h1>Raptor</h1>
+					<p>Raptor helps you style entire web applications.</p>
+				
+					<h2>Using RaptorUI</h2>
+					<p>To use RaptorUI, dump this your page:</p>
+<pre>
+&lt;link href="<a href="http://kriogenx.net/cases/uicomponents/libraries/raptor/raptor.css">../raptor.css</a>" rel="stylesheet" type="text/css" /&gt; 
+&lt;script src="<a href="http://kriogenx.net/cases/uicomponents/libraries/raptor/raptor.js">../raptor.js</a>" type="text/javascript"&gt;&lt;/script&gt; 
+
+&lt;link href="<a href="http://kriogenx.net/cases/uicomponents/libraries/raptor/uis/raptorui/ui.css">../uis/raptorui/ui.css</a>" rel="stylesheet" type="text/css" /&gt;
+&lt;script src="<a href="http://kriogenx.net/cases/uicomponents/libraries/raptor/uis/raptorui/ui.js">../uis/raptorui/ui.js</a>" type="text/javascript"&gt;&lt;/script&gt;
+</pre>
+					<p>&nbsp;</p>
+				
+					<p>Or bookmark this link:</p>
+					<a href="javascript:var%20s%20=%20document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='http://kriogenx.net/cases/uicomponents/libraries/raptor/raptor-quick.js';void(0);">addRaptor</a>
+				
+				
+				
+				</div>
+				
+				
+				<div class="examples">
+					<div class="example-raptor">
+						<h2>Create Buttons</h2>
+						<a href="#" class="raptorui-button">Sample Button</a>
+					</div>	
+					
+					
+					<div class="example-raptor">
+						<h2>Create Styled Textboxes</h2>
+						<input type="text" class="raptorui-textbox" value="Sample Textbox" />
+					</div>
+					
+					<div class="example-raptor">
+						<h2>Create Styled Checkboxes</h2>
+						<div class="whatever-label">
+							<input type="checkbox" class="raptorui-checkbox" value="Sample Textbox" checked="checked" /> Test
+						</div>
+						<div class="label">
+							<input type="checkbox" class="raptorui-checkbox" value="Sample Textbox" /> Pork
+						</div>
+						<label>
+							<input type="checkbox" class="raptorui-checkbox" value="Sample Textbox" checked="true" /> Chicken
+						</label>
+						<label>
+							<input type="checkbox" class="raptorui-checkbox" value="Sample Textbox" />
+						</label>
+					</div>
+					
+					<div class="example-raptor">
+						<h2>Create Styled Radios</h2>				
+						
+						<input type="radio" class="raptorui-radio" value="Sample Textbox" name="same" />
+						<input type="radio" class="raptorui-radio" value="Sample Textbox" name="different" />
+						
+						<div>
+							<input type="radio" class="raptorui-radio" value="Sample Textbox" name="same" />
+							Same
+						</div>
+						<div>
+							<input type="radio" class="raptorui-radio" value="Sample Textbox" name="same" />
+							Same
+						</div>
+						<div>
+							<input type="radio" class="raptorui-radio" value="Sample Textbox" name="different" />
+							Different
+						</div>
+					</div>
+					
+					<div class="example-raptor">
+						<h2>Style Selects</h2>
+						<select class="raptorui-select">
+							<option>Select Year</option>
+							<option>Option 2</option>
+							<option>Option 3</option>
+							<option>Option 4</option>
+						</select>
+					</div>
+					
+					<div class="example-raptor">
+						<h2>Style Selects as Combo Selects</h2>
+						<select class="raptorui-comboSelect">
+							<option>Select Year</option>
+							<option>Option 2</option>
+							<option>Option 3</option>
+							<option>Option 4</option>
+						</select>
+					</div>
+					
+					<div class="example-raptor">
+						<h2>Create List Selects</h2>	
+						<select class="raptorui-listSelect">
+							<option value="listValue">AWD Turbo Coupe Carrera (3.6L H6)</option>
+							<option value="listValue">C2 Coupe Carrera (3.6L H6)</option>
+							<option value="listValue">AWD C4 Coupe Carrera (3.6L H6)</option>
+							<option value="listValue">AWD Turbo Coupe Carrera (A3.6L H6)</option>
+						</select>
+					</div>
+					
+					<div class="example-raptor">
+						<h2>Create Lists</h2>
+						<ul class="raptorui-listPanel">
+							<li>
+								<b>Engine Block Config:</b>
+								<i>3.60 Liters H6</i>
+							</li>
+							<li>
+								<b>Cam Type:</b>
+								<i>Dual Overhead Cam</i>
+							</li>
+							<li>
+								<b>Valves Per Cylinder:</b>
+								<i>4</i>
+							</li>
+							<li>
+								<b>Fuel Type:</b>
+								<i>Gas</i>
+							</li>
+							<li>
+								<b>Doors:</b>
+								<i>2 Doors</i>
+							</li>
+							<li>
+								<b>Drive Train Type:</b>
+								<i>AWD</i>
+							</li>
+							<li>
+								<b>Body Type:</b>
+								<i>Coupe</i>
+							</li>
+							<li>
+								<b>Aspiration:</b>
+								<i>Twin Turbocharged</i>
+							</li>
+							<li>
+								<b>Restraint System:</b>
+								<i>Passive Belts</i>
+							</li>
+						</ul>
+					</div>
+					
+					
+					
+					
+					<div class="example-raptor">
+						<h2>Create Color Swatches</h2>
+						<div class="raptorui-colorSwatch">
+							<select name="form[]">
+								<option value="#990000" title="{Code: '46U', 'Basic Nane': 'Gray'}">Stealth Gray</option>
+								<option value="#009900">Green</option>
+								<option value="#000099">Blue</option>
+								<option value="purple">Red</option>
+								<option value="fuchsia">Green</option>
+								<option value="silver">Blue</option>
+								<option value="plum">Red</option>
+								<option value="orange">Green</option>
+								<option value="tomato">Blue</option>
+								<option value="cyan">Red</option>
+								<option value="yellow">Green</option>
+								<option value="white">Blue</option>
+								<option value="black">Blue</option>
+							</select>
+						</div>
+					</div>
+					
+					<h2>Create Checklists</h2>
+					<p>With multiple values</p>
+					<div class="raptorui-checklist">
+						<label>
+							<input type="checkbox" value="test" name="checklist[]" /><span title="name">3-Spoke Interior Leather Steering Wheel</span><span title="value">More Check</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">3-Spoke Multi-Function Steering Wheel</span><span title="value">Price</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">5mm Wheel Spacers</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">Adaptive Sport Seats</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">Aerokit</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">All Leather Seat Trim</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">Aluminium Foot Rest</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">Aluminium Gear Shifter</span>
+						</label>
+					</div>	
+					
+					<h2>Create Custom Options</h2>
+					<p>And add all the options you would love to</p>
+					<div class="raptorui-customOptions">
+						<label>
+							<input type="checkbox" value="test" name="customOptions[]" /><span title="name">3-Spoke Interior Leather Steering Wheel</span><span title="value">More Check</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">3-Spoke Multi-Function Steering Wheel</span><span title="value">Price</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">5mm Wheel Spacers</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">Adaptive Sport Seats</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">Aerokit</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">All Leather Seat Trim</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">Aluminium Foot Rest</span>
+						</label>
+						<label>
+							<input type="checkbox" value="test" /><span title="name">Aluminium Gear Shifter</span>
+						</label>
+					</div>	
+					
+					<h2>All Types of Panels</h2>
+					<div class="raptorui-panel">
+						<h1>Test Panel insides</h1>
+					</div>
+					
+					<div class="raptorui-panelRound">
+						<h1><b><i><em><span>Title</span><a href="javascript: void(0)" class="panel-collapse"></a></em></i></b></h1>
+						<div class="panel-content">
+							Test
+						</div>		
+					</div>
+					
+					<h2>Create Tabs</h2>
+					<div class="raptorui-tabs">
+						<div class="tabs-content panel7-white">
+							<div class="panel-content">
+								<div class="panel-padding">
+									<div title="Basic" class="tabs-section">
+										<h1>Basic Inventory Vehicle Data</h1>
+										<div class="column">
+											<div class="half-left formStyle">
+												<div class="form-field">
+													<div class="form-field-label"> Year: </div>
+													<div class="form-field-editor">
+														<select class="a123-select">
+															<option>Select Year</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Make: </div>
+													<div class="form-field-editor">
+														<select class="a123-select">
+															<option>Select Make</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Model: </div>
+													<div class="form-field-editor">
+														<select class="a123-select">
+															<option>Select Model</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Trim: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> VIN: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Mileage: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> EPA City MPG: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> EPA Highway MPG: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Price: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+											</div>
+											<div class="half-left formStyle">
+												<div class="form-field">
+													<div class="form-field-label"> Title: </div>
+													<div class="form-field-editor">
+														<select class="a123-select">
+															<option>Select Condition</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Warranty: </div>
+													<div class="form-field-editor">
+														<select class="a123-select">
+															<option>Select Condition</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Engine: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Drive Train: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Transmission: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Exterior: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Interior: </div>
+													<div class="form-field-editor">
+														<input type="text"  />
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Number of Doors: </div>
+													<div class="form-field-editor">
+														<select class="a123-select">
+															<option>2 - Doors</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-field">
+													<div class="form-field-label"> Vehicle Type: </div>
+													<div class="form-field-editor">
+														<select class="a123-select">
+															<option>Select Year</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+									<div title="Standard" class="tabs-section"> standard </div>
+									<div title="Other" class="tabs-section"> other </div>
+									<div title="Bullets" class="tabs-section"> other </div>
+									<div title="Options" class="tabs-section"> other </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
